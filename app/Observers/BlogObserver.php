@@ -46,6 +46,10 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
+        if (strpos($url, $this->imageFinder->getBlogBasePath()) === false) {
+            return;
+        }
+
         $doc = new DOMDocument();
         $body = $response->getBody();
 
@@ -64,7 +68,7 @@ class BlogObserver extends CrawlObserver
                 foreach ($matches as $match) {
                     $image = current($match);
                     // Get only the images in the defined basePath
-                    if (strpos($image, $this->imageFinder->getBasePath()) === false) {
+                    if (strpos($image, $this->imageFinder->getImageBasePath()) === false) {
                         continue;
                     }
                     $found = (new BlogCrawlerService($this->imageFinder))->urlExists($image);

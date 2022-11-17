@@ -4,5 +4,6 @@ namespace App\Interfaces;
 
 interface FindableImage
 {
-    public function getBasePath(): string;
+    public function getBlogBasePath(): string;
+    public function getImageBasePath(): string;
 }

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductionImage extends Model implements FindableImage
 {
-    protected string $basePath = '/files';
+    protected string $blogBasePath = 'wordpress.clarku.edu';
+    protected string $imageBasePath = '/files';
 
     protected $fillable = [
         'blog_id',
@@ -16,9 +17,14 @@ class ProductionImage extends Model implements FindableImage
         'found'
     ];
 
-    public function getBasePath(): string
+    public function getBlogBasePath(): string
     {
-        return $this->basePath;
+        return $this->blogBasePath;
+    }
+
+    public function getImageBasePath(): string
+    {
+        return $this->imageBasePath;
     }
 
 }
