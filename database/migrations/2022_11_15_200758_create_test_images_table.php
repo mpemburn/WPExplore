@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('test_images', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
-            $table->string('page_url');
-            $table->string('image_url');
+            $table->string('page_url', 500);
+            $table->string('image_url', 500);
             $table->boolean('found');
             $table->timestamps();
         });

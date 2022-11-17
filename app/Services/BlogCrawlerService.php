@@ -28,7 +28,12 @@ class BlogCrawlerService
         $blogs = Blog::all();
 
         $blogs->each(function ($blog) use ($echo) {
-            if ($blog->blog_id < 2) {
+            // Make sure we're not duplicating a blog
+            $finderClass = get_class($this->imageFinder);
+            $finder = new $finderClass();
+            $foundCount = $finder->where('blog_id', $blog->blog_id)->count();
+
+            if ($blog->blog_id < 2 || $foundCount > 0) {
                 return;
             }
 
