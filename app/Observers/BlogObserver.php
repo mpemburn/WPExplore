@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Models\FoundImage;
+use App\Interfaces\FindableImage;
+use App\Services\BlogCrawlerService;
 use DOMDocument;
-use Illuminate\Support\Collection;
 use Spatie\Crawler\CrawlObservers\CrawlObserver;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Log;
 class BlogObserver extends CrawlObserver
 {
     protected int $blogId;
-    protected Collection $content;
+    protected FindableImage $imageFinder;
 
-    public function __construct(int $blogId)
+    public function __construct(int $blogId, FindableImage $imageFinder)
     {
         $this->blogId = $blogId;
         $this->content = collect();
+        $this->imageFinder = $imageFinder;
     }
 
     /**
@@ -45,8 +46,6 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        $images = collect();
-
         $doc = new DOMDocument();
         $body = $response->getBody();
 
@@ -64,23 +63,22 @@ class BlogObserver extends CrawlObserver
             if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
                 foreach ($matches as $match) {
                     $image = current($match);
-                    // Get only the images moved by multisite upgrade
-                    if (strpos($image, 'wp-content/uploads/sites') === false) {
+                    // Get only the images in the defined basePath
+                    if (strpos($image, $this->imageFinder->getBasePath()) === false) {
                         continue;
                     }
-                    $images->push($image);
-                    FoundImage::create([
+                    $found = (new BlogCrawlerService($this->imageFinder))->urlExists($image);
+
+                    $finder = new $this->imageFinder();
+                    $finder->create([
                         'blog_id' => $this->blogId,
                         'page_url' => $url,
                         'image_url' => $image,
-                        'original_exists' => false,
-                        'success' => false,
+                        'found' => $found,
                     ]);
                 }
             }
         }
-
-        $this->content = $this->content->merge($images);
     }
 
     /**
@@ -104,7 +102,6 @@ class BlogObserver extends CrawlObserver
      */
     public function finishedCrawling(): void
     {
-//        Log::info("finishedCrawling");
-//        !d("finishedCrawling");
+        echo '...Done!' . PHP_EOL;
     }
 }

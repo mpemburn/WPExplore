@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
+use App\Interfaces\FindableImage;
 use App\Models\Blog;
-use App\Models\FoundImage;
+use App\Models\TestImage;
 use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;
@@ -14,9 +15,11 @@ use Spatie\Crawler\Crawler;
 class BlogCrawlerService
 {
     protected Collection $processes;
+    protected FindableImage $imageFinder;
 
-    public function __construct()
+    public function __construct(FindableImage $imageFinder)
     {
+        $this->imageFinder = $imageFinder;
         $this->processes = collect();
     }
 
@@ -25,8 +28,7 @@ class BlogCrawlerService
         $blogs = Blog::all();
 
         $blogs->each(function ($blog) use ($echo) {
-            $foundCount = FoundImage::where('blog_id', $blog->blog_id)->count();
-            if ($blog->blog_id < 2 || $foundCount > 0) {
+            if ($blog->blog_id < 2) {
                 return;
             }
 
@@ -37,7 +39,7 @@ class BlogCrawlerService
             $options->each(function (Option $option) use ($blog, $echo) {
                 $blogName = $option->option_value;
                 if ($echo) {
-                    echo $blogName . ' added' . PHP_EOL;
+                    echo  'Adding ' .$blogName . PHP_EOL;
                 }
                 $this->processes->push($this->fetchContent((int)$blog->blog_id, $blogName));
             });
@@ -55,7 +57,7 @@ class BlogCrawlerService
         Crawler::create([RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30])
             ->acceptNofollowLinks()
             ->ignoreRobots()
-            ->setCrawlObserver(new BlogObserver($blogId))
+            ->setCrawlObserver(new BlogObserver($blogId, new $this->imageFinder()))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
             ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
             ->setDelayBetweenRequests(100)
@@ -78,6 +80,17 @@ class BlogCrawlerService
         });
 
         $pool->wait();
+    }
+
+    public function urlExists($url): bool
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return ($code == 200);
     }
 
 
