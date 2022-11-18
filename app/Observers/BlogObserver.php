@@ -16,12 +16,14 @@ class BlogObserver extends CrawlObserver
     protected int $blogId;
     protected ?string $blogRoot = null;
     protected FindableLink $linkFinder;
+    protected bool $echo;
 
-    public function __construct(int $blogId, FindableLink $linkFinder)
+    public function __construct(int $blogId, FindableLink $linkFinder, bool $echo = false)
     {
         $this->blogId = $blogId;
         $this->content = collect();
         $this->linkFinder = $linkFinder;
+        $this->echo = $echo;
     }
 
     /**
@@ -63,23 +65,40 @@ class BlogObserver extends CrawlObserver
         //# save HTML
         $content = $doc->saveHTML();
 
-        if (strpos($content, '<img') !== false || strpos($content, '.pdf') !== false) {
-            // Search for both image and .pdf links
-            $regexp = '<img[^>]+src=(?:\"|\')\K(' . str_replace('/', '\/', $this->blogRoot) . '.[^">]+?)(?=\"|\')';
-            $regexp .= '|' . str_replace('/', '\/', $this->blogRoot) . '(.*)\.pdf(?=\"|\')';
+        // Search for image links
+        if (strpos($content, '<img') !== false) {
+            $regexp = '<img[^>]+src=(?:\"|\')\K(.[^">]+?)(?=\"|\')';
+            $this->addLink($regexp, $content, $url);
+        }
+        // Search for .pdf links
+        if (strpos($content, '.pdf') !== false) {
+            $regexp = '<a[^>]+href=(?:\"|\')\K(.[^">]+?pdf)(?=\"|\')';
+            $this->addLink($regexp, $content, $url);
+        }
+    }
 
-            if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
-                foreach ($matches as $match) {
-                    $link = current($match);
-                    $found = (new BlogCrawlerService($this->linkFinder))->urlExists($link);
+    protected function addLink(string $regexp, string $content, string $url): void
+    {
+        if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
+            foreach ($matches as $match) {
+                $link = current($match);
+                // If the link doesn't belong to this blog, skip it
+                if (strpos($link, $this->blogRoot) === false) {
+                    continue;
+                }
 
-                    $finder = new $this->linkFinder();
-                    $finder->create([
-                        'blog_id' => $this->blogId,
-                        'page_url' => $url,
-                        'link_url' => $link,
-                        'found' => $found,
-                    ]);
+                $found = (new BlogCrawlerService($this->linkFinder))->urlExists($link);
+
+                $finder = new $this->linkFinder();
+                $finder->create([
+                    'blog_id' => $this->blogId,
+                    'page_url' => $url,
+                    'link_url' => $link,
+                    'found' => $found,
+                ]);
+
+                if ($this->echo) {
+                    echo '.';
                 }
             }
         }
@@ -106,6 +125,8 @@ class BlogObserver extends CrawlObserver
      */
     public function finishedCrawling(): void
     {
-        echo '...Done!' . PHP_EOL;
+        if ($this->echo) {
+            echo 'Done!' . PHP_EOL;
+        }
     }
 }

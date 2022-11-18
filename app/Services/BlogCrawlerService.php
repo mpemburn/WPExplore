@@ -46,7 +46,7 @@ class BlogCrawlerService
                 if ($echo) {
                     echo  'Adding ' .$blogName . PHP_EOL;
                 }
-                $this->processes->push($this->fetchContent((int)$blog->blog_id, $blogName));
+                $this->processes->push($this->fetchContent((int)$blog->blog_id, $blogName, $echo));
             });
         });
 
@@ -57,12 +57,12 @@ class BlogCrawlerService
      * Crawl the website content.
      * @return true
      */
-    public function fetchContent(int $blogId, string $url) {
+    public function fetchContent(int $blogId, string $url, bool $echo = false) {
         //# initiate crawler
         Crawler::create([RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30])
             ->acceptNofollowLinks()
             ->ignoreRobots()
-            ->setCrawlObserver(new BlogObserver($blogId, new $this->linkFinder()))
+            ->setCrawlObserver(new BlogObserver($blogId, new $this->linkFinder(), $echo))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
             ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
             ->setDelayBetweenRequests(100)

@@ -34,7 +34,9 @@ class BlogCrawlCommand extends Command
         $linkFinder = $this->option('env') === 'prod' ? new ProductionLink() : new TestLink();
         $service = new BlogCrawlerService($linkFinder);
 
-        $service->loadCrawlProcesses(true)->run();
+        $echo = $this->option('verbose');
+
+        $service->loadCrawlProcesses($echo)->run();
 
         return Command::SUCCESS;
     }

@@ -26,6 +26,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dev', function () {
-    // Do what thou wilt here
+    $links = \App\Models\TestLink::select('blog_id')->groupBy('blog_id')->orderBy('blog_id');
+
+    $links->each(function ($link) {
+        !d($link->blog_id);
+    });
 });
 
