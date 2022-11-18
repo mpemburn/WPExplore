@@ -66,7 +66,7 @@ class BlogObserver extends CrawlObserver
         if (strpos($content, '<img') !== false || strpos($content, '.pdf') !== false) {
             // Search for both image and .pdf links
             $regexp = '<img[^>]+src=(?:\"|\')\K(' . str_replace('/', '\/', $this->blogRoot) . '.[^">]+?)(?=\"|\')';
-            $regexp .= '|' . str_replace('/', '\/', $this->blogRoot) . '(.*)\.pdf';
+            $regexp .= '|' . str_replace('/', '\/', $this->blogRoot) . '(.*)\.pdf(?=\"|\')';
 
             if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
                 foreach ($matches as $match) {
