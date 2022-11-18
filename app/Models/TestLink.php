@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use App\Interfaces\FindableImage;
+use App\Interfaces\FindableLink;
 use Illuminate\Database\Eloquent\Model;
 
-class TestImage extends Model implements FindableImage
+class TestLink extends Model implements FindableLink
 {
     protected string $blogBasePath = 'wordpress.test.clarku.edu';
-    protected string $imageBasePath = '/wp-content/uploads/sites';
+    protected string $linkBasePath = '/wp-content/uploads/sites';
 
     protected $fillable = [
         'blog_id',
         'page_url',
-        'image_url',
+        'link_url',
         'found'
     ];
 
@@ -22,9 +22,9 @@ class TestImage extends Model implements FindableImage
         return $this->blogBasePath;
     }
 
-    public function getImageBasePath(): string
+    public function getLinkBasePath(): string
     {
-        return $this->imageBasePath;
+        return $this->linkBasePath;
     }
 
 }

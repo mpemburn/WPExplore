@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\TestImage;
-use App\Models\ProductionImage;
+use App\Models\TestLink;
+use App\Models\ProductionLink;
 use App\Services\BlogCrawlerService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -31,8 +31,8 @@ class BlogCrawlCommand extends Command
      */
     public function handle()
     {
-        $imageFinder = $this->option('env') === 'prod' ? new ProductionImage() : new TestImage();
-        $service = new BlogCrawlerService($imageFinder);
+        $linkFinder = $this->option('env') === 'prod' ? new ProductionLink() : new TestLink();
+        $service = new BlogCrawlerService($linkFinder);
 
         $service->loadCrawlProcesses(true)->run();
 

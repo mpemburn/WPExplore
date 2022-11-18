@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Interfaces\FindableImage;
+use App\Interfaces\FindableLink;
 use App\Services\BlogCrawlerService;
 use DOMDocument;
 use Spatie\Crawler\CrawlObservers\CrawlObserver;
@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Log;
 class BlogObserver extends CrawlObserver
 {
     protected int $blogId;
-    protected FindableImage $imageFinder;
+    protected ?string $blogRoot = null;
+    protected FindableLink $linkFinder;
 
-    public function __construct(int $blogId, FindableImage $imageFinder)
+    public function __construct(int $blogId, FindableLink $linkFinder)
     {
         $this->blogId = $blogId;
         $this->content = collect();
-        $this->imageFinder = $imageFinder;
+        $this->linkFinder = $linkFinder;
     }
 
     /**
@@ -30,6 +31,7 @@ class BlogObserver extends CrawlObserver
      */
     public function willCrawl(UriInterface $url): void
     {
+        $this->blogRoot = $this->blogRoot ?: $url;
         Log::info('willCrawl', ['url' => $url]);
     }
 
@@ -46,7 +48,7 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        if (strpos($url, $this->imageFinder->getBlogBasePath()) === false) {
+        if (strpos($url, $this->linkFinder->getBlogBasePath()) === false) {
             return;
         }
 
@@ -61,23 +63,21 @@ class BlogObserver extends CrawlObserver
         //# save HTML
         $content = $doc->saveHTML();
 
-        if (strpos($content, '<img') !== false) {
-            $regexp = '<img[^>]+src=(?:\"|\')\K(.[^">]+?)(?=\"|\')';
+        if (strpos($content, '<img') !== false || strpos($content, '.pdf') !== false) {
+            // Search for both image and .pdf links
+            $regexp = '<img[^>]+src=(?:\"|\')\K(' . str_replace('/', '\/', $this->blogRoot) . '.[^">]+?)(?=\"|\')';
+            $regexp .= '|' . str_replace('/', '\/', $this->blogRoot) . '(.*)\.pdf';
 
             if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
                 foreach ($matches as $match) {
-                    $image = current($match);
-                    // Get only the images in the defined basePath
-                    if (strpos($image, $this->imageFinder->getImageBasePath()) === false) {
-                        continue;
-                    }
-                    $found = (new BlogCrawlerService($this->imageFinder))->urlExists($image);
+                    $link = current($match);
+                    $found = (new BlogCrawlerService($this->linkFinder))->urlExists($link);
 
-                    $finder = new $this->imageFinder();
+                    $finder = new $this->linkFinder();
                     $finder->create([
                         'blog_id' => $this->blogId,
                         'page_url' => $url,
-                        'image_url' => $image,
+                        'link_url' => $link,
                         'found' => $found,
                     ]);
                 }

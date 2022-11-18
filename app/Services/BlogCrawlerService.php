@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Interfaces\FindableImage;
+use App\Interfaces\FindableLink;
 use App\Models\Blog;
-use App\Models\TestImage;
+use App\Models\TestLink;
 use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;
@@ -15,11 +15,11 @@ use Spatie\Crawler\Crawler;
 class BlogCrawlerService
 {
     protected Collection $processes;
-    protected FindableImage $imageFinder;
+    protected FindableLink $linkFinder;
 
-    public function __construct(FindableImage $imageFinder)
+    public function __construct(FindableLink $linkFinder)
     {
-        $this->imageFinder = $imageFinder;
+        $this->linkFinder = $linkFinder;
         $this->processes = collect();
     }
 
@@ -29,7 +29,7 @@ class BlogCrawlerService
 
         $blogs->each(function ($blog) use ($echo) {
             // Make sure we're not duplicating a blog
-            $finderClass = get_class($this->imageFinder);
+            $finderClass = get_class($this->linkFinder);
             $finder = new $finderClass();
             $foundCount = $finder->where('blog_id', $blog->blog_id)->count();
 
@@ -62,7 +62,7 @@ class BlogCrawlerService
         Crawler::create([RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30])
             ->acceptNofollowLinks()
             ->ignoreRobots()
-            ->setCrawlObserver(new BlogObserver($blogId, new $this->imageFinder()))
+            ->setCrawlObserver(new BlogObserver($blogId, new $this->linkFinder()))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
             ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
             ->setDelayBetweenRequests(100)

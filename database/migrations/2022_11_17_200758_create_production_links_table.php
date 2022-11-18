@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_images', function (Blueprint $table) {
+        Schema::create('production_links', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
             $table->string('page_url', 500);
-            $table->string('image_url', 500);
+            $table->string('link_url', 500);
             $table->boolean('found');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_images');
+        Schema::dropIfExists('production_links');
     }
 };

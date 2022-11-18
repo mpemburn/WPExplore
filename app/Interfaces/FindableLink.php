@@ -5,8 +5,8 @@ namespace App\Interfaces;
 /**
  * @method where(string $string, $blog_id)
  */
-interface FindableImage
+interface FindableLink
 {
     public function getBlogBasePath(): string;
-    public function getImageBasePath(): string;
+    public function getLinkBasePath(): string;
 }
