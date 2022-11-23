@@ -5,6 +5,7 @@ use App\Models\Blog;
 use App\Models\Option;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use App\Observers\BlogObserver;
 use Spatie\Crawler\Crawler;
@@ -26,10 +27,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dev', function () {
-    $links = \App\Models\TestLink::select('blog_id')->groupBy('blog_id')->orderBy('blog_id');
-
-    $links->each(function ($link) {
-        !d($link->blog_id);
-    });
+    // Do what thou wilt
 });
 

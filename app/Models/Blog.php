@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    protected $table = 'wp_blogs';
     use HasFactory;
+
+    protected $primaryKey = 'blog_id';
+    protected $table = 'wp_blogs';
 }
