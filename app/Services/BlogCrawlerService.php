@@ -17,10 +17,13 @@ class BlogCrawlerService
     protected Collection $processes;
     protected FindableLink $linkFinder;
 
-    public function __construct(FindableLink $linkFinder)
+    public function __construct(FindableLink $linkFinder, bool $flushData = false)
     {
-        $this->linkFinder = $linkFinder;
         $this->processes = collect();
+        $this->linkFinder = $linkFinder;
+        if ($flushData) {
+            $this->truncate($linkFinder);
+        }
     }
 
     public function loadCrawlProcesses(bool $echo = false): self
@@ -102,5 +105,10 @@ class BlogCrawlerService
         return ($code == 200);
     }
 
+    protected function truncate(FindableLink $linkFinder)
+    {
+        $class = get_class($linkFinder);
+        $class::query()->truncate();
+    }
 
 }

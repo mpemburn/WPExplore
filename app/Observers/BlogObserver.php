@@ -65,22 +65,15 @@ class BlogObserver extends CrawlObserver
         //# save HTML
         $content = $doc->saveHTML();
 
-        $found = false;
         // Search for image links
         if (strpos($content, '<img') !== false) {
             $regexp = '<img[^>]+src=(?:\"|\')\K(.[^">]+?)(?=\"|\')';
             $this->addLink($regexp, $content, $url);
-            $found = true;
         }
         // Search for .pdf links
         if (strpos($content, '.pdf') !== false) {
             $regexp = '<a[^>]+href=(?:\"|\')\K(.[^">]+?pdf)(?=\"|\')';
             $this->addLink($regexp, $content, $url);
-            $found = true;
-        }
-
-        if (! $found && $this->echo) {
-            echo 'not found' . PHP_EOL;
         }
     }
 

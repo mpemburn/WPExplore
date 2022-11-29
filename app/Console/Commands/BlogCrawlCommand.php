@@ -15,7 +15,7 @@ class BlogCrawlCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'blog:crawl {--env=}';
+    protected $signature = 'blog:crawl {--env=} {--flush}';
 
     /**
      * The console command description.
@@ -32,7 +32,19 @@ class BlogCrawlCommand extends Command
     public function handle()
     {
         $linkFinder = $this->option('env') === 'prod' ? new ProductionLink() : new TestLink();
-        $service = new BlogCrawlerService($linkFinder);
+
+        $flushData = $this->option('flush') ? true : false;
+
+        if ($flushData) {
+            $message = 'The --flush option will truncate the ' . $linkFinder->getTable() . ' table' . PHP_EOL;
+            if (!$this->confirm($message . ' Do you wish to continue?', false)) {
+                $this->info("Process terminated by user");
+
+                return;
+            }
+        }
+
+        $service = new BlogCrawlerService($linkFinder, $flushData);
 
         $echo = $this->option('verbose');
 
