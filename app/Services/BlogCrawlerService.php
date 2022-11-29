@@ -46,13 +46,11 @@ class BlogCrawlerService
 
             $options->each(function (Option $option) use ($finder, $blog, $echo) {
                 $blogName = $finder->replaceBasePath($option->option_value);
-                if (! $this->urlExists($blogName)) {
-                    return;
-                }
 
                 if ($echo) {
                     echo  'Adding ' .$blogName . PHP_EOL;
                 }
+
                 $this->processes->push($this->fetchContent((int)$blog->blog_id, $blogName, $echo));
             });
         });
