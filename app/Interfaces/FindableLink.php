@@ -9,4 +9,5 @@ interface FindableLink
 {
     public function getBlogBasePath(): string;
     public function getLinkBasePath(): string;
+    public function replaceBasePath(string $url): string;
 }

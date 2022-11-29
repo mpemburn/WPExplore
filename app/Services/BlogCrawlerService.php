@@ -25,7 +25,7 @@ class BlogCrawlerService
 
     public function loadCrawlProcesses(bool $echo = false): self
     {
-        $blogs = Blog::all();
+        $blogs = Blog::where('archived', 0);
 
         $blogs->each(function ($blog) use ($echo) {
             // Make sure we're not duplicating a blog
@@ -41,8 +41,12 @@ class BlogCrawlerService
                 ->whereIn('option_name', ['siteurl'])
                 ->orderBy('option_name');
 
-            $options->each(function (Option $option) use ($blog, $echo) {
-                $blogName = $option->option_value;
+            $options->each(function (Option $option) use ($finder, $blog, $echo) {
+                $blogName = $finder->replaceBasePath($option->option_value);
+                if (! $this->urlExists($blogName)) {
+                    return;
+                }
+
                 if ($echo) {
                     echo  'Adding ' .$blogName . PHP_EOL;
                 }

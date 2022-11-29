@@ -27,4 +27,10 @@ class ProductionLink extends Model implements FindableLink
         return $this->linkBasePath;
     }
 
+    public function replaceBasePath(string $url): string
+    {
+        $parts = parse_url($url);
+
+        return $parts['scheme'] . '://' . $this->blogBasePath . $parts['path'];
+    }
 }
