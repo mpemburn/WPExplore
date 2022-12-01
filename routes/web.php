@@ -3,6 +3,8 @@
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\Option;
+use App\Models\ProductionLink;
+use App\Services\BlogService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -26,7 +28,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dev', function () {
-    // Do what thou wilt
+Route::get('/csv', function () {
+    return (new BlogService())->createCsv();
 });
 
+Route::get('/dev', function () {
+    // Do what thou wilt.
+});
+
+Route::get('/active', function () {
+    $blogs = (new BlogService())->getActiveBlogs();
+
+    !d($blogs->toArray());
+});

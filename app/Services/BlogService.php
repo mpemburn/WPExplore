@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Blog;
 use App\Models\Option;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 
 class BlogService
@@ -25,6 +26,25 @@ class BlogService
             "URL",
         ];
 
+        $rows = $this->getActiveBlogs();
+
+        $callback = function () use ($rows, $columns)
+        {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            $rows->each(function ($row) use ($file) {
+                fputcsv($file, $row);
+            });
+
+            fclose($file);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function getActiveBlogs(): Collection
+    {
         $rows = collect();
 
         $blogs = Blog::where('archived', 0);
@@ -40,29 +60,16 @@ class BlogService
                 ->whereIn('option_name', ['siteurl', 'admin_email'])
                 ->orderBy('option_name');
 
-            $data[] = $blog->blog_id;
-            $data[] = $blog->last_updated;
+            $data['blog_id'] = $blog->blog_id;
+            $data['last_updated'] = $blog->last_updated;
 
             $options->each(function (Option $option) use (&$data) {
-                $data[] = $option->option_value;
+                $data[$option->option_name] = $option->option_value;
             });
 
             $rows->push($data);
         });
 
-
-        $callback = function () use ($rows, $columns)
-        {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            $rows->each(function ($row) use ($file) {
-                fputcsv($file, $row);
-            });
-
-            fclose($file);
-        };
-
-        return Response::stream($callback, 200, $headers);
+        return $rows;
     }
 }
