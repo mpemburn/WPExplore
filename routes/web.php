@@ -3,7 +3,7 @@
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\Option;
-use App\Models\ProductionLink;
+use App\Models\WordpressProductionLink;
 use App\Services\BlogService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

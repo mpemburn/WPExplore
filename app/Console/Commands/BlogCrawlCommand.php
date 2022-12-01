@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Models\TestLink;
-use App\Models\ProductionLink;
+use App\Factories\LinkFactory;
+use App\Interfaces\FindableLink;
 use App\Services\BlogCrawlerService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use PDOException;
 
 class BlogCrawlCommand extends Command
 {
@@ -31,16 +32,16 @@ class BlogCrawlCommand extends Command
      */
     public function handle()
     {
-        $linkFinder = $this->option('env') === 'prod' ? new ProductionLink() : new TestLink();
+        $linkFinder = $this->getLinkFinder($this->option('env'));
 
-        $flushData = $this->option('flush') ? true : false;
+        $flushData = (bool)$this->option('flush');
 
         if ($flushData) {
             $message = 'The --flush option will truncate the ' . $linkFinder->getTable() . ' table' . PHP_EOL;
             if (!$this->confirm($message . ' Do you wish to continue?', false)) {
                 $this->info("Process terminated by user");
 
-                return;
+                return Command::FAILURE;
             }
         }
 
@@ -51,5 +52,18 @@ class BlogCrawlCommand extends Command
         $service->loadCrawlProcesses($echo)->run();
 
         return Command::SUCCESS;
+    }
+
+    protected function getLinkFinder($env): ?FindableLink
+    {
+        try {
+            return LinkFactory::build($env);
+        } catch (PDOException $pdoex) {
+            $this->info('Error: ' . $pdoex->getMessage());
+            die();
+        } catch (ModelNotFoundException $mnfex) {
+            $this->info('Error: ' . $mnfex->getMessage());
+            die();
+        }
     }
 }

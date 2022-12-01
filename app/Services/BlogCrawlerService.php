@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\FindableLink;
 use App\Models\Blog;
-use App\Models\TestLink;
+use App\Models\WordpressTestLink;
 use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;

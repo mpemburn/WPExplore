@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Interfaces\FindableLink;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
+use PDOException;
 
 abstract class Link extends Model implements FindableLink
 {
-    protected string $blogBasePath = 'wordpress.test.clarku.edu';
-    protected string $linkBasePath = '/wp-content/uploads/sites';
+    protected string $blogBasePath = '';
+    protected array $alternateImagePaths = [];
 
     protected $fillable = [
         'blog_id',
@@ -17,21 +19,32 @@ abstract class Link extends Model implements FindableLink
         'found'
     ];
 
+    public function __construct()
+    {
+        if (! Schema::hasTable($this->getTable())) {
+            throw new PDOException('Table "' . $this->getTable() . '" not found in ' . get_called_class());
+
+        }
+
+        parent::__construct();
+    }
+
     public function getBlogBasePath(): string
     {
         return $this->blogBasePath;
     }
 
-    public function getLinkBasePath(): string
+    public function foundInAlternateImagePath(string $path): bool
     {
-        return $this->linkBasePath;
+        return (str_replace($this->alternateImagePaths, '', $path) != $path);
     }
 
     public function replaceBasePath(string $url): string
     {
         $parts = parse_url($url);
+        $path = isset($parts['path']) ? $parts['path'] : null;
 
-        return $parts['scheme'] . '://' . $this->blogBasePath . $parts['path'];
+        return $parts['scheme'] . '://' . $this->blogBasePath . $path;
     }
 
 }

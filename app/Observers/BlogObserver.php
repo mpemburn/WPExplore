@@ -83,7 +83,7 @@ class BlogObserver extends CrawlObserver
             foreach ($matches as $match) {
                 $link = current($match);
                 // If the link doesn't belong to this blog, skip it
-                if (strpos($link, $this->blogRoot) === false) {
+                if (strpos($link, $this->blogRoot) === false && ! $this->linkFinder->foundInAlternateImagePath($link)) {
                     continue;
                 }
 

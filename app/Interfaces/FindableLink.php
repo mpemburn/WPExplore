@@ -8,6 +8,6 @@ namespace App\Interfaces;
 interface FindableLink
 {
     public function getBlogBasePath(): string;
-    public function getLinkBasePath(): string;
+    public function foundInAlternateImagePath(string $path): bool;
     public function replaceBasePath(string $url): string;
 }
