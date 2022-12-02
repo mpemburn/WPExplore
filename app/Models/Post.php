@@ -6,7 +6,7 @@ use App\Traits\BindsDynamically;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Option extends Model
+class Post extends Model
 {
     use BindsDynamically;
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\Option;
+use App\Models\Post;
 use App\Models\WordpressProductionLink;
 use App\Services\BlogService;
 use Illuminate\Support\Facades\DB;
@@ -28,8 +29,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/csv', function () {
-    return (new BlogService())->createCsv();
+Route::get('/csv/active', function () {
+    return (new BlogService())->createActiveBlogsCsv();
+});
+
+Route::get('/csv/stale', function () {
+    return (new BlogService())->createStaleBlogsCsv();
+});
+
+Route::get('/csv/mat', function () {
+    return (new BlogService())->createMatBlogsCsv();
 });
 
 Route::get('/dev', function () {

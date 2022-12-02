@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Generators;
+
+use App\Interfaces\CsvGeneratorInterface;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+abstract class CsvGenerator implements CsvGeneratorInterface
+{
+    protected Collection $data;
+    protected string $filename;
+
+    public function __construct(string $filename)
+    {
+        $this->filename = $filename;
+    }
+
+    public function getColumns(): ?array
+    {
+        return  [];
+    }
+
+    public function setData(Collection $data): self
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function run(): ?StreamedResponse
+    {
+        if (! $this->data && ! $this->filename) {
+            return null;
+        }
+
+        return Response::stream($this->getCallback($this->data), 200, $this->getHeaders($this->filename));
+    }
+
+    protected function getHeaders(string $filename): array
+    {
+        return [
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0'
+        ];
+    }
+
+    protected function getCallback(Collection $rows): callable
+    {
+        $columns = $this->getColumns();
+        return function () use ($rows, $columns)
+        {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            $rows->each(function ($row) use ($file) {
+                fputcsv($file, $row);
+            });
+
+            fclose($file);
+        };
+    }
+}
