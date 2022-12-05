@@ -2,12 +2,11 @@
 
 namespace App\Generators;
 
-use App\Interfaces\CsvGeneratorInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-abstract class CsvGenerator implements CsvGeneratorInterface
+abstract class CsvGenerator
 {
     protected Collection $data;
     protected string $filename;
@@ -17,10 +16,7 @@ abstract class CsvGenerator implements CsvGeneratorInterface
         $this->filename = $filename;
     }
 
-    public function getColumns(): ?array
-    {
-        return  [];
-    }
+    abstract public function getColumns(): ?array;
 
     public function setData(Collection $data): self
     {
