@@ -4,8 +4,11 @@ use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
+use App\Models\PostMeta;
 use App\Models\WordpressProductionLink;
+use App\Models\WordpressTestLink;
 use App\Services\BlogService;
+use App\Services\CloneService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -42,6 +45,9 @@ Route::get('/csv/mat', function () {
 });
 
 Route::get('/dev', function () {
+//    (new CloneService())->clone('wordpress_testing', 'multisite', 'wp_154_');
+    !d((new CloneService())->getTablesByPrefix('wordpress_testing', '%'));
+    // Do what thou wilt.
     // Do what thou wilt.
 });
 

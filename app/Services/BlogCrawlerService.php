@@ -69,7 +69,7 @@ class BlogCrawlerService
             ->ignoreRobots()
             ->setCrawlObserver(new BlogObserver($blogId, new $this->linkFinder(), $echo))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
-            ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
+//            ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
             ->setDelayBetweenRequests(100)
             ->startCrawling($url);
         return true;

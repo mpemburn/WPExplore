@@ -87,6 +87,10 @@ class BlogObserver extends CrawlObserver
                     continue;
                 }
 
+                if ($this->linkFinder->where('link_url', $link)->exists()) {
+                    continue;
+                }
+
                 $found = (new BlogCrawlerService($this->linkFinder))->urlExists($link);
 
                 $finder = new $this->linkFinder();
