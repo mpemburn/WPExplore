@@ -12,7 +12,7 @@ class CloneSubsite extends Command
      *
      * @var string
      */
-    protected $signature = 'clone:site {--source=} {--dest=} {--blog_id=}';
+    protected $signature = 'clone:site {--source=} {--dest=} {--blog_id=} {--prefix=}';
 
     /**
      * The console command description.
@@ -31,8 +31,14 @@ class CloneSubsite extends Command
         $sourceDb = $this->option('source');
         $destDb = $this->option('dest');
         $blogId = $this->option('blog_id');
+        $prefix = $this->option('prefix') ? $this->option('prefix') : 'wp_';
 
-        (new CloneService())->clone($sourceDb, $destDb, 'wp_' . $blogId . '_');
+        try {
+            (new CloneService())->clone($sourceDb, $destDb, $prefix . $blogId . '_', $blogId);
+        } catch (\PDOException $pdoex) {
+            $this->info('Aborting: ' . $pdoex->getMessage());
+            die();
+        }
 
         return Command::SUCCESS;
     }

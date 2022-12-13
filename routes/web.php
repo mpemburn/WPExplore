@@ -45,9 +45,6 @@ Route::get('/csv/mat', function () {
 });
 
 Route::get('/dev', function () {
-//    (new CloneService())->clone('wordpress_testing', 'multisite', 'wp_154_');
-    !d((new CloneService())->getTablesByPrefix('wordpress_testing', '%'));
-    // Do what thou wilt.
     // Do what thou wilt.
 });
 
