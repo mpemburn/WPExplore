@@ -9,6 +9,9 @@ use PDOException;
 
 abstract class Link extends Model implements FindableLink
 {
+    protected const AUTH_USERNAME = null;
+    protected const AUTH_PASSWORD = null;
+
     protected string $blogBasePath = '';
     protected array $alternateImagePaths = [];
 
@@ -27,6 +30,17 @@ abstract class Link extends Model implements FindableLink
         }
 
         parent::__construct();
+    }
+
+    public function getAuth(array $options): array
+    {
+        $username = env(static::AUTH_USERNAME);
+        $password = env(static::AUTH_PASSWORD);
+
+        if ($username && $password) {
+            $options = array_merge($options, ['auth' => [$username, $password]]);
+        }
+        return $options;
     }
 
     public function getBlogBasePath(): string

@@ -10,4 +10,5 @@ interface FindableLink
     public function getBlogBasePath(): string;
     public function foundInAlternateImagePath(string $path): bool;
     public function replaceBasePath(string $url): string;
+    public function getAuth(array $options): array;
 }
