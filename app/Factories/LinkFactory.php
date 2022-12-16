@@ -12,15 +12,11 @@ class LinkFactory
 {
     public static function build(string $env): FindableLink
     {
-        switch ($env) {
-            case 'wpprod':
-                return new WordpressProductionLink();
-            case 'wptest':
-                return new WordpressTestLink();
-            case 'clarkprod':
-                return new ClarkProductionLink();
-            default:
-                throw new ModelNotFoundException('No valid Model specified by "' . $env . '"');
-        }
+        return match ($env) {
+            'wpprod' => new WordpressProductionLink(),
+            'wptest' => new WordpressTestLink(),
+            'clarkprod' => new ClarkProductionLink(),
+            default => throw new ModelNotFoundException('No valid Model specified by "' . $env . '"'),
+        };
     }
 }

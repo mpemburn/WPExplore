@@ -9,11 +9,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 abstract class CsvGenerator
 {
     protected Collection $data;
-    protected string $filename;
 
-    public function __construct(string $filename)
+    public function __construct(protected string $filename)
     {
-        $this->filename = $filename;
     }
 
     abstract public function getColumns(): ?array;

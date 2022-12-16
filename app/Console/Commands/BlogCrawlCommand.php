@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Factories\LinkFactory;
 use App\Interfaces\FindableLink;
+use App\ObserverActions\BlogObserverAction;
 use App\Services\BlogCrawlerService;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -32,7 +33,9 @@ class BlogCrawlCommand extends Command
      */
     public function handle()
     {
+        $echo = $this->option('verbose');
         $linkFinder = $this->getLinkFinder($this->option('env'));
+        $action = new BlogObserverAction($linkFinder, $echo);
 
         $flushData = (bool)$this->option('flush');
 
@@ -45,11 +48,8 @@ class BlogCrawlCommand extends Command
             }
         }
 
-        $service = new BlogCrawlerService($linkFinder, $flushData);
-
-        $echo = $this->option('verbose');
-
-        $service->loadCrawlProcesses($echo)->run();
+        (new BlogCrawlerService($action, $flushData))
+            ->loadCrawlProcesses($echo)->run();
 
         return Command::SUCCESS;
     }

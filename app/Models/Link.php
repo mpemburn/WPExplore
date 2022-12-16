@@ -22,7 +22,7 @@ abstract class Link extends Model implements FindableLink
     public function __construct()
     {
         if (! Schema::hasTable($this->getTable())) {
-            throw new PDOException('Table "' . $this->getTable() . '" not found in ' . get_called_class());
+            throw new PDOException('Table "' . $this->getTable() . '" not found in ' . static::class);
 
         }
 
@@ -42,7 +42,7 @@ abstract class Link extends Model implements FindableLink
     public function replaceBasePath(string $url): string
     {
         $parts = parse_url($url);
-        $path = isset($parts['path']) ? $parts['path'] : null;
+        $path = $parts['path'] ?? null;
 
         return $parts['scheme'] . '://' . $this->blogBasePath . $path;
     }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\FindableLink;
+use App\Interfaces\ObserverAction;
 use App\Models\Blog;
 use App\Models\WordpressTestLink;
 use App\Models\Option;
@@ -16,14 +17,17 @@ class BlogCrawlerService
 {
     protected Collection $processes;
     protected FindableLink $linkFinder;
+    protected ObserverAction $observerAction;
 
-    public function __construct(FindableLink $linkFinder, bool $flushData = false)
+    public function __construct(ObserverAction $observerAction, bool $flushData = false)
     {
+        $this->linkFinder = $observerAction->getLinkFinder();
+
         $this->processes = collect();
-        $this->linkFinder = $linkFinder;
         if ($flushData) {
-            $this->truncate($linkFinder);
+            $this->truncate($this->linkFinder);
         }
+        $this->observerAction = $observerAction;
     }
 
     public function loadCrawlProcesses(bool $echo = false): self
@@ -32,7 +36,7 @@ class BlogCrawlerService
 
         $blogs->each(function ($blog) use ($echo) {
             // Make sure we're not duplicating a blog
-            $finderClass = get_class($this->linkFinder);
+            $finderClass = $this->linkFinder::class;
             $finder = new $finderClass();
             $foundCount = $finder->where('blog_id', $blog->blog_id)->count();
 
@@ -67,7 +71,7 @@ class BlogCrawlerService
         Crawler::create([RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30])
             ->acceptNofollowLinks()
             ->ignoreRobots()
-            ->setCrawlObserver(new BlogObserver($blogId, new $this->linkFinder(), $echo))
+            ->setCrawlObserver(new BlogObserver($blogId, $this->observerAction))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
 //            ->setTotalCrawlLimit(25) // limit defines the maximal count of URLs to crawl
             ->setDelayBetweenRequests(100)
@@ -105,7 +109,7 @@ class BlogCrawlerService
 
     protected function truncate(FindableLink $linkFinder)
     {
-        $class = get_class($linkFinder);
+        $class = $linkFinder::class;
         $class::query()->truncate();
     }
 

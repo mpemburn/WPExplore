@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Interfaces\FindableLink;
+use App\Interfaces\ObserverAction;
 use App\Services\BlogCrawlerService;
 use DOMDocument;
 use Spatie\Crawler\CrawlObservers\CrawlObserver;
@@ -13,23 +14,18 @@ use Illuminate\Support\Facades\Log;
 
 class BlogObserver extends CrawlObserver
 {
-    protected int $blogId;
     protected ?string $blogRoot = null;
-    protected FindableLink $linkFinder;
-    protected bool $echo;
+    protected int $blogId;
 
-    public function __construct(int $blogId, FindableLink $linkFinder, bool $echo = false)
+    public function __construct(int $blogId, protected ObserverAction $observerAction)
     {
-        $this->blogId = $blogId;
         $this->content = collect();
-        $this->linkFinder = $linkFinder;
-        $this->echo = $echo;
+        $this->blogId = $blogId;
     }
 
     /**
      * Called when the crawler will crawl the url.
      *
-     * @param \Psr\Http\Message\UriInterface $url
      */
     public function willCrawl(UriInterface $url): void
     {
@@ -40,9 +36,6 @@ class BlogObserver extends CrawlObserver
     /**
      * Called when the crawler has crawled the given url successfully.
      *
-     * @param \Psr\Http\Message\UriInterface $url
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param \Psr\Http\Message\UriInterface|null $foundOnUrl
      */
     public function crawled(
         UriInterface      $url,
@@ -50,72 +43,15 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        if (strpos($url, $this->linkFinder->getBlogBasePath()) === false) {
-            return;
-        }
 
-        $doc = new DOMDocument();
-        $body = $response->getBody();
-
-        if (strlen($body) < 1) {
-            return;
-        }
-
-        @$doc->loadHTML($body);
-        //# save HTML
-        $content = $doc->saveHTML();
-
-        // Search for image links
-        if (strpos($content, '<img') !== false) {
-            $regexp = '<img[^>]+src=(?:\"|\')\K(.[^">]+?)(?=\"|\')';
-            $this->addLink($regexp, $content, $url);
-        }
-        // Search for .pdf links
-        if (strpos($content, '.pdf') !== false) {
-            $regexp = '<a[^>]+href=(?:\"|\')\K(.[^">]+?pdf)(?=\"|\')';
-            $this->addLink($regexp, $content, $url);
-        }
-    }
-
-    protected function addLink(string $regexp, string $content, string $url): void
-    {
-        if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
-            foreach ($matches as $match) {
-                $link = current($match);
-                // If the link doesn't belong to this blog, skip it
-                if (strpos($link, $this->blogRoot) === false && ! $this->linkFinder->foundInAlternateImagePath($link)) {
-                    continue;
-                }
-
-                if ($this->linkFinder->where('link_url', $link)->exists()) {
-                    continue;
-                }
-
-                $found = (new BlogCrawlerService($this->linkFinder))->urlExists($link);
-
-                $finder = new $this->linkFinder();
-                $finder->create([
-                    'blog_id' => $this->blogId,
-                    'page_url' => $url,
-                    'link_url' => $link,
-                    'found' => $found,
-                ]);
-
-                if ($this->echo) {
-                    echo '.';
-                }
-
-                return;
-            }
-        }
+        $this->observerAction->setBlogRoot($this->blogRoot)
+            ->setBlogId($this->blogId)
+            ->act($url, $response, $foundOnUrl);
     }
 
     /**
      * Called when the crawler had a problem crawling the given url.
      *
-     * @param \Psr\Http\Message\UriInterface $url
-     * @param \GuzzleHttp\Exception\RequestException $requestException
-     * @param \Psr\Http\Message\UriInterface|null $foundOnUrl
      */
     public function crawlFailed(
         UriInterface     $url,
@@ -131,7 +67,7 @@ class BlogObserver extends CrawlObserver
      */
     public function finishedCrawling(): void
     {
-        if ($this->echo) {
+        if ($this->observerAction->verbose()) {
             echo 'Done!' . PHP_EOL;
         }
     }

@@ -31,7 +31,7 @@ class CloneSubsite extends Command
         $sourceDb = $this->option('source');
         $destDb = $this->option('dest');
         $blogId = $this->option('blog_id');
-        $prefix = $this->option('prefix') ? $this->option('prefix') : 'wp_';
+        $prefix = $this->option('prefix') ?: 'wp_';
 
         try {
             (new CloneService())->clone($sourceDb, $destDb, $prefix . $blogId . '_', $blogId);
