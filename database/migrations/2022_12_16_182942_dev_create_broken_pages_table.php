@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('broken_pages', function (Blueprint $table) {
+        Schema::create('dev_broken_pages', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
             $table->string('page_url', 500);
-            $table->string('link_url', 500)->nullable();
-            $table->boolean('found');
+            $table->string('error', 500)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('broken_pages');
+        Schema::dropIfExists('dev_broken_pages');
     }
 };

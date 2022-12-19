@@ -14,5 +14,6 @@ interface ObserverAction
     ): void;
     public function setBlogId(int $blogId): self;
     public function setBlogRoot(string $blogRoot): self;
+    public function recordFailure(string $url, string $message): void;
     public function verbose(): bool;
 }

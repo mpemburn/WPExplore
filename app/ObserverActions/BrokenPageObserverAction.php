@@ -57,19 +57,10 @@ class BrokenPageObserverAction implements ObserverAction
         @$doc->loadHTML($body);
         //# save HTML
         $content = $doc->saveHTML();
-        echo $url . PHP_EOL;
-        echo substr($content,0, 10) . PHP_EOL;
-//
-//        // Search for image links
-//        if (str_contains($content, '<img')) {
-//            $regexp = '<img[^>]+src=(?:\"|\')\K(.[^">]+?)(?=\"|\')';
-//            $this->addLink($regexp, $content, $url);
-//        }
-//        // Search for .pdf links
-//        if (str_contains($content, '.pdf')) {
-//            $regexp = '<a[^>]+href=(?:\"|\')\K(.[^">]+?pdf)(?=\"|\')';
-//            $this->addLink($regexp, $content, $url);
-//        }
+
+        if ($this->echo) {
+            echo '.';
+        }
 
     }
 
@@ -77,38 +68,14 @@ class BrokenPageObserverAction implements ObserverAction
     {
         return $this->linkFinder;
     }
-//
-//    protected function addLink(string $regexp, string $content, string $url): void
-//    {
-//        if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
-//            foreach ($matches as $match) {
-//                $link = current($match);
-//                // If the link doesn't belong to this blog, skip it
-//                if (!str_contains($link, $this->blogRoot) && ! $this->linkFinder->foundInAlternateImagePath($link)) {
-//                    continue;
-//                }
-//
-//                if ($this->linkFinder->where('link_url', $link)->exists()) {
-//                    continue;
-//                }
-//
-//                $found = (new BlogCrawlerService($this))->urlExists($link);
-//
-//                $finder = new $this->linkFinder();
-//                $finder->create([
-//                    'blog_id' => $this->blogId,
-//                    'page_url' => $url,
-//                    'link_url' => $link,
-//                    'found' => $found,
-//                ]);
-//
-//                if ($this->echo) {
-//                    echo '.';
-//                }
-//
-//                return;
-//            }
-//        }
-//    }
 
+    public function recordFailure(string $url, string $message): void
+    {
+        $linkFinder = new $this->linkFinder();
+        $linkFinder->create([
+            'blog_id' =>$this->blogId,
+            'page_url' => $url,
+            'error' => $message,
+        ]);
+    }
 }

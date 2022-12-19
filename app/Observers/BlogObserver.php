@@ -59,7 +59,7 @@ class BlogObserver extends CrawlObserver
         ?UriInterface    $foundOnUrl = null
     ): void
     {
-        Log::error('crawlFailed', ['url' => $url, 'error' => $requestException->getMessage()]);
+        $this->observerAction->recordFailure($url, $requestException->getMessage());
     }
 
     /**

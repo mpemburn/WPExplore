@@ -6,6 +6,7 @@ use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
 use App\Services\BlogCrawlerService;
 use DOMDocument;
+use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -72,7 +73,6 @@ class BlogObserverAction implements ObserverAction
             $regexp = '<a[^>]+href=(?:\"|\')\K(.[^">]+?pdf)(?=\"|\')';
             $this->addLink($regexp, $content, $url);
         }
-
     }
 
     public function getLinkFinder(): FindableLink
@@ -113,4 +113,8 @@ class BlogObserverAction implements ObserverAction
         }
     }
 
+    public function recordFailure(string $url, string $message): void
+    {
+        Log::error('crawlFailed', [$url => $url, $message]);
+    }
 }

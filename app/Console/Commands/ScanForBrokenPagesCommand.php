@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Factories\LinkFactory;
 use App\Interfaces\FindableLink;
-use App\Models\WwwDevBrokenPage;
+use App\Models\DevBrokenPage;
 use App\ObserverActions\BrokenPageObserverAction;
 use App\Services\BlogCrawlerService;
 use Illuminate\Console\Command;
@@ -39,7 +39,7 @@ class ScanForBrokenPagesCommand extends Command
         $action = new BrokenPageObserverAction($linkFinder, $echo);
 
         (new BlogCrawlerService($action))
-            ->loadCrawlProcesses()->run();
+            ->loadCrawlProcesses(true)->run();
 
         return Command::SUCCESS;
     }
