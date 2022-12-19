@@ -34,12 +34,13 @@ abstract class Link extends Model implements FindableLink
 
     public function getAuth(array $options): array
     {
-        $username = env(static::AUTH_USERNAME);
-        $password = env(static::AUTH_PASSWORD);
+        if (static::AUTH_USERNAME && static::AUTH_PASSWORD) {
+            $username = env(static::AUTH_USERNAME);
+            $password = env(static::AUTH_PASSWORD);
 
-        if ($username && $password) {
             $options = array_merge($options, ['auth' => [$username, $password]]);
         }
+
         return $options;
     }
 

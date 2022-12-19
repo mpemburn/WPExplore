@@ -21,6 +21,7 @@ class BlogObserver extends CrawlObserver
     {
         $this->content = collect();
         $this->blogId = $blogId;
+        $this->observerAction->setBlogId($this->blogId);
     }
 
     /**
@@ -45,7 +46,6 @@ class BlogObserver extends CrawlObserver
     {
 
         $this->observerAction->setBlogRoot($this->blogRoot)
-            ->setBlogId($this->blogId)
             ->act($url, $response, $foundOnUrl);
     }
 

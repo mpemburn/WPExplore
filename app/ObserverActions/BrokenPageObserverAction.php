@@ -73,7 +73,7 @@ class BrokenPageObserverAction implements ObserverAction
     {
         $linkFinder = new $this->linkFinder();
         $linkFinder->create([
-            'blog_id' =>$this->blogId,
+            'blog_id' => $this->blogId,
             'page_url' => $url,
             'error' => $message,
         ]);
