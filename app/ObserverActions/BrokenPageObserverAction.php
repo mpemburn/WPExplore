@@ -47,21 +47,20 @@ class BrokenPageObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        $doc = new DOMDocument();
-        $body = $response->getBody();
-
-        if (strlen($body) < 1) {
+        if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
             return;
         }
 
-        @$doc->loadHTML($body);
-        //# save HTML
-        $content = $doc->saveHTML();
+        $linkFinder = new $this->linkFinder();
+        $linkFinder->create([
+            'blog_id' => $this->blogId,
+            'page_url' => $url,
+            'error' => 'success',
+        ]);
 
         if ($this->echo) {
-            echo '.';
+            echo 'Testing...' . $url . PHP_EOL;
         }
-
     }
 
     public function getLinkFinder(): FindableLink
@@ -71,11 +70,23 @@ class BrokenPageObserverAction implements ObserverAction
 
     public function recordFailure(string $url, string $message): void
     {
+        if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
+            return;
+        }
+
+        $result = preg_match('/(.*)(resulted in a `)(.*)(` response)(:)/', $message, $matches);
+        $error = $result ? $matches[3] : substr($message, 0, 499);
+
         $linkFinder = new $this->linkFinder();
         $linkFinder->create([
             'blog_id' => $this->blogId,
             'page_url' => $url,
-            'error' => $message,
+            'error' => $error,
         ]);
+
+        if ($this->echo) {
+            echo 'ERROR: ' . $url . ' -- ' . $error . PHP_EOL;
+        }
+
     }
 }

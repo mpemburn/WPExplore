@@ -41,6 +41,10 @@ Route::get('/csv/stale', fn() => (new BlogService())->createStaleBlogsCsv());
 Route::get('/csv/mat', fn() => (new BlogService())->createMatBlogsCsv());
 
 Route::get('/dev', function () {
+    // Do what thou wilt
+});
+
+Route::get('/themes', function () {
     collect([
         '2010-weaver',
         'attitude',
@@ -84,13 +88,3 @@ Route::get('/active', function () {
     !d($blogs->toArray());
 });
 
-Route::get('/depscan', function () {
-//    $file = 'wordpress.clarku.edu-plugin-scan.json';
-    $file = 'www.clarku.edu_plugin_scan.json';
-
-    $errors = (new BugScanService())->parseDeprecationScanJSON($file);
-
-    $errors->each(function ($plugin) {
-        !d($plugin);
-    });
-});

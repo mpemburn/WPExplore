@@ -77,7 +77,7 @@ class BlogCrawlerService
             ->ignoreRobots()
             ->setCrawlObserver(new BlogObserver($blogId, $this->observerAction))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
-            ->setDelayBetweenRequests(100)
+            ->setDelayBetweenRequests(1000)
             ->startCrawling($url);
         return true;
     }
