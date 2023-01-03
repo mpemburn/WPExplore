@@ -20,6 +20,8 @@ use App\Observers\BlogObserver;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Crawler\Crawler;
 use Spatie\Async\Pool;
+use Symfony\Component\Process\Process;
+use function Sentry\captureException;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,50 +43,97 @@ Route::get('/csv/stale', fn() => (new BlogService())->createStaleBlogsCsv());
 Route::get('/csv/mat', fn() => (new BlogService())->createMatBlogsCsv());
 
 Route::get('/dev', function () {
+    $csv = Storage::path('public/plugins.csv');
+    if (file_exists($csv)) {
+        $row = 1;
+        if (($handle = fopen($csv, "r")) !== false) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+                $num = count($data);
+                echo "<p> $num fields in line $row: <br /></p>\n";
+                $row++;
+                for ($c=0; $c < $num; $c++) {
+                    echo $data[$c] . "<br />\n";
+                }
+            }
+            fclose($handle);
+        }    }
     // Do what thou wilt
 });
 
 Route::get('/themes', function () {
-    collect([
-        '2010-weaver',
-        'attitude',
-        'blogolife',
-        'copyblogger',
-        'custom-community',
-        'customizr',
-        'evolve',
-        'indore',
-        'ivanhoe',
-        'news-magazine-theme-640',
-        'origin',
-        'oxygen',
-        'parabola',
-        'responsive',
-        'sorbet',
-        'sydney',
-        'twentyeleven',
-        'twentyfifteen',
-        'twentyfourteen',
-        'twentyseventeen',
-        'twentysixteen',
-        'twentyten',
-        'twentythirteen',
-        'twentytwelve',
-        'twentytwenty',
-        'twentytwentytwo',
-        'veryplaintxt-20',
-        'weaver',
-        'weaver-ii-pro',
-        'zeesynergie',
-        'zerif-lite',
-    ])->each(function ($theme) {
-        $blogs = Blog::where();
+    $themes = collect();
+    (new BlogService())->getActiveBlogs()->each(function ($blog) use ($themes) {
+        $theme = isset($blog['template']) ? $blog['template'] : null;
+        if ($theme && ! $themes->has($theme)) {
+            $themes->push($theme);
+        }
+        if (isset($blog['siteurl'])) {
+            $themes->put($theme, $blog['siteurl']);
+        }
     });
+    !d($themes);
+
+//    collect([
+//        '2010-weaver',
+//        'attitude',
+//        'blogolife',
+//        'copyblogger',
+//        'custom-community',
+//        'customizr',
+//        'evolve',
+//        'indore',
+//        'ivanhoe',
+//        'news-magazine-theme-640',
+//        'origin',
+//        'oxygen',
+//        'parabola',
+//        'responsive',
+//        'sorbet',
+//        'sydney',
+//        'twentyeleven',
+//        'twentyfifteen',
+//        'twentyfourteen',
+//        'twentyseventeen',
+//        'twentysixteen',
+//        'twentyten',
+//        'twentythirteen',
+//        'twentytwelve',
+//        'twentytwenty',
+//        'twentytwentytwo',
+//        'veryplaintxt-20',
+//        'weaver',
+//        'weaver-ii-pro',
+//        'zeesynergie',
+//        'zerif-lite',
+//    ])->each(function ($theme) use ($blogs) {
+//        $using = $blogs->where('template', $theme);
+//        !d($using);
+//    });
 });
 
 Route::get('/active', function () {
     $blogs = (new BlogService())->getActiveBlogs();
 
     !d($blogs->toArray());
+});
+
+Route::get('/sentry', function () {
+    \Sentry\init(['dsn' => env('WP_SENTRY_PHP_DSN')]);
+    try {
+        $this->functionBogus();
+    } catch (\Throwable $exception) {
+        $result = captureException($exception);
+
+        !d($result);
+    }
+
+});
+
+Route::get('/phpdd', function () {
+    $pluginPath = "C:/Users/mpemburn/Documents/Dev/www.clarku.edu/wp-content/plugins/";
+    $json = file_get_contents('C:/Users/mpemburn/Documents/Sandbox/wpexplore/storage/app/public/PluginJSON/wordfence.json');
+    $data = collect(json_decode($json, true));
+
+    !d($data);
 });
 

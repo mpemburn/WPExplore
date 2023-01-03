@@ -46,7 +46,7 @@ class BlogService
             $data = [];
 
             $options = (new Option())->setTable('wp_' . $blog->blog_id . '_options')
-                ->whereIn('option_name', ['siteurl', 'template', 'admin_email'])
+                ->whereIn('option_name', ['siteurl', 'theme', 'template', 'admin_email'])
                 ->orderBy('option_name');
 
             $data['blog_id'] = $blog->blog_id;

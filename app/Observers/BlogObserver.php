@@ -2,10 +2,7 @@
 
 namespace App\Observers;
 
-use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
-use App\Services\BlogCrawlerService;
-use DOMDocument;
 use Spatie\Crawler\CrawlObservers\CrawlObserver;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;

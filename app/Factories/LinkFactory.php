@@ -7,7 +7,9 @@ use App\Models\ClarkProductionLink;
 use App\Models\DevBrokenPage;
 use App\Models\ProductionBrokenPage;
 use App\Models\TestingBrokenPage;
+use App\Models\WordPressProductionBrokenPage;
 use App\Models\WordpressProductionLink;
+use App\Models\WordPressTestBrokenPage;
 use App\Models\WordpressTestLink;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -22,6 +24,8 @@ class LinkFactory
             'wwwdev' => new DevBrokenPage(),
             'wwwprod' => new ProductionBrokenPage(),
             'wwwtest' => new TestingBrokenPage(),
+            'wordpressprod' => new WordPressProductionBrokenPage(),
+            'wordpresstest' => new WordPressTestBrokenPage(),
             default => throw new ModelNotFoundException('No valid Model specified by "' . $env . '"'),
         };
     }

@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
 use App\Models\Blog;
-use App\Models\WordpressTestLink;
 use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;
@@ -77,7 +76,7 @@ class BlogCrawlerService
             ->ignoreRobots()
             ->setCrawlObserver(new BlogObserver($blogId, $this->observerAction))
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
-            ->setDelayBetweenRequests(1000)
+            ->setDelayBetweenRequests(500)
             ->startCrawling($url);
         return true;
     }
