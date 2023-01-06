@@ -47,7 +47,11 @@ class BrokenPageObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
+
+        if (
+            !str_starts_with($url, 'https://' . $this->linkFinder->getBlogBasePath())
+            || preg_match('/(.*)(.jpe?g|.png|.gif|.bmp)/', $url)
+        ) {
             return;
         }
 
