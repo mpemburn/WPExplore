@@ -1,5 +1,7 @@
 <?php
 
+use App\Generators\BlogsCsvGenerator;
+use App\Generators\PluginsCsvGenerator;
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\Option;
@@ -14,6 +16,7 @@ use App\Services\CloneService;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -138,25 +141,43 @@ Route::get('/phpdd', function () {
     !d($data);
 });
 
-Route::get('/cron', function () {
-    $path = Storage::path('public');
-    $file = $path . '/cronlist.json';
-    $json = file_get_contents($file);
+Route::get('/distill', function () {
+    $rootPath = Storage::path('plugins_json');
+    $distilled = collect();
+    collect(File::allFiles($rootPath))->each(function ($file) use (&$distilled) {
+        $info = pathinfo($file);
+        $site = str_replace('_plugins', '', $info['filename']);
 
-    echo '<table>';
-    collect(json_decode($json, true))->each(function ($row) {
-        echo '<tr>';
-
-        $row['time'] = Carbon::createFromTimestamp($row['time'])
-            ->setTimezone('America/New_York')
-            ->format('m-d-Y g:i:s A');
-        echo "<td>{$row['hook']}</td>";
-        echo "<td>{$row['time']}</td>";
-        echo "<td>{$row['recurrence']}</td>";
-        echo '</tr>';
+        $json = file_get_contents($file);
+        collect(json_decode($json, true))->each(function ($row) use ($site, &$distilled){
+            if ($row['status'] !== 'active' && $row['status'] !== 'active-network') {
+                return;
+            }
+            $plugin = $row['name'];
+            if (! $distilled->contains($plugin)) {
+                $distilled->push($plugin);
+                $sites = collect();
+                $sites->push($site);
+                $distilled->put($plugin, ['data' => $row, 'sites' => $sites]);
+            } else {
+                $data = $distilled->get($plugin);
+                $data['sites']->push($site);
+                $distilled->put($plugin, $data);
+            }
+        });
     });
-    echo '</table>';
-
+    $rows = collect();
+    $distilled->each(function ($plugin) use (&$rows) {
+        if (is_array($plugin)) {
+            $data = $plugin['data'];
+            unset($data['version'], $data['status'], $data['update']);
+            $data['sites'] = implode(',', $plugin['sites']->sortDesc()->toArray());
+            $rows->push($data);
+        }
+    });
+    return (new PluginsCsvGenerator('distilled_plugin_list.csv'))
+        ->setData($rows)
+        ->run();
 
 });
 
