@@ -50,7 +50,7 @@ class BrokenPageObserverAction implements ObserverAction
 
         if (
             !str_starts_with($url, 'https://' . $this->linkFinder->getBlogBasePath())
-            || preg_match('/(.*)(.jpe?g|.png|.gif|.bmp|.pdf|.txtgir)/', $url)
+            || preg_match('/(.*)(.jpe?g|.png|.gif|.bmp|.pdf|.txt)/', $url)
         ) {
             return;
         }
