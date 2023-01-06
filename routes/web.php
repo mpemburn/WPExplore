@@ -12,6 +12,7 @@ use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -135,5 +136,27 @@ Route::get('/phpdd', function () {
     $data = collect(json_decode($json, true));
 
     !d($data);
+});
+
+Route::get('/cron', function () {
+    $path = Storage::path('public');
+    $file = $path . '/cronlist.json';
+    $json = file_get_contents($file);
+
+    echo '<table>';
+    collect(json_decode($json, true))->each(function ($row) {
+        echo '<tr>';
+
+        $row['time'] = Carbon::createFromTimestamp($row['time'])
+            ->setTimezone('America/New_York')
+            ->format('m-d-Y g:i:s A');
+        echo "<td>{$row['hook']}</td>";
+        echo "<td>{$row['time']}</td>";
+        echo "<td>{$row['recurrence']}</td>";
+        echo '</tr>';
+    });
+    echo '</table>';
+
+
 });
 
