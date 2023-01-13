@@ -8,13 +8,16 @@ use App\Models\Option;
 use App\Models\Post;
 use App\Models\PostMeta;
 use App\Models\WordpressProductionLink;
+use App\Models\WordPressTestBrokenPage;
 use App\Models\WordpressTestLink;
 use App\Observers\BugObserver;
 use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
+use App\Services\DatabaseService;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -47,63 +50,61 @@ Route::get('/csv/stale', fn() => (new BlogService())->createStaleBlogsCsv());
 Route::get('/csv/mat', fn() => (new BlogService())->createMatBlogsCsv());
 
 Route::get('/dev', function () {
-    $test = "https://www.clarku.edu/mypicture.jpeg";
-    !d(preg_match('/(.*)(.jpe?g|.png|.gif|.bmp)/', $test));
-    // Do what thou wilt
+    WordPressTestBrokenPage::query()
+        ->where('error', 'LIKE', '500 %')
+        ->each(function ($page) {
+            !d($page->page_url);
+        });
+});
+
+Route::get('/where_active', function () {
+    $currentSite = request('site');
+    $notFoundOnly = request('not_found');
+
+    DatabaseService::setDb($currentSite . '_clarku');
+
+    $rootPath = Storage::path('plugins_json');
+    $file =  $rootPath . "/{$currentSite}_plugins.json";
+
+    if (file_exists($file)) {
+        $json = file_get_contents($file);
+        collect(json_decode($json, true))->each(function ($row) use ($notFoundOnly) {
+            if ($row['status'] !== 'inactive') {
+                return;
+            }
+            $pluginName = $row['name'];
+            $title = $row['title'];
+            echo (new BlogService())->findPluginInSubsite($pluginName, $title, $notFoundOnly);
+        });
+    }
 });
 
 Route::get('/themes', function () {
-    $themes = collect();
-    (new BlogService())->getActiveBlogs()->each(function ($blog) use ($themes) {
-        $theme = isset($blog['template']) ? $blog['template'] : null;
-        if ($theme && ! $themes->has($theme)) {
-            $themes->push($theme);
-        }
-        if (isset($blog['siteurl'])) {
-            $themes->put($theme, $blog['siteurl']);
-        }
-    });
-    !d($themes);
+    $currentSite = request('site');
+    $notFoundOnly = request('not_found');
 
-//    collect([
-//        '2010-weaver',
-//        'attitude',
-//        'blogolife',
-//        'copyblogger',
-//        'custom-community',
-//        'customizr',
-//        'evolve',
-//        'indore',
-//        'ivanhoe',
-//        'news-magazine-theme-640',
-//        'origin',
-//        'oxygen',
-//        'parabola',
-//        'responsive',
-//        'sorbet',
-//        'sydney',
-//        'twentyeleven',
-//        'twentyfifteen',
-//        'twentyfourteen',
-//        'twentyseventeen',
-//        'twentysixteen',
-//        'twentyten',
-//        'twentythirteen',
-//        'twentytwelve',
-//        'twentytwenty',
-//        'twentytwentytwo',
-//        'veryplaintxt-20',
-//        'weaver',
-//        'weaver-ii-pro',
-//        'zeesynergie',
-//        'zerif-lite',
-//    ])->each(function ($theme) use ($blogs) {
-//        $using = $blogs->where('template', $theme);
-//        !d($using);
-//    });
+    DatabaseService::setDb($currentSite . '_clarku');
+
+    $rootPath = Storage::path('themes_json');
+    $file =  $rootPath . "/{$currentSite}_themes.json";
+    if (file_exists($file)) {
+        $json = file_get_contents($file);
+        collect(json_decode($json, true))->each(function ($row) use ($notFoundOnly) {
+            if ($row['status'] !== 'inactive') {
+                return;
+            }
+            $themeName = $row['title'];
+            echo (new BlogService())->findThemesInSubsite($themeName, $notFoundOnly);
+        });
+    }
 });
 
 Route::get('/active', function () {
+    $currentSite = request('site');
+    if ($currentSite) {
+        DatabaseService::setDb($currentSite . '_clarku');
+    }
+
     $blogs = (new BlogService())->getActiveBlogs();
 
     !d($blogs->toArray());

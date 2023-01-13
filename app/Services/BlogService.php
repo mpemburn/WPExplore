@@ -6,6 +6,7 @@ use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 
@@ -46,7 +47,7 @@ class BlogService
             $data = [];
 
             $options = (new Option())->setTable('wp_' . $blog->blog_id . '_options')
-                ->whereIn('option_name', ['siteurl', 'theme', 'template', 'admin_email'])
+                ->whereIn('option_name', ['siteurl', 'current_theme', 'template', 'admin_email', 'active_plugins'])
                 ->orderBy('option_name');
 
             $data['blog_id'] = $blog->blog_id;
@@ -106,6 +107,59 @@ class BlogService
         });
 
         return $rows;
+    }
+
+    public function findPluginInSubsite(string $pluginName, string $title, $notFoundOnly = false)
+    {
+        $data = $this->getActiveBlogs();
+        $notFound = true;
+
+        $titleRow = '<div><b>' . $title . '</b></div>';
+        $html = '<div style="font-family:  sans-serif">';
+        $html .= $titleRow;
+        $data->each(function ($row) use (&$notFound, &$html, $pluginName) {
+            if (stripos($row['active_plugins'], $pluginName) !== false) {
+                $html .= '<div>';
+                $html .= $row['siteurl'];
+                $html .= '</div>';
+                $notFound = false;
+            }
+        });
+
+        if ($notFoundOnly) {
+            return $notFound ? $titleRow : '';
+        }
+
+        return $notFound ? $titleRow . '<div style="font-family: sans-serif">Not Found</div><br>' : $html . '<br>';
+    }
+
+    public function findThemesInSubsite(string $themeName, $notFoundOnly = false)
+    {
+        $data = $this->getActiveBlogs();
+        $notFound = true;
+        $notFoundMsg = '<div style="font-family: sans-serif">Not Found</div><br>';
+
+        $titleRow = '<div style="font-family: sans-serif"><b>' . $themeName . '</b></div>';
+        $html = '<div style="font-family: sans-serif">';
+        $html .= $titleRow;
+        $data->each(function ($row) use (&$notFound, &$html, $themeName) {
+            if (! isset($row['current_theme'])) {
+                return;
+            }
+            if ($row['current_theme'] === $themeName) {
+                $html .= '<div>';
+                $html .= $row['siteurl'];
+                $html .= '</div>';
+                $notFound = false;
+            }
+        });
+        $html .= '</div>';
+
+        if ($notFoundOnly) {
+            return $notFound ? $titleRow : '';
+        }
+
+        return $notFound ? $titleRow . '<div style="font-family: sans-serif">Not Found</div><br>' : $html . '<br>';
     }
 
 }
