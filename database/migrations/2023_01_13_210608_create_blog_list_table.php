@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_broken_pages', function (Blueprint $table) {
+        Schema::create('blogs_list', function (Blueprint $table) {
             $table->id();
+            $table->string('site');
             $table->integer('blog_id');
-            $table->string('page_url', 500);
-            $table->string('error', 500)->nullable();
+            $table->string('blog_url', 500);
+            $table->string('last_updated');
+            $table->string('admin_email');
+            $table->string('current_theme');
+            $table->string('template');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_broken_pages');
+        Schema::dropIfExists('blogs_list');
     }
 };

@@ -4,6 +4,7 @@ use App\Generators\BlogsCsvGenerator;
 use App\Generators\PluginsCsvGenerator;
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
+use App\Models\BlogList;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\PostMeta;
@@ -48,6 +49,29 @@ Route::get('/csv/active', fn() => (new BlogService())->createActiveBlogsCsv());
 Route::get('/csv/stale', fn() => (new BlogService())->createStaleBlogsCsv());
 
 Route::get('/csv/mat', fn() => (new BlogService())->createMatBlogsCsv());
+
+Route::get('/load_blogs', function () {
+    $currentSite = request('site');
+    DatabaseService::setDb($currentSite . '_clarku');
+
+    $blogs = (new BlogService())->getActiveBlogs();
+
+    DatabaseService::setDb('server_tests');
+    DB::purge('mysql');
+    $blogs->each(function ($blog) use ($currentSite) {
+        BlogList::create([
+            'site' => $currentSite,
+            'blog_id' => $blog['blog_id'],
+            'blog_url' => $blog['siteurl'],
+            'last_updated' => $blog['last_updated'],
+            'admin_email' => $blog['admin_email'],
+            'current_theme' => isset($blog['current_theme']) ? $blog['current_theme'] : '',
+            'template' => $blog['template'],
+        ]);
+    });
+
+
+});
 
 Route::get('/dev', function () {
     WordPressTestBrokenPage::query()

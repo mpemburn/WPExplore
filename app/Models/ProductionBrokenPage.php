@@ -10,6 +10,6 @@ class ProductionBrokenPage extends Link
         'error'
     ];
 
-    public $table = 'production_broken_pages';
+    public $table = 'www_broken_pages';
     protected string $blogBasePath = 'www.clarku.edu';
 }

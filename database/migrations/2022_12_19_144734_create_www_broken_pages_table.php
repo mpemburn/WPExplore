@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testing_broken_pages', function (Blueprint $table) {
+        Schema::create('www_broken_pages', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
             $table->string('page_url', 500);
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testing_broken_pages');
+        Schema::dropIfExists('www_broken_pages');
     }
 };

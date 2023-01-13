@@ -10,6 +10,6 @@ class TestingBrokenPage extends Link
         'error'
     ];
 
-    public $table = 'testing_broken_pages';
+    public $table = 'www_testing_broken_pages';
     protected string $blogBasePath = 'www.testing.clarku.edu';
 }
