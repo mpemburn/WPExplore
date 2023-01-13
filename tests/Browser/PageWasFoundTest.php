@@ -18,16 +18,9 @@ class PageWasFoundTest extends DuskTestCase
 
     public function test_page_fatal_error(): void
     {
-        WordPressTestBrokenPage::query()
-            ->where('error', 'LIKE', '500 %')
+        WordPressTestBrokenPage::query()->where('error', 'LIKE', '%500 %')
             ->each(function ($page){
-                if (stripos($page->page_url, '.pdf') !== false) {
-                    return;
-                }
-                if (stripos($page->page_url, '.jpg') !== false) {
-                    return;
-                }
-                if (stripos($page->page_url, '.png') !== false) {
+                if (preg_match('/.*\.(?:jpe?g|png|gif|pdf)(?:\?\S+)?$/', $page->page_url)) {
                     return;
                 }
                 var_dump($page->page_url);
