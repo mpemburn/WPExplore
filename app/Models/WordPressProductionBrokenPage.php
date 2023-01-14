@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/**
+ * @method  where(string $string, $blog_id)
+ */
 class WordPressProductionBrokenPage extends Link
 {
     protected $fillable = [
@@ -12,4 +15,9 @@ class WordPressProductionBrokenPage extends Link
 
     public $table = 'wordpress_production_broken_pages';
     protected string $blogBasePath = 'wordpress.clarku.edu';
+
+    public function __call(string $name, array $arguments)
+    {
+        // TODO: Implement @method  where(string $string, $blog_id)
+    }
 }

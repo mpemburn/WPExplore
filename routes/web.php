@@ -74,11 +74,12 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
-    WordPressTestBrokenPage::query()
-        ->where('error', 'LIKE', '500 %')
-        ->each(function ($page) {
-            !d($page->page_url);
-        });
+    WordPressTestBrokenPage::create([
+        'blog_id' => 123,
+        'page_url' => 'https://something.com',
+        'error' => 'success',
+
+    ]);
 });
 
 Route::get('/where_active', function () {

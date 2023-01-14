@@ -31,7 +31,7 @@ class BlogCrawlerService
 
     public function loadCrawlProcesses(bool $echo = false): self
     {
-        $blogs = Blog::where('archived', 0);
+        $blogs = Blog::wheregot('archived', 0);
 
         $blogs->each(function ($blog) use ($echo) {
             // Make sure we're not duplicating a blog
