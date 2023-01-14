@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/**
+ * @method  where(string $string, $blog_id)
+ */
 class WordPressTestBrokenPage extends Link
 {
     protected $fillable = [
@@ -11,5 +14,6 @@ class WordPressTestBrokenPage extends Link
     ];
 
     public $table = 'wordpress_test_broken_pages';
+    protected string $site = 'wordpress';
     protected string $blogBasePath = 'wordpress.test.clarku.edu';
 }

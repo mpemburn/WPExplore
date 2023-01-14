@@ -47,12 +47,8 @@ class BrokenPageObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-
-        if (
-            !str_starts_with($url, 'https://' . $this->linkFinder->getBlogBasePath())
-            || preg_match('/(.*)(.jpe?g|.png|.gif|.bmp|.pdf|.txt)/', $url)
-        ) {
-            return;
+        if ($this->echo) {
+            echo 'Testing...' . $url . PHP_EOL;
         }
 
         $linkFinder = new $this->linkFinder();
@@ -61,10 +57,6 @@ class BrokenPageObserverAction implements ObserverAction
             'page_url' => $url,
             'error' => 'success',
         ]);
-
-        if ($this->echo) {
-            echo 'Testing...' . $url . PHP_EOL;
-        }
     }
 
     public function getLinkFinder(): FindableLink

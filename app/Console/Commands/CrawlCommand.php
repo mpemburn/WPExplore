@@ -14,7 +14,7 @@ use PDOException;
 abstract class CrawlCommand extends Command
 {
     protected ObserverAction $observerAction;
-    protected FindableLink $linkFinder;
+    protected ?FindableLink $linkFinder;
     protected bool $echo = false;
 
     /**

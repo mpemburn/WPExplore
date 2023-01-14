@@ -14,10 +14,6 @@ class TestingBrokenPage extends Link
     ];
 
     public $table = 'www_testing_broken_pages';
+    protected string $site = 'www';
     protected string $blogBasePath = 'www.testing.clarku.edu';
-
-    public function __call(string $name, array $arguments)
-    {
-        // TODO: Implement @method  where(string $string, $blog_id)
-    }
 }

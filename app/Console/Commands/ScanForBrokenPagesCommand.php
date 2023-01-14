@@ -23,9 +23,11 @@ class ScanForBrokenPagesCommand extends CrawlCommand
 
     public function handle()
     {
-        $this->echo = $this->option('verbose');
+        $this->echo = $this->option('verbose') ? true : false;
         $this->linkFinder = $this->getLinkFinder($this->option('env'));
-        $this->observerAction = new BrokenPageObserverAction($this->linkFinder, $this->echo);
+        if ($this->linkFinder) {
+            $this->observerAction = new BrokenPageObserverAction($this->linkFinder, $this->echo);
+        }
 
         return parent::handle();
     }

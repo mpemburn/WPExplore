@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
 use App\Models\Blog;
+use App\Models\BlogList;
 use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;
@@ -31,31 +32,18 @@ class BlogCrawlerService
 
     public function loadCrawlProcesses(bool $echo = false): self
     {
-        $blogs = Blog::wheregot('archived', 0);
+        $finderClass = $this->linkFinder::class;
+        $finder = new $finderClass();
+        $blogs = BlogList::where('site', $finder->getSite());
 
-        $blogs->each(function ($blog) use ($echo) {
-            // Make sure we're not duplicating a blog
-            $finderClass = $this->linkFinder::class;
-            $finder = new $finderClass();
-            $foundCount = $finder->where('blog_id', $blog->blog_id)->count();
+        $blogs->each(function ($blog) use ($finder, $echo) {
+            $blogUrl = $finder->replaceBasePath($blog['blog_url']);
 
-            if ($blog->blog_id < 2 || $foundCount > 0) {
-                return;
+            if ($echo) {
+                echo  'Adding ' .$blogUrl . PHP_EOL;
             }
 
-            $options = (new Option())->setTable('wp_'. $blog->blog_id .'_options')
-                ->whereIn('option_name', ['siteurl'])
-                ->orderBy('option_name');
-
-            $options->each(function (Option $option) use ($finder, $blog, $echo) {
-                $blogName = $finder->replaceBasePath($option->option_value);
-
-                if ($echo) {
-                    echo  'Adding ' .$blogName . PHP_EOL;
-                }
-
-                $this->processes->push($this->fetchContent((int)$blog->blog_id, $blogName, $echo));
-            });
+            $this->processes->push($this->fetchContent((int)$blog['blog_id'], $blog['blog_url'], $echo));
         });
 
         return $this;
