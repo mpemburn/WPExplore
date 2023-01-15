@@ -5,7 +5,13 @@ namespace App\Factories;
 use App\Interfaces\FindableLink;
 use App\Models\ClarkProductionLink;
 use App\Models\DevBrokenPage;
+use App\Models\FutureProductionBrokenPage;
+use App\Models\FutureTestBrokenPage;
+use App\Models\NewsProductionBrokenPage;
+use App\Models\NewsTestBrokenPage;
 use App\Models\ProductionBrokenPage;
+use App\Models\SitesProductionBrokenPage;
+use App\Models\SitesTestBrokenPage;
 use App\Models\TestingBrokenPage;
 use App\Models\WordPressProductionBrokenPage;
 use App\Models\WordpressProductionLink;
@@ -26,6 +32,12 @@ class LinkFactory
             'wwwtest' => new TestingBrokenPage(),
             'wordpressprod' => new WordPressProductionBrokenPage(),
             'wordpresstest' => new WordPressTestBrokenPage(),
+            'newsprod' => new NewsProductionBrokenPage(),
+            'newstest' => new NewsTestBrokenPage(),
+            'sitesprod' => new SitesProductionBrokenPage(),
+            'sitestest' => new SitesTestBrokenPage(),
+            'futureprod' => new FutureProductionBrokenPage(),
+            'futuretest' => new FutureTestBrokenPage(),
             default => throw new ModelNotFoundException('No valid Model specified by "' . $env . '"'),
         };
     }
