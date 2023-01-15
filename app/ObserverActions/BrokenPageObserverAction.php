@@ -4,8 +4,6 @@ namespace App\ObserverActions;
 
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
-use App\Services\BlogCrawlerService;
-use DOMDocument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -47,6 +45,8 @@ class BrokenPageObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
+        $url = $this->linkFinder->replaceBasePath($url->__toString());
+
         if ($this->echo) {
             echo 'Testing...' . $url . PHP_EOL;
         }
