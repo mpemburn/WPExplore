@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('production_links', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
-            $table->string('page_url', 500);
+            $table->text('page_url');
             $table->string('link_url', 500);
             $table->boolean('found');
             $table->timestamps();

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('wordpress_production_broken_pages', function (Blueprint $table) {
             $table->id();
             $table->integer('blog_id');
-            $table->string('page_url', 500);
+            $table->text('page_url');
             $table->string('error', 500)->nullable();
             $table->timestamps();
         });
