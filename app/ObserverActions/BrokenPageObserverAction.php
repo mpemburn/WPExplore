@@ -66,10 +66,6 @@ class BrokenPageObserverAction implements ObserverAction
 
     public function recordFailure(string $url, string $message): void
     {
-        if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
-            return;
-        }
-
         $result = preg_match('/(.*)(resulted in a `)(.*)(` response)(:)/', $message, $matches);
         $error = $result ? $matches[3] : substr($message, 0, 499);
 
@@ -83,6 +79,5 @@ class BrokenPageObserverAction implements ObserverAction
         if ($this->echo) {
             echo 'ERROR: ' . $url . ' -- ' . $error . PHP_EOL;
         }
-
     }
 }
