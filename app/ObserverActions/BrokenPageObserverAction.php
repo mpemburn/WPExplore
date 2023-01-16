@@ -4,6 +4,7 @@ namespace App\ObserverActions;
 
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
+use App\Services\BlogCrawlerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -55,11 +56,13 @@ class BrokenPageObserverAction implements ObserverAction
             echo 'Testing...' . $url . PHP_EOL;
         }
 
+        $result = (new BlogCrawlerService($this))->testUrl($url);
+
         $linkFinder = new $this->linkFinder();
         $linkFinder->create([
             'blog_id' => $this->blogId,
             'page_url' => $url,
-            'error' => 'success',
+            'error' => $result === 200 ? 'success' : $result . ' Error',
         ]);
     }
 

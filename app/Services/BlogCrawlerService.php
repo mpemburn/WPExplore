@@ -86,7 +86,12 @@ class BlogCrawlerService
         $pool->wait();
     }
 
-    public function urlExists($url): bool
+    public function urlExists(string $url): bool
+    {
+        return ($this->testUrl($url) === 200);
+    }
+
+    public function testUrl(string $url): int
     {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_NOBODY, true);
@@ -94,10 +99,10 @@ class BlogCrawlerService
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return ($code == 200);
+        return (int) $code;
     }
 
-    protected function truncate(FindableLink $linkFinder)
+    protected function truncate(FindableLink $linkFinder): void
     {
         $class = $linkFinder::class;
         $class::query()->truncate();
