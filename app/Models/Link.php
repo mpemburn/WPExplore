@@ -68,4 +68,9 @@ abstract class Link extends Model implements FindableLink
         return $parts['scheme'] . '://' . $this->blogBasePath . $path;
     }
 
+    public function matchesBasePath(string $url): bool
+    {
+        return preg_match('/(https|http)(:\/\/)' . $this->blogBasePath . '(.*)/', $url);
+    }
+
 }
