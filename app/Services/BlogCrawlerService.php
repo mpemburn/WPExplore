@@ -18,6 +18,7 @@ class BlogCrawlerService
     protected Collection $processes;
     protected FindableLink $linkFinder;
     protected ObserverAction $observerAction;
+    protected bool $resume = true;
 
     public function __construct(ObserverAction $observerAction, bool $flushData = false)
     {
@@ -26,7 +27,9 @@ class BlogCrawlerService
         $this->processes = collect();
         if ($flushData) {
             $this->truncate($this->linkFinder);
+            $this->resume = false;
         }
+
         $this->observerAction = $observerAction;
     }
 
@@ -34,7 +37,7 @@ class BlogCrawlerService
     {
         $finderClass = $this->linkFinder::class;
         $finder = new $finderClass();
-        $blogs = BlogList::where('site', $finder->getSite());
+        $blogs = $this->resume ? $this->getRemainingBlogs($finder) : BlogList::where('site', $finder->getSite());
 
         $blogs->each(function ($blog) use ($finder, $echo) {
             $blogUrl = $finder->replaceBasePath($blog['blog_url']);
@@ -47,6 +50,24 @@ class BlogCrawlerService
         });
 
         return $this;
+    }
+
+    protected function getRemainingBlogs(FindableLink $finder): Collection
+    {
+        // Get the last entry in the $finder table
+        $last = $finder::query()->latest()->first();
+        // Use the ID from this get the most recently crawled blog
+        $lastBlog = BlogList::where('site', 'wordpress')
+            ->where('blog_id', $last->blog_id)
+            ->first();
+        // Get the list of all blogs from the last crawled to the end
+        $remainingBlogs = BlogList::where('id', '>=', $lastBlog->id)->get();
+        // Delete the records from the last blog crawled so that they aren't duplicated
+        $finder::query()
+            ->where('blog_id', $last->blog_id)
+            ->delete();
+
+        return $remainingBlogs;
     }
 
     /**
