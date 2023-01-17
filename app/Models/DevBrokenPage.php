@@ -13,6 +13,7 @@ class DevBrokenPage extends Link
         'error'
     ];
 
-    public $table = 'dev_broken_pages';
+    public $table = 'www_dev_broken_pages';
+    protected string $site = 'www';
     protected string $blogBasePath = 'www.dev.clarku.edu';
 }
