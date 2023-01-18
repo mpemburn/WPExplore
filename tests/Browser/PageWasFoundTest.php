@@ -2,6 +2,8 @@
 
 namespace Tests\Browser;
 
+use App\Models\DevBrokenPage;
+use App\Models\TestingBrokenPage;
 use App\Models\WordPressTestBrokenPage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -18,15 +20,9 @@ class PageWasFoundTest extends DuskTestCase
 
     public function test_page_fatal_error(): void
     {
-        $exclude = [
-            'https://wordpress.test.clarku.edu/anfonseca'
-        ];
-        WordPressTestBrokenPage::query()->where('error', 'LIKE', '%500 %')
-            ->each(function ($page) use ($exclude) {
+        DevBrokenPage::query()->where('error', 'LIKE', '%500%')
+            ->each(function ($page) {
                 if (preg_match('/.*\.(?:jpe?g|png|gif|pdf)(?:\?\S+)?$/', $page->page_url)) {
-                    return;
-                }
-                if (in_array($page->page_url, $exclude)) {
                     return;
                 }
                 var_dump($page->page_url);
