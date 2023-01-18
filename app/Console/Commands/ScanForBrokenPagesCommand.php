@@ -12,7 +12,7 @@ class ScanForBrokenPagesCommand extends CrawlCommand
      *
      * @var string
      */
-    protected $signature = 'scan:pages {--env=} {--flush}';
+    protected $signature = 'scan:pages {--env=} {--flush} {--top}';
 
     /**
      * The console command description.

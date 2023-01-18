@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Factories\LinkFactory;
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverAction;
+use App\Models\BlogList;
 use App\ObserverActions\BlogObserverAction;
 use App\Services\BlogCrawlerService;
 use Illuminate\Console\Command;
@@ -24,7 +25,13 @@ abstract class CrawlCommand extends Command
      */
     public function handle()
     {
+        $topOnly = (bool)$this->option('top');
         $flushData = (bool)$this->option('flush');
+
+        if ($topOnly) {
+            $this->testTopLevelOnly($this->linkFinder);
+            return Command::SUCCESS;
+        }
 
         if ($flushData) {
             $message = 'The --flush option will truncate the ' . $this->linkFinder->getTable() . ' table' . PHP_EOL;
@@ -52,5 +59,24 @@ abstract class CrawlCommand extends Command
             $this->info('Error: ' . $mnfex->getMessage());
             die();
         }
+    }
+
+    protected function testTopLevelOnly(FindableLink $finder): void
+    {
+        BlogList::where('site', $finder->getSite())->each(function ($blog) use ($finder) {
+            if (! $blog->blog_url) {
+                return;
+            }
+            $url = $finder->replaceBasePath($blog->blog_url);
+            if ($this->echo) {
+                echo 'Testing ' . $url . PHP_EOL;
+            }
+
+            $code = (new BlogCrawlerService($this->observerAction))->testUrl($url);
+
+            if ($code !== 200) {
+                echo 'Failed with ' . $code . ' error.' . PHP_EOL;
+            }
+        });
     }
 }
