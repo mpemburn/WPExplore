@@ -48,7 +48,7 @@ class BrokenPageObserverAction implements ObserverAction
     {
         $url = $this->linkFinder->replaceBasePath($url->__toString());
 
-        if (! $this->linkFinder->matchesBasePath($url)) {
+        if (! $this->linkFinder->matchesBasePath($url) || $this->linkFinder->urlExists($url)) {
             return;
         }
 

@@ -73,4 +73,9 @@ abstract class Link extends Model implements FindableLink
         return preg_match('/(https|http)(:\/\/)' . $this->blogBasePath . '(.*)/', $url);
     }
 
+    public function urlExists(string $url): bool
+    {
+        return $this->where('page_url', $url)->exists();
+    }
+
 }

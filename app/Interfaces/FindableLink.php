@@ -11,5 +11,6 @@ interface FindableLink
     public function foundInAlternateImagePath(string $path): bool;
     public function replaceBasePath(string $url): string;
     public function matchesBasePath(string $url): bool;
+    public function urlExists(string $url): bool;
     public function getAuth(array $options): array;
 }
