@@ -57,7 +57,7 @@ class BlogCrawlerService
         // Get the last entry in the $finder table
         $last = $finder::query()->latest()->first();
         // Use the ID from this get the most recently crawled blog
-        $lastBlog = BlogList::where('site', 'wordpress')
+        $lastBlog = BlogList::where('site', $finder->getSite())
             ->where('blog_id', $last->blog_id)
             ->first();
         // Get the list of all blogs from the last crawled to the end
