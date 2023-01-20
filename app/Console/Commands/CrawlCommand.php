@@ -14,6 +14,13 @@ use PDOException;
 
 abstract class CrawlCommand extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top}';
+
     protected ObserverAction $observerAction;
     protected ?FindableLink $linkFinder;
     protected bool $echo = false;
@@ -27,6 +34,7 @@ abstract class CrawlCommand extends Command
     {
         $topOnly = (bool)$this->option('top');
         $flushData = (bool)$this->option('flush');
+        $resumeAt = (int)$this->option('resume_at');
 
         if ($topOnly) {
             $this->testTopLevelOnly($this->linkFinder);
@@ -42,7 +50,7 @@ abstract class CrawlCommand extends Command
             }
         }
 
-        (new BlogCrawlerService($this->observerAction, $flushData))
+        (new BlogCrawlerService($this->observerAction, $flushData, $resumeAt))
             ->loadCrawlProcesses($this->echo)->run();
 
         return Command::SUCCESS;
