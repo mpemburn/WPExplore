@@ -26,10 +26,16 @@ abstract class CrawlCommand extends Command
     public function handle()
     {
         $topOnly = (bool)$this->option('top');
+        $fatalOnly = (bool)$this->option('fatal');
         $flushData = (bool)$this->option('flush');
 
         if ($topOnly) {
             $this->testTopLevelOnly($this->linkFinder);
+            return Command::SUCCESS;
+        }
+
+        if ($fatalOnly) {
+            $this->testFatalError($this->linkFinder);
             return Command::SUCCESS;
         }
 
@@ -61,6 +67,26 @@ abstract class CrawlCommand extends Command
         }
     }
 
+    protected function testFatalError(FindableLink $finder): void
+    {
+        $finder->where('error', 'LIKE', '%500%')->each(function ($found) {
+            if (! $found->page_url) {
+                return;
+            }
+            $url = $found->page_url;
+
+            if ($this->echo) {
+                echo 'Testing ' . $url . PHP_EOL;
+            }
+
+            $code = (new BlogCrawlerService($this->observerAction))->testUrl($url);
+
+            if ($code !== 200) {
+                echo $url. ' failed with ' . $code . ' error.' . PHP_EOL;
+            }
+        });
+    }
+
     protected function testTopLevelOnly(FindableLink $finder): void
     {
         BlogList::where('site', $finder->getSite())->each(function ($blog) use ($finder) {
@@ -75,7 +101,7 @@ abstract class CrawlCommand extends Command
             $code = (new BlogCrawlerService($this->observerAction))->testUrl($url);
 
             if ($code !== 200) {
-                echo 'Failed with ' . $code . ' error.' . PHP_EOL;
+                echo $url. ' failed with ' . $code . ' error.' . PHP_EOL;
             }
         });
     }

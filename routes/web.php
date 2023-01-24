@@ -5,9 +5,11 @@ use App\Generators\PluginsCsvGenerator;
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\BlogList;
+use App\Models\DevBrokenPage;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\PostMeta;
+use App\Models\TestingBrokenPage;
 use App\Models\WordpressProductionLink;
 use App\Models\WordPressTestBrokenPage;
 use App\Models\WordpressTestLink;
@@ -74,12 +76,10 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
-    WordPressTestBrokenPage::create([
-        'blog_id' => 123,
-        'page_url' => 'https://something.com',
-        'error' => 'success',
-
-    ]);
+    $pluginName = 'cm-custom-reports';
+    $title = 'CM Custom Reports';
+    echo (new BlogService())->findPluginInSubsite($pluginName, $title);
+    // Do what thau wilt
 });
 
 Route::get('/where_active', function () {

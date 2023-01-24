@@ -37,7 +37,7 @@ class BlogService
     {
         $rows = collect();
 
-        $blogs = Blog::where('archived', 0);
+        $blogs = Blog::all();
 
         $blogs->each(function ($blog) use ($rows, $filter) {
             if ($blog->blog_id < 2) {
@@ -118,7 +118,7 @@ class BlogService
         $html = '<div style="font-family:  sans-serif">';
         $html .= $titleRow;
         $data->each(function ($row) use (&$notFound, &$html, $pluginName) {
-            if (stripos($row['active_plugins'], $pluginName) !== false) {
+            if (isset($row['active_plugins']) && stripos($row['active_plugins'], $pluginName) !== false) {
                 $html .= '<div>';
                 $html .= $row['siteurl'];
                 $html .= '</div>';

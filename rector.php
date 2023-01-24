@@ -10,7 +10,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         //__DIR__ . '/src/nextgen-gallery-sidebar-widget',
 //        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\public\all_plugins\wordpress\google-analytics-async',
-        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_themes\news-magazine-theme-640'
+        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_plugins\elementor'
     ]);
 
     // register a single rule
