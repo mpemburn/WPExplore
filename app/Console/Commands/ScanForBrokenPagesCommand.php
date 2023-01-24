@@ -31,5 +31,4 @@ class ScanForBrokenPagesCommand extends CrawlCommand
 
         return parent::handle();
     }
-
 }

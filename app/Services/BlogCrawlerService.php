@@ -19,8 +19,9 @@ class BlogCrawlerService
     protected FindableLink $linkFinder;
     protected ObserverAction $observerAction;
     protected bool $resume = true;
+    protected int $resumeAt = 0;
 
-    public function __construct(ObserverAction $observerAction, bool $flushData = false)
+    public function __construct(ObserverAction $observerAction, bool $flushData = false, int $resumeAt = 0)
     {
         $this->linkFinder = $observerAction->getLinkFinder();
 
@@ -31,6 +32,7 @@ class BlogCrawlerService
         }
 
         $this->observerAction = $observerAction;
+        $this->resumeAt = $resumeAt;
     }
 
     public function loadCrawlProcesses(bool $echo = false): self
@@ -54,18 +56,23 @@ class BlogCrawlerService
 
     protected function getRemainingBlogs(FindableLink $finder): Collection
     {
-        // Get the last entry in the $finder table
-        $last = $finder::query()->latest()->first();
-        // Use the ID from this get the most recently crawled blog
-        $lastBlog = BlogList::where('site', $finder->getSite())
-            ->where('blog_id', $last->blog_id)
-            ->first();
-        // Get the list of all blogs from the last crawled to the end
-        $remainingBlogs = BlogList::where('id', '>=', $lastBlog->id)->get();
-        // Delete the records from the last blog crawled so that they aren't duplicated
-        $finder::query()
-            ->where('blog_id', $last->blog_id)
-            ->delete();
+        if ($this->resumeAt > 0) {
+            $remainingBlogs = BlogList::where('site', $finder->getSite())
+                ->where('blog_id', '>=', $this->resumeAt)
+                ->get();
+        } else {
+            // Get the last entry in the $finder table
+            $last = $finder::query()->latest()->first();
+            // Use the ID from this get the most recently crawled blog
+            $lastBlog = BlogList::where('site', $finder->getSite())
+                ->where('blog_id', $last->blog_id);
+            // Get the list of all blogs from the last crawled to the end
+            $remainingBlogs = BlogList::where('id', '>=', $lastBlog->id)->get();
+            // Delete the records from the last blog crawled so that they aren't duplicated
+            $finder::query()
+                ->where('blog_id', $last->blog_id)
+                ->delete();
+        }
 
         return $remainingBlogs;
     }
