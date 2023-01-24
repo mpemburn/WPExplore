@@ -19,7 +19,7 @@ abstract class CrawlCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top}';
+    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top} {--fatal}';
 
     protected ObserverAction $observerAction;
     protected ?FindableLink $linkFinder;

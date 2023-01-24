@@ -8,13 +8,6 @@ use App\ObserverActions\BrokenPageObserverAction;
 class ScanForBrokenPagesCommand extends CrawlCommand
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'scan:pages {--env=} {--flush} {--top} {--fatal}';
-
-    /**
      * The console command description.
      *
      * @var string
