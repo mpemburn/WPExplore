@@ -76,10 +76,7 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
-    $pluginName = 'cm-custom-reports';
-    $title = 'CM Custom Reports';
-    echo (new BlogService())->findPluginInSubsite($pluginName, $title);
-    // Do what thau wilt
+    // Do what thou wilt
 });
 
 Route::get('/where_active', function () {
