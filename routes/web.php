@@ -101,7 +101,6 @@ Route::get('/to_archive', function () {
 
         $count++;
     });
-    // Do what thou wilt
 });
 
 Route::get('/where_active', function () {
