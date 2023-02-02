@@ -23,6 +23,20 @@ abstract class CsvGenerator
         return $this;
     }
 
+    public function unsetColumns(array $columns): self
+    {
+        if ($this->data->isNotEmpty()) {
+            $this->data = $this->data->transform(function ($item) use ($columns) {
+                foreach ($columns as $column) {
+                    unset($item[$column]);
+                }
+
+                return $item;
+            });
+        }
+        return $this;
+    }
+
     public function run(): ?StreamedResponse
     {
         if (! $this->data && ! $this->filename) {

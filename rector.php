@@ -8,9 +8,7 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        //__DIR__ . '/src/nextgen-gallery-sidebar-widget',
-//        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\public\all_plugins\wordpress\google-analytics-async',
-        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_plugins\elementor'
+        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_plugins\css-injector'
     ]);
 
     // register a single rule

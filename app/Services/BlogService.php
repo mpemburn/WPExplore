@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Generators\BlogsCsvGenerator;
+use App\Generators\BlogsInDateRangeCsvGenerator;
 use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
@@ -12,10 +13,17 @@ use Illuminate\Support\Facades\Response;
 
 class BlogService
 {
+    protected const UNSET_COLUMNS = [
+        'active_plugins',
+        'current_theme',
+        'template'
+    ];
+
     public function createActiveBlogsCsv(string $filename = 'active_blogs.csv')
     {
         return (new BlogsCsvGenerator($filename))
             ->setData($this->getActiveBlogs())
+            ->unsetColumns(self::UNSET_COLUMNS)
             ->run();
     }
 
@@ -23,6 +31,7 @@ class BlogService
     {
         return (new BlogsCsvGenerator($filename))
             ->setData($this->getStaleBlogs())
+            ->unsetColumns(self::UNSET_COLUMNS)
             ->run();
     }
 
@@ -30,41 +39,110 @@ class BlogService
     {
         return (new BlogsCsvGenerator($filename))
             ->setData($this->getActiveBlogs(['/mat']))
+            ->unsetColumns(self::UNSET_COLUMNS)
             ->run();
     }
 
-    public function getActiveBlogs(array $filter = []): Collection
+    public function createBlogsInDateRangeCsv(
+        string $startDate = null,
+        string $endDate = null
+    )
+    {
+        if (! $startDate && ! $endDate) {
+            return null;
+        }
+
+        $filename = "active_blogs_from_{$startDate}_to_{$endDate}.csv";
+
+        $blogs = $this->getFormattedBlogs($startDate, $endDate);
+
+        return (new BlogsInDateRangeCsvGenerator($filename))
+            ->setData($blogs->sortBy('last_updated'))
+            ->run();
+    }
+
+    public function createMatBlogsInDateRangeCsv(
+        string $startDate = null,
+        string $endDate = null
+    )
+    {
+        if (! $startDate && ! $endDate) {
+            return null;
+        }
+
+        $filename = "mat_blogs_from_{$startDate}_to_{$endDate}.csv";
+
+        $blogs = $this->getFormattedBlogs($startDate, $endDate);
+
+        return (new BlogsInDateRangeCsvGenerator($filename))
+            ->setData($blogs->sortBy('last_updated'))
+            ->run();
+    }
+
+    public function getActiveBlogs(array $filter = [], ?string $startDate = null, ?string $endDate = null): Collection
     {
         $rows = collect();
-
-        $blogs = Blog::all();
+        if ($startDate && $endDate) {
+            $blogs = Blog::whereBetween('last_updated', [date($startDate), date($endDate)])->get();
+        } else {
+            $blogs = Blog::all();
+        }
 
         $blogs->each(function ($blog) use ($rows, $filter) {
-            if ($blog->blog_id < 2) {
-                return;
+
+            $data = $this->getBlogData($blog, $filter);
+
+            if ($data) {
+                $rows->push($data);
             }
-
-            $data = [];
-
-            $options = (new Option())->setTable('wp_' . $blog->blog_id . '_options')
-                ->whereIn('option_name', ['siteurl', 'current_theme', 'template', 'admin_email', 'active_plugins'])
-                ->orderBy('option_name');
-
-            $data['blog_id'] = $blog->blog_id;
-            $data['last_updated'] = $blog->last_updated;
-
-            $options->each(function (Option $option) use (&$data) {
-                $data[$option->option_name] = $option->option_value;
-            });
-
-            if ($filter && str_replace($filter, '', $data['siteurl']) === $data['siteurl']) {
-                return;
-            }
-
-            $rows->push($data);
         });
 
         return $rows;
+    }
+
+    public function getBlogsById(array $blogIds, array $filter = [])
+    {
+        $rows = collect();
+        $blogs = Blog::whereIn('blog_id', $blogIds)->get();
+
+        $blogs->each(function ($blog) use ($rows, $filter) {
+
+            $data = $this->getBlogData($blog, $filter);
+
+            if ($data) {
+                $rows->push($data);
+            }
+        });
+
+        return $rows;
+
+    }
+
+
+    protected function getBlogData(Blog $blog, array $filter): ?array
+    {
+        if ($blog->blog_id < 2) {
+            return null;
+        }
+
+        $data = [];
+
+        $options = (new Option())->setTable('wp_' . $blog->blog_id . '_options')
+            ->whereIn('option_name', ['siteurl', 'admin_email', 'current_theme', 'template', 'active_plugins'])
+            ->orderBy('option_name');
+
+        $data['blog_id'] = $blog->blog_id;
+        $data['last_updated'] = $blog->last_updated;
+
+        $options->each(function (Option $option) use (&$data) {
+            $data[$option->option_name] = $option->option_value;
+        });
+
+        if ($filter && str_replace($filter, '', $data['siteurl']) === $data['siteurl']) {
+            return null;
+        }
+
+        return $data;
     }
 
     public function getStaleBlogs(): Collection
@@ -109,6 +187,26 @@ class BlogService
         return $rows;
     }
 
+    public function getFormattedBlogs(?string $startDate = null, ?string $endDate = null)
+    {
+        return $this->getActiveBlogs([], $startDate, $endDate)
+            ->transform(function ($blog) {
+                $plugins = collect(unserialize($blog['active_plugins']))->map(function ($plugin) {
+                    return current(explode('/', $plugin));
+                })->implode(',');
+                $blog['last_updated'] = Carbon::parse($blog['last_updated'])->format('m/d/Y');
+                $blog['template'] = isset($blog['template']) && strlen($blog['template']) > 0
+                    ? $blog['template']
+                    : 'N/A';
+                $blog['current_theme'] = isset($blog['current_theme']) && strlen($blog['current_theme']) > 0
+                    ? $blog['current_theme']
+                    : 'N/A';
+                $blog['active_plugins'] = $plugins;
+
+                return $blog;
+            });
+    }
+
     public function findPluginInSubsite(string $pluginName, string $title, $notFoundOnly = false)
     {
         $data = $this->getActiveBlogs();
@@ -143,7 +241,7 @@ class BlogService
         $html = '<div style="font-family: sans-serif">';
         $html .= $titleRow;
         $data->each(function ($row) use (&$notFound, &$html, $themeName) {
-            if (! isset($row['current_theme'])) {
+            if (!isset($row['current_theme'])) {
                 return;
             }
             if ($row['current_theme'] === $themeName) {

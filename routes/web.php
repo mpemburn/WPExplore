@@ -52,6 +52,10 @@ Route::get('/csv/stale', fn() => (new BlogService())->createStaleBlogsCsv());
 
 Route::get('/csv/mat', fn() => (new BlogService())->createMatBlogsCsv());
 
+Route::get('/csv/active/date', fn() => (new BlogService())->createBlogsInDateRangeCsv(request('start'), request('end')));
+
+Route::get('/csv/mat/date', fn() => (new BlogService())->createMatBlogsInDateRangeCsv(request('start'), request('end')));
+
 Route::get('/load_blogs', function () {
     $currentSite = request('site');
     DatabaseService::setDb($currentSite . '_clarku');
@@ -76,10 +80,28 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
-    $pluginName = 'cm-custom-reports';
-    $title = 'CM Custom Reports';
-    echo (new BlogService())->findPluginInSubsite($pluginName, $title);
-    // Do what thau wilt
+    // Do what thou wilt
+});
+
+Route::get('/to_archive', function () {
+    $mats = (new BlogService())->getActiveBlogs(['/mat'], '2013/01/10', '2018/12/31');
+
+    $exclude = ['210', '212', '405', '400', '416', '413', '396', '409', '398', '450', '664'];
+
+    $additions = (new BlogService())->getBlogsById(['539', '101', '536', '402', '548']);
+
+    $mats = $mats->merge($additions);
+
+    $count = 0;
+    $mats->each(function ($blog) use (&$count, $exclude) {
+        if (in_array($blog['blog_id'], $exclude)) {
+            return;
+        }
+        echo "blogs[{$count}]=\"{$blog['blog_id']}\" # {$blog['siteurl']}" . '<br>';
+
+        $count++;
+    });
+    // Do what thou wilt
 });
 
 Route::get('/where_active', function () {
