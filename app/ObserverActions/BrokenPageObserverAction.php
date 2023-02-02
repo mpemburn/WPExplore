@@ -14,11 +14,13 @@ class BrokenPageObserverAction implements ObserverAction
     protected int $blogId;
     protected string $blogRoot;
     protected bool $echo;
+    protected bool $persist;
 
-    public function __construct(FindableLink $linkFinder, bool $echo = false)
+    public function __construct(FindableLink $linkFinder, bool $echo = false, bool $persist = true)
     {
         $this->linkFinder = $linkFinder;
         $this->echo = $echo;
+        $this->persist = $persist;
     }
 
     public function setBlogId(int $blogId): self
@@ -80,12 +82,14 @@ class BrokenPageObserverAction implements ObserverAction
         $result = preg_match('/(.*)(resulted in a `)(.*)(` response)(:)/', $message, $matches);
         $error = $result ? $matches[3] : substr($message, 0, 499);
 
-        $linkFinder = new $this->linkFinder();
-        $linkFinder->create([
-            'blog_id' => $this->blogId,
-            'page_url' => $url,
-            'error' => $error,
-        ]);
+        if ($this->persist) {
+            $linkFinder = new $this->linkFinder();
+            $linkFinder->create([
+                'blog_id' => $this->blogId,
+                'page_url' => $url,
+                'error' => $error,
+            ]);
+        }
 
         if ($this->echo) {
             echo 'ERROR: ' . $url . ' -- ' . $error . PHP_EOL;
