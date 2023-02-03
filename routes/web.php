@@ -80,6 +80,8 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
+    DatabaseService::setDb('wordpress_clarku');
+
     // Do what thou wilt
 });
 
