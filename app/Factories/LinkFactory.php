@@ -3,6 +3,7 @@
 namespace App\Factories;
 
 use App\Interfaces\FindableLink;
+use App\Models\ClarkNowBrokenPage;
 use App\Models\ClarkProductionLink;
 use App\Models\DevBrokenPage;
 use App\Models\FutureProductionBrokenPage;
@@ -38,6 +39,7 @@ class LinkFactory
             'sitestest' => new SitesTestBrokenPage(),
             'futureprod' => new FutureProductionBrokenPage(),
             'futuretest' => new FutureTestBrokenPage(),
+            'clarknow' => new ClarkNowBrokenPage(),
             default => throw new ModelNotFoundException('No valid Model specified by "' . $env . '"'),
         };
     }
