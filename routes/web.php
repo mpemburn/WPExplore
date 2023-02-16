@@ -82,11 +82,6 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
-    $public = Storage::path('1206226352.pdf');
-    !d($public);
-    $pdfParser = new Parser();
-    $pdf = $pdfParser->parseFile($public);
-    echo $pdf->getText();
     // Do what thou wilt
 });
 

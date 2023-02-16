@@ -31,7 +31,7 @@ class CompareTestLinksToProduction extends Command
     {
         Config::set('database.default', 'mysql_remote');
         $records = WordPressTestBrokenPage::where('error', '<>', 'success')
-            ->whereRaw("`page_url` NOT REGEXP 'doc$|docx$|jpg$|jpeg$|gif$|mp3$|png$|pdf$|txt$|wmv$|xls$|xlsx$|zip$'");
+            ->whereRaw("`page_url` NOT REGEXP 'doc$|docx$|jpg$|jpeg$|gif$|mp3$|png$|pdf$|txt$|wav$|wmv$|xls$|xlsx$|zip$'");
 
         $rows = $records->get()->toArray();
         foreach ($rows as $row) {
