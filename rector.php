@@ -8,7 +8,7 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_plugins\css-injector'
+        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_themes\weaver-ii-pro'
     ]);
 
     // register a single rule

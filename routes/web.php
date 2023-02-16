@@ -32,6 +32,8 @@ use Spatie\Crawler\Crawler;
 use Spatie\Async\Pool;
 use Symfony\Component\Process\Process;
 use function Sentry\captureException;
+use Smalot\PdfParser\Parser;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +82,11 @@ Route::get('/load_blogs', function () {
 });
 
 Route::get('/dev', function () {
+    $public = Storage::path('1206226352.pdf');
+    !d($public);
+    $pdfParser = new Parser();
+    $pdf = $pdfParser->parseFile($public);
+    echo $pdf->getText();
     // Do what thou wilt
 });
 
