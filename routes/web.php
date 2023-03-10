@@ -18,6 +18,7 @@ use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
 use App\Services\DatabaseService;
+use App\Services\LogParserService;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -81,8 +82,67 @@ Route::get('/load_blogs', function () {
 
 });
 
+Route::get('/func', function () {
+    class Update
+    {
+        protected $versions = [
+            '20140709',
+            '20160831',
+            '20170510',
+            '20170511',
+            '20170711',
+            '20171023',
+            '20171215',
+            '20171219',
+            '20190227',
+            '20200331',
+            '20201217',
+            '20210624',
+            '20210924',
+            '20220222',
+            '20220426',
+            '20220506',
+            '20220818',
+            '20221101',
+        ];
+
+        public function __construct()
+        {
+            $needs_updating = false;
+            $auth_version = '20220426';
+
+            foreach ($this->versions as $version) {
+                if ( false === $auth_version || intval( $auth_version ) < $version ){
+                    if (method_exists($this, 'update_' . $version)) {
+                        $auth_version = call_user_func_array([$this, 'update_' . $version], [$auth_version, $version]);
+                        $needs_updating = true;
+                    }
+                }
+            }
+        }
+
+        protected function update_20221101( $auth_version, $version )
+        {
+            echo 'Hi! ' . $auth_version . '<br>';
+            echo 'Yo! ' . $version . '<br>';
+
+            return $version;
+        }
+    }
+
+    new Update();
+});
+
 Route::get('/dev', function () {
-    // Do what thou wilt
+    $myArray = [];
+
+    $result = $myArray['element'] ?? null;
+
+    !d($result);
+});
+
+Route::get('/parse_log', function () {
+    new LogParserService('28151_3_10', ['wp-content/themes/clarku'], []);
 });
 
 Route::get('/to_archive', function () {
