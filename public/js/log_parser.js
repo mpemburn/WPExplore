@@ -3,6 +3,7 @@ $(document).ready(function () {
     link.on('click', function () {
         let lineNum = $(this).data('line-num');
         let logId = $('[data-log]').data('log');
+        let self = $(this);
 
         $.ajax({
             url: 'api/parser',
@@ -13,8 +14,7 @@ $(document).ready(function () {
                 logId: logId
             },
             success: function (response) {
-                console.log(response);
-                location.reload()
+                $('div[data-line-num="' + response.lineNum + '"').toggleClass('done', response.done)
             },
             error: function (response) {
                 alert(response);

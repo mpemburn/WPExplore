@@ -60,7 +60,7 @@ class LogParserService
         $this->readLinesDone();
 
         if ($this->done->contains($lineNum)) {
-            return $this->removeFromDone($lineNum);
+            return ! $this->removeFromDone($lineNum);
         } else {
             return $this->addToDone($lineNum);
         }
@@ -78,8 +78,7 @@ class LogParserService
         $contents = file_get_contents($this->doneFilePath);
         $revised = collect(explode("\n", $contents))->map(function ($num) use ($lineNum) {
             return (int)$num === (int)$lineNum ? null : $num;
-        })->filter()
-        ->implode("\n");
+        })->implode("\n");
 
         return file_put_contents($this->doneFilePath, $revised) !== false;
     }
