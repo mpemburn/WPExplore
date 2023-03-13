@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogParserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
+Route::apiResource('parser', LogParserController::class);

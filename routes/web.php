@@ -134,15 +134,25 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $myArray = [];
+    $lineNum = '49';
+    $doneFilePath = Storage::path('28151_3_10_done.txt');
+    $contents = file_get_contents($doneFilePath);
+    $revised = collect(explode("\n", $contents))->map(function ($num) use ($lineNum) {
+        return (int)$num === (int)$lineNum ? null : $num;
+    })->filter()
+        ->implode("\n");
 
-    $result = $myArray['element'] ?? null;
-
-    !d($result);
+    !d($revised);
 });
 
 Route::get('/parse_log', function () {
-    new LogParserService('28151_3_10', ['wp-content/themes/clarku'], []);
+    $parser = new LogParserService();
+    $parser->run('28151_3_10', ['wp-content/themes/clarku'], []);
+
+    return view('logparser', [
+        'logPrefix' => $parser->getLogPrefix(),
+        'data' => $parser->display()
+    ]);
 });
 
 Route::get('/to_archive', function () {
