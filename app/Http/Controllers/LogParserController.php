@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\LogParserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class LogParserController extends Controller
 {
@@ -14,9 +15,9 @@ class LogParserController extends Controller
         ]);
     }
 
-    public function store(LogParserService $service): JsonResponse
+    public function store(LogParserService $service, Request $request): JsonResponse
     {
-        $done = $service->toggleDone(request('logId'), request('lineNum'));
+        $done = $service->toggleDone($request);
 
         return response()->json([
             'success' => true,

@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\DevBrokenPage;
+use App\Models\LogParserCompleted;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\PostMeta;
@@ -134,23 +135,22 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $lineNum = '49';
-    $doneFilePath = Storage::path('28151_3_10_done.txt');
-    $contents = file_get_contents($doneFilePath);
-    $revised = collect(explode("\n", $contents))->map(function ($num) use ($lineNum) {
-        return (int)$num === (int)$lineNum ? null : $num;
-    })->filter()
-        ->implode("\n");
+    $lpc = LogParserCompleted::where('log_id', '28151_3_10')
+            ->where('line_number', '2');
 
-    !d($revised);
+    !d($lpc->exists());
 });
 
 Route::get('/parse_log', function () {
     $parser = new LogParserService();
-    $parser->run('28151_3_10', ['wp-content/themes/clarku'], []);
+    $parser->setCodePath('C:\Users\mpemburn\Documents\Dev\clarku-wordpress')
+        ->setAppPath('dom28151\\')
+        ->run('28151_3_10', ['wp-content/themes/clarku'], []);
 
     return view('logparser', [
         'logPrefix' => $parser->getLogPrefix(),
+        'basePath' => $parser->getCodePath(),
+        'appPath' => $parser->getAppPath(),
         'data' => $parser->display()
     ]);
 });

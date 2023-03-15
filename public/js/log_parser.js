@@ -1,9 +1,13 @@
 $(document).ready(function () {
-    let link = $('[data-line-num]');
-    link.on('click', function () {
+    let lineNum = $('[data-line-num]');
+    let phpStormLink = $('[data-link]');
+    lineNum.on('click', function () {
         let lineNum = $(this).data('line-num');
-        let logId = $('[data-log]').data('log');
-        let self = $(this);
+        let logPrefix = $('[data-log]').data('log');
+        let lineBox = $('div[data-line-num="' + lineNum + '"');
+        let lineText = $('.log-line[data-line-num="' + lineNum + '"]').html();
+
+        lineBox.toggleClass('done', !lineBox.hasClass('done'))
 
         $.ajax({
             url: 'api/parser',
@@ -11,14 +15,38 @@ $(document).ready(function () {
             dataType: 'json',
             data: {
                 lineNum: lineNum,
-                logId: logId
+                lineText: lineText,
+                logPrefix: logPrefix
             },
             success: function (response) {
-                $('div[data-line-num="' + response.lineNum + '"').toggleClass('done', response.done)
+                console.log(response);
             },
             error: function (response) {
                 alert(response);
             }
         });
     });
+    phpStormLink.on('click', function () {
+        let relPath = $(this).html().replace(/\//g, '\\');
+        let path = basePath + relPath;
+        let html = '';
+        if (navigator.userAgent.indexOf('Windows') === -1) {
+            html = '<a href="phpstorm://open?url=file://' + path + '" target="_blank">' + path + '</a>';
+        } else {
+            html = '<div id="copyText" class="link">' + path + '</div>';
+
+            $("#dialog").html(html).dialog({width: '800px'});
+            let copyText = $('#copyText');
+
+            copyText.on('click', function () {
+                navigator.clipboard.writeText(relPath.replace(appPath, '')).then(() => {
+                    copyText.after('<div id="copied">COPIED</div>');
+                    $('#copied').fadeOut(3000);
+                }).catch(() => {
+                    alert("something went wrong");
+                });
+            });
+        }
+
+    })
 });
