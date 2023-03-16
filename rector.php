@@ -6,9 +6,10 @@ use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 
+// Run with vendor/bin/rector process
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        'C:\Users\mpemburn\Documents\Sandbox\wpexplore\storage\app\repaired_plugins\css-injector'
+        'C:\Users\mpemburn\Documents\Sandbox\clarku-sandbox\wp-content\themes\clarku\templates\sticky-nav.php'
     ]);
 
     // register a single rule

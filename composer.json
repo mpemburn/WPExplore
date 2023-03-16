@@ -15,6 +15,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "sentry/sdk": "^3.3",
+        "smalot/pdfparser": "^2.3",
         "spatie/async": "^1.5",
         "spatie/crawler": "^7.1"
     },

@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\DevBrokenPage;
+use App\Models\LogParserCompleted;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\PostMeta;
@@ -18,6 +19,7 @@ use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
 use App\Services\DatabaseService;
+use App\Services\LogParserService;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -32,6 +34,8 @@ use Spatie\Crawler\Crawler;
 use Spatie\Async\Pool;
 use Symfony\Component\Process\Process;
 use function Sentry\captureException;
+use Smalot\PdfParser\Parser;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,10 +83,76 @@ Route::get('/load_blogs', function () {
 
 });
 
-Route::get('/dev', function () {
-    DatabaseService::setDb('wordpress_clarku');
+Route::get('/func', function () {
+    class Update
+    {
+        protected $versions = [
+            '20140709',
+            '20160831',
+            '20170510',
+            '20170511',
+            '20170711',
+            '20171023',
+            '20171215',
+            '20171219',
+            '20190227',
+            '20200331',
+            '20201217',
+            '20210624',
+            '20210924',
+            '20220222',
+            '20220426',
+            '20220506',
+            '20220818',
+            '20221101',
+        ];
 
-    // Do what thou wilt
+        public function __construct()
+        {
+            $needs_updating = false;
+            $auth_version = '20220426';
+
+            foreach ($this->versions as $version) {
+                if ( false === $auth_version || intval( $auth_version ) < $version ){
+                    if (method_exists($this, 'update_' . $version)) {
+                        $auth_version = call_user_func_array([$this, 'update_' . $version], [$auth_version, $version]);
+                        $needs_updating = true;
+                    }
+                }
+            }
+        }
+
+        protected function update_20221101( $auth_version, $version )
+        {
+            echo 'Hi! ' . $auth_version . '<br>';
+            echo 'Yo! ' . $version . '<br>';
+
+            return $version;
+        }
+    }
+
+    new Update();
+});
+
+Route::get('/dev', function () {
+    $lpc = LogParserCompleted::where('log_id', '28151_3_10')
+            ->where('line_number', '2');
+
+    !d($lpc->exists());
+});
+
+Route::get('/parse_log', function () {
+    $parser = new LogParserService();
+    $parser->setCodePath('C:\Users\mpemburn\Documents\Dev\clarku-wordpress')
+        ->setAppPath('dom28151\\')
+        ->run('28151_3_10', ['wp-content/themes/clarku'], []);
+
+    return view('logparser', [
+        'logPrefix' => $parser->getLogPrefix(),
+        'basePath' => $parser->getCodePath(),
+        'appPath' => $parser->getAppPath(),
+        'data' => $parser->display()
+    ]);
 });
 
 Route::get('/to_archive', function () {

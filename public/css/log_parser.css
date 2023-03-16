@@ -1,0 +1,46 @@
+.log {
+    margin-bottom: 2rem;
+    font-size: 12pt;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.log-line {
+    display: inline-block;
+    font-family: sans-serif;
+}
+.log-line-hidden {
+    display: none;
+}
+.link {
+    text-decoration: underline;
+    font-family: sans-serif;
+    color: blue;
+    cursor: pointer
+}
+.line-num {
+    display: inline-block;
+    cursor: pointer;
+    min-width: 50px;
+    padding: 2px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    border: 1px solid blue;
+    background-color: lightpink;
+    text-align: right;
+    font-size: 10pt;
+    font-family: sans-serif;
+}
+.done {
+    background-color: lightgreen;
+}
+#copyText::after {
+    content: '\1F4CB';
+    text-decoration: none;
+    margin-left: 5px;
+}
+#copied {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+}

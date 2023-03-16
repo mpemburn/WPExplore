@@ -30,6 +30,7 @@ class NoFatalErrorTest extends DuskTestCase
 
     public function test_page_fatal_error(): void
     {
+        //DevBrokenPage::query()->where('error', 'LIKE', '%500%')
         collect(self::ERRORS_FOUND)
             ->each(function ($page) {
                 if (preg_match('/.*\.(?:jpe?g|png|gif|pdf)(?:\?\S+)?$/', $page)) {
