@@ -156,10 +156,10 @@ class LogParserService
             $link = '<span class="link"';
             $link .= ' data-link="' . $path . '">' . $matched . '</span>';
             $result = str_replace($matched, $link, $line);
-            $result .= '<div class="log-line" data-line-num="' . $lineNum . '">' . $line . '</div>';
+            $result .= '<div class="log-line-hidden" data-line-num="' . $lineNum . '">' . $line . '</div>';
         }
 
-        return $result;
+        return '<div class="log-line">' . $result . '</div>';
     }
 
     protected function readLog(): self

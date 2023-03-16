@@ -31,6 +31,7 @@ $(document).ready(function () {
         let path = basePath + relPath;
         let html = '';
         if (navigator.userAgent.indexOf('Windows') === -1) {
+            // https://github.com/aik099/PhpStormProtocol
             html = '<a href="phpstorm://open?url=file://' + path + '" target="_blank">' + path + '</a>';
         } else {
             html = '<div id="copyText" class="link">' + path + '</div>';

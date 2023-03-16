@@ -5,10 +5,15 @@
     font-weight: bold;
 }
 .log-line {
+    display: inline-block;
+    font-family: sans-serif;
+}
+.log-line-hidden {
     display: none;
 }
 .link {
     text-decoration: underline;
+    font-family: sans-serif;
     color: blue;
     cursor: pointer
 }
