@@ -135,15 +135,15 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $lpc = LogParserCompleted::where('log_id', '28151_3_10')
-            ->where('line_number', '2');
+    $line = '[09-Mar-2023 10:34:38 UTC] PHP Warning:  Undefined array key "e-mail" in /dom28151/wp-content/themes/clarku/components/contact-box.php on line 59';
 
-    !d($lpc->exists());
+    preg_match('/(.php on line )([\d]+)/', $line, $lineMatches);
+    !d($lineMatches);
 });
 
 Route::get('/parse_log', function () {
     $parser = new LogParserService();
-    $parser->setCodePath('C:\Users\mpemburn\Documents\Dev\clarku-wordpress')
+    $parser->setCodePath('/Users/mpemburn/Dev/wpexplore')
         ->setAppPath('dom28151\\')
         ->run('28151_3_10', ['wp-content/themes/clarku'], []);
 

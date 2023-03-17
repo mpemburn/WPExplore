@@ -151,10 +151,13 @@ class LogParserService
     {
         $result = $line;
         if (preg_match('/(\/dom28151\/)(wp-content)(.*)(\.php)/', $line, $matches)) {
+            preg_match('/(.php on line )([\d]+)/', $line, $lineMatches);
+
             $matched = $matches[0];
+            $fileLine = $lineMatches[2] ?? null;
             $path = str_replace('/dom28151', '', $matched);
             $link = '<span class="link"';
-            $link .= ' data-link="' . $path . '">' . $matched . '</span>';
+            $link .= ' data-link="' . $path . '" data-file-line="' . $fileLine . '">' . $path . '</span>';
             $result = str_replace($matched, $link, $line);
             $result .= '<div class="log-line-hidden" data-line-num="' . $lineNum . '">' . $line . '</div>';
         }

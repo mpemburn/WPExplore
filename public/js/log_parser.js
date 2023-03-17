@@ -5,7 +5,7 @@ $(document).ready(function () {
         let lineNum = $(this).data('line-num');
         let logPrefix = $('[data-log]').data('log');
         let lineBox = $('div[data-line-num="' + lineNum + '"');
-        let lineText = $('.log-line[data-line-num="' + lineNum + '"]').html();
+        let lineText = $('.log-line-hidden[data-line-num="' + lineNum + '"]').html();
 
         lineBox.toggleClass('done', !lineBox.hasClass('done'))
 
@@ -27,16 +27,21 @@ $(document).ready(function () {
         });
     });
     phpStormLink.on('click', function () {
+        let rawPath = $(this).html();
+        let fileLine = $(this).data('file-line');
         let relPath = $(this).html().replace(/\//g, '\\');
         let path = basePath + relPath;
         let html = '';
         if (navigator.userAgent.indexOf('Windows') === -1) {
+            let uri = encodeURIComponent(basePath + rawPath + '&line=' + fileLine);
             // https://github.com/aik099/PhpStormProtocol
-            html = '<a href="phpstorm://open?url=file://' + path + '" target="_blank">' + path + '</a>';
+            html = '<a href="phpstorm://open?file=' + uri + '" target="_blank">' + rawPath + '&line=' + fileLine +  '</a>';
+
+            $("#dialog").html(html).dialog({width: '600px'});
         } else {
             html = '<div id="copyText" class="link">' + path + '</div>';
 
-            $("#dialog").html(html).dialog({width: '800px'});
+            $("#dialog").html(html).dialog({width: '600px'});
             let copyText = $('#copyText');
 
             copyText.on('click', function () {
