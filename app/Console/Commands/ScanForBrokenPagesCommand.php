@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Interfaces\ObserverAction;
 use App\ObserverActions\BrokenPageObserverAction;
 
 class ScanForBrokenPagesCommand extends CrawlCommand

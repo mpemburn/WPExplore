@@ -135,10 +135,10 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $line = '[09-Mar-2023 10:34:38 UTC] PHP Warning:  Undefined array key "e-mail" in /dom28151/wp-content/themes/clarku/components/contact-box.php on line 59';
-
-    preg_match('/(.php on line )([\d]+)/', $line, $lineMatches);
-    !d($lineMatches);
+    $blogList = BlogList::where('site', 'www');
+    $blogList->each(function ($blog) {
+       !d($blog->blog_url);
+    });
 });
 
 Route::get('/parse_log', function () {
