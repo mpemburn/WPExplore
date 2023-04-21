@@ -10,6 +10,7 @@ use Spatie\Crawler\Crawler;
 class WebCrawlerService
 {
     protected Collection $processes;
+    protected ?int $resumeAt = null;
 
     public function __construct()
     {
@@ -48,7 +49,15 @@ class WebCrawlerService
             ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
             ->setDelayBetweenRequests(500)
             ->startCrawling($url);
+
         return true;
+    }
+
+    public function shouldResume(?int $blogId = null): self
+    {
+        $this->resumeAt = $blogId;
+
+        return $this;
     }
 
     protected function getBlogList()
