@@ -168,7 +168,7 @@ class LogParserService
     protected function readLog(): self
     {
         if (!$this->logFilePath) {
-            $path = Storage::path($this->logPrefix . '_error.log');
+            $path = Storage::path($this->logPrefix . '_php.error.log');
             $this->logFilePath = file_exists($path) ? $path : null;
         }
 
