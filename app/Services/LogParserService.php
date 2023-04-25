@@ -158,6 +158,7 @@ class LogParserService
             $path = str_replace('/dom28151', '', $matched);
             $link = '<a href="phpstorm://open?file=' . urlencode($this->codePath . $path) . '&line=' . $fileLine . '">' . $path . '</a>';
             $result = str_replace($matched, $link, $line);
+            $result .= '<div class="log-line-hidden" data-line-num="' . $lineNum . '">' . $line . '</div>';
         }
 
         return '<div class="log-line">' . $result . '</div>';
