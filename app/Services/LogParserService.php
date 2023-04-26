@@ -156,12 +156,12 @@ class LogParserService
             $matched = $matches[0];
             $fileLine = $lineMatches[2] ?? null;
             $path = str_replace('/dom28151', '', $matched);
-            $link = '<a href="phpstorm://open?file=' . urlencode($this->codePath . $path) . '&line=' . $fileLine . '">' . $path . '</a>';
+            $link = '<a data-link-line-num="' . $lineNum . '"href="phpstorm://open?file=' . urlencode($this->codePath . $path) . '&line=' . $fileLine . '">' . $path . '</a>';
             $result = str_replace($matched, $link, $line);
             $result .= '<div class="log-line-hidden" data-line-num="' . $lineNum . '">' . $line . '</div>';
         }
 
-        return '<div class="log-line">' . $result . '</div>';
+        return '<div class="log-line" data-log-line="' . $lineNum . '">' . $result . '</div>';
     }
 
     protected function readLog(): self
