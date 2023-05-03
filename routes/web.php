@@ -143,9 +143,9 @@ Route::get('/dev', function () {
 
 Route::get('/parse_log', function () {
     $parser = new LogParserService();
-    $parser->setCodePath('/Users/mpemburn/Dev/wpexplore')
+    $parser->setCodePath('/Users/mpemburn/Dev/clarku-wordpress')
         ->setAppPath('dom28151\\')
-        ->run('28151_3_10', ['wp-content/themes/clarku'], []);
+        ->run('28151_04_24', ['wp-content/themes/clarku'], []);
 
     return view('logparser', [
         'logPrefix' => $parser->getLogPrefix(),

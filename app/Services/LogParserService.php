@@ -156,19 +156,18 @@ class LogParserService
             $matched = $matches[0];
             $fileLine = $lineMatches[2] ?? null;
             $path = str_replace('/dom28151', '', $matched);
-            $link = '<span class="link"';
-            $link .= ' data-link="' . $path . '" data-file-line="' . $fileLine . '">' . $path . '</span>';
+            $link = '<a data-link-line-num="' . $lineNum . '"href="phpstorm://open?file=' . urlencode($this->codePath . $path) . '&line=' . $fileLine . '">' . $path . '</a>';
             $result = str_replace($matched, $link, $line);
             $result .= '<div class="log-line-hidden" data-line-num="' . $lineNum . '">' . $line . '</div>';
         }
 
-        return '<div class="log-line">' . $result . '</div>';
+        return '<div class="log-line" data-log-line="' . $lineNum . '">' . $result . '</div>';
     }
 
     protected function readLog(): self
     {
         if (!$this->logFilePath) {
-            $path = Storage::path($this->logPrefix . '_error.log');
+            $path = Storage::path($this->logPrefix . '_php.error.log');
             $this->logFilePath = file_exists($path) ? $path : null;
         }
 

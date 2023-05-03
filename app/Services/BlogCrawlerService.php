@@ -18,7 +18,7 @@ class BlogCrawlerService
     protected Collection $processes;
     protected FindableLink $linkFinder;
     protected ObserverAction $observerAction;
-    protected bool $resume = true;
+    protected bool $resume = false;
     protected int $resumeAt = 0;
 
     public function __construct(ObserverAction $observerAction, bool $flushData = false, int $resumeAt = 0)
