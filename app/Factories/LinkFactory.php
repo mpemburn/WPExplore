@@ -18,6 +18,7 @@ use App\Models\WordPressProductionBrokenPage;
 use App\Models\WordpressProductionLink;
 use App\Models\WordPressTestBrokenPage;
 use App\Models\WordpressTestLink;
+use App\Models\LocalBrokenPage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LinkFactory
@@ -40,6 +41,7 @@ class LinkFactory
             'futureprod' => new FutureProductionBrokenPage(),
             'futuretest' => new FutureTestBrokenPage(),
             'clarknow' => new ClarkNowBrokenPage(),
+            'local' => new LocalBrokenPage(),
             default => throw new ModelNotFoundException('No valid Model specified by "' . $env . '"'),
         };
     }
