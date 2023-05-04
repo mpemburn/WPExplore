@@ -10,6 +10,7 @@ use App\Models\Post;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Schema;
 
 class BlogService
 {
@@ -143,6 +144,44 @@ class BlogService
         }
 
         return $data;
+    }
+
+    public function findShortCodeInPosts(string $shortCode): Collection
+    {
+        $postsFound = collect();
+        $blogs = Blog::where('archived', 0);
+
+        $shortCodeRegex = '/\[' . str_replace(['[', ']'], '', $shortCode) . '/';
+
+        $blogs->each(function ($blog) use ($shortCodeRegex, &$postsFound) {
+            $blogId = $blog->blog_id;
+            $blogUrl = 'https://' . $blog->domain . $blog->path;
+
+            if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
+                return;
+            }
+
+            $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
+                ->where('post_status', 'publish')
+                ->orderBy('ID');
+
+            $posts->each(function (Post $post) use ($shortCodeRegex, $blogUrl, &$postsFound) {
+                $found = preg_match($shortCodeRegex, $post->post_content, $matches);
+                if ($found) {
+                    $postsFound->push([
+                        'blog_url' => $blogUrl,
+                        'post_name' => $post->post_name,
+                        'title' => $post->post_title,
+                        'date' => $post->post_date,
+                        'content' => trim($post->post_content),
+                    ]);
+                }
+            });
+
+        });
+
+        return $postsFound;
+
     }
 
     public function getStaleBlogs(): Collection

@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use App\Observers\BlogObserver;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Spatie\Crawler\Crawler;
 use Spatie\Async\Pool;
 use Symfony\Component\Process\Process;
@@ -135,10 +136,19 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $blogList = BlogList::where('site', 'www');
-    $blogList->each(function ($blog) {
-       !d($blog->blog_url);
-    });
+    // Do what thou wilt
+});
+
+Route::get('/shortcode', function () {
+    $shortCode = $_REQUEST['shortcode'] ?? null;
+
+    if (! $shortCode) {
+        echo 'No shortcode specified. Syntax: ' . URL::to('/shortcode') . '?shortcode=';
+        return;
+    }
+    $blogList = (new BlogService())->findShortCodeInPosts($shortCode);
+
+    !d($blogList->toArray());
 });
 
 Route::get('/parse_log', function () {
