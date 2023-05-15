@@ -7,6 +7,9 @@ namespace App\Models;
  */
 class TestingBrokenPage extends Link
 {
+    public const AUTH_USERNAME = 'WWWDEV_USERNAME';
+    public const AUTH_PASSWORD = 'WWWDEV_PASSWORD';
+
     protected $fillable = [
         'blog_id',
         'page_url',

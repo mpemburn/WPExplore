@@ -9,8 +9,8 @@ use PDOException;
 
 abstract class Link extends Model implements FindableLink
 {
-    protected const AUTH_USERNAME = null;
-    protected const AUTH_PASSWORD = null;
+    public const AUTH_USERNAME = null;
+    public const AUTH_PASSWORD = null;
 
     protected string $site = '';
     protected string $blogBasePath = '';

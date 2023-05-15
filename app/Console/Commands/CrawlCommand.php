@@ -106,7 +106,7 @@ abstract class CrawlCommand extends Command
                 echo 'Testing ' . $url . PHP_EOL;
             }
 
-            $code = (new BlogCrawlerService($this->observerAction))->testUrl($url);
+            $code = (new BlogCrawlerService($this->observerAction))->testUrl($url, $finder::AUTH_USERNAME, $finder::AUTH_PASSWORD);
 
             if ($code !== 200) {
                 echo $url. ' failed with ' . $code . ' error.' . PHP_EOL;
