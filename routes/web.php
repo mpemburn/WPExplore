@@ -148,7 +148,36 @@ Route::get('/shortcode', function () {
     }
     $blogList = (new BlogService())->findShortCodeInPosts($shortCode);
 
-    !d($blogList->toArray());
+    echo '<div style="font-family: sans-serif">';
+    echo '<table>';
+    echo '   <tr style="background-color: #e2e8f0;">';
+    echo '      <td>';
+    echo 'Page';
+    echo '      </td>';
+    echo '      <td>';
+    echo 'Title';
+    echo '      </td>';
+    echo '      <td>';
+    echo 'Created';
+    echo '      </td>';
+    echo '   </tr>';
+    $blogList->each(function ($page) {
+        $url = $page['blog_url'] . $page['post_name'];
+        echo '   <tr>';
+        echo '      <td>';
+        echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
+        echo '      </td>';
+        echo '      <td>';
+        echo $page['title'];
+        echo '      </td>';
+        echo '      <td>';
+        echo Carbon::parse($page['date'])->format('F j, Y');
+        echo '      </td>';
+        echo '   </tr>';
+    });
+    echo '<div>';
+    echo '<table>';
+
 });
 
 Route::get('/parse_log', function () {
