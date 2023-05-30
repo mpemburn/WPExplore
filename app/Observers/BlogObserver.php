@@ -41,7 +41,6 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-
         $this->observerAction->setBlogRoot($this->blogRoot)
             ->act($url, $response, $foundOnUrl);
     }

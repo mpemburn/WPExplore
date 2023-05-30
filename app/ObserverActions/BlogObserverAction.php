@@ -48,9 +48,12 @@ class BlogObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
+        $url = $this->linkFinder->replaceBasePath($url->__toString());
+
         if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
             return;
         }
+
 
         $doc = new DOMDocument();
         $body = $response->getBody();

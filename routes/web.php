@@ -136,6 +136,15 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
+    $blogList = BlogList::where('site', 'wordpress');
+
+    $blogList->each(function ($blog) {
+        $blogId = $blog->id;
+        if (! file_exists("/Users/MPemburn/Sandbox/wordpress_clarku/wp-content/blogs.dir/{$blog->id}/files")) {
+            echo $blog->id . ' Does not <br/>';
+            echo $blog->blog_url . '<br/>';
+        }
+    });
     // Do what thou wilt
 });
 
