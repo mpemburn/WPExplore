@@ -50,7 +50,7 @@ class BlogCrawlerService
                 echo  'Adding ' .$blogUrl . PHP_EOL;
             }
 
-            $this->processes->push($this->fetchContent((int)$blog['blog_id'], $blog['blog_url'], $echo));
+            $this->processes->push($this->fetchContent((int)$blog['blog_id'], $blogUrl, $echo));
         });
 
         return $this;

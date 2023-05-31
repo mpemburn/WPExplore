@@ -48,9 +48,8 @@ class BlogObserverAction implements ObserverAction
         ?UriInterface     $foundOnUrl = null
     ): void
     {
-        $url = $this->linkFinder->replaceBasePath($url->__toString());
 
-        if (!str_contains($url, $this->linkFinder->getBlogBasePath())) {
+        if (! str_contains($url, 'https://' . $this->linkFinder->getSite())) {
             return;
         }
 
@@ -65,6 +64,9 @@ class BlogObserverAction implements ObserverAction
         @$doc->loadHTML($body);
         //# save HTML
         $content = $doc->saveHTML();
+
+        // Fix the URL if necessary
+        $url = $this->linkFinder->replaceBasePath($url->__toString());
 
         // Search for image links
         if (str_contains($content, '<img')) {
