@@ -39,7 +39,9 @@ class BlogCrawlerService
     {
         $finderClass = $this->linkFinder::class;
         $finder = new $finderClass();
-        $blogs = $this->resume ? $this->getRemainingBlogs($finder) : BlogList::where('site', $finder->getSite());
+        $blogs = $this->resume
+            ? $this->getRemainingBlogs($finder)
+            : BlogList::where('site', $finder->getSite())->where('deprecated', 0);
 
         $blogs->each(function ($blog) use ($finder, $echo) {
             $blogUrl = $finder->replaceBasePath($blog['blog_url']);
