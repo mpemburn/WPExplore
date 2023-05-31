@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('test_links', function (Blueprint $table) {
-            $table->boolean('deprecated')->after('found');
+        Schema::table('blogs_list', function (Blueprint $table) {
+            $table->boolean('deprecated')->after('blog_id');
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('test_links', function (Blueprint $table) {
+        Schema::table('blogs_list', function (Blueprint $table) {
             $table->dropColumn('deprecated');
         });
     }
