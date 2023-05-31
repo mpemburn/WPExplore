@@ -15,6 +15,7 @@ use App\Models\WordpressProductionLink;
 use App\Models\WordPressTestBrokenPage;
 use App\Models\WordpressTestLink;
 use App\Observers\BugObserver;
+use App\Services\BlogCrawlerService;
 use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
@@ -136,14 +137,30 @@ Route::get('/func', function () {
 });
 
 Route::get('/dev', function () {
-    $blogList = BlogList::where('site', 'wordpress');
-
-    $blogList->each(function ($blog) {
-        $blogId = $blog->id;
-        if (! file_exists("/Users/MPemburn/Sandbox/wordpress_clarku/wp-content/blogs.dir/{$blog->id}/files")) {
-            echo $blog->id . ' Does not <br/>';
-            echo $blog->blog_url . '<br/>';
+    class Service
+    {
+        public function testUrl(string $url, ?string $username = null, ?string $password = null): int
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        if ($username && $password) {
+            curl_setopt($ch, CURLOPT_USERPWD, env($username) . ":" . env($password));
         }
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return (int) $code;
+    }
+    }
+
+    $service = new Service();
+    $wpLink = new WordpressTestLink();
+    $wpLink->where('found', 0)
+        ->each(function ($link) use ($service) {
+            $result = $service->testUrl($link->link_url);
+            !d($link->link_url, $result);
     });
     // Do what thou wilt
 });
