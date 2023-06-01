@@ -21,6 +21,7 @@ use App\Services\BugScanService;
 use App\Services\CloneService;
 use App\Services\DatabaseService;
 use App\Services\LogParserService;
+use App\Services\UrlService;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -138,6 +139,59 @@ Route::get('/func', function () {
 
 Route::get('/dev', function () {
     // Do what thou wilt
+});
+
+Route::get('/broken', function () {
+    $testLinks = (new WordpressTestLink())->where('found', 0);
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>';
+    echo 'Blog Page';
+    echo '</th>';
+    echo '<th>';
+    echo 'Link';
+    echo '</th>';
+    echo '<th>';
+    echo 'Last Updated';
+    echo '</th>';
+    echo '</tr>';
+    $testLinks->each(function ($testLink) {
+        $isBlogsDir = false;
+        $blogId = $testLink->blog_id;
+        $blogUrl = $testLink->page_url;
+        $oldLink = $testLink->link_url;
+        $blog = BlogList::where('site', 'wordpress')->where('blog_id', $blogId);
+        $lastUpdated = $blog->first()->last_updated;
+        $siteName = str_replace('https://wordpress.clarku.edu/', '', $blog->first()->blog_url);
+        if (stripos($oldLink, 'blogs.dir')) {
+            $isBlogsDir = true;
+            $replaceLink = str_replace("{$siteName}/wp-content/blogs.dir/{$blogId}/files", "wp-content/uploads/sites/{$blogId}", $oldLink);
+        } else {
+            $replaceLink = str_replace("{$siteName}/files", "wp-content/uploads/sites/{$blogId}", $oldLink);
+        }
+        if ($isBlogsDir) {
+            $code = (new UrlService())->testUrl($replaceLink);
+            if ($code === 404) {
+                $prodLink = str_replace('/test', '', $oldLink);
+                $prodCode = (new UrlService())->testUrl($prodLink);
+                if ($prodCode !== 200) {
+                    echo '<tr>';
+                    echo '<td>';
+                    echo $blogUrl;
+                    echo '</td>';
+                    echo '<td>';
+                    echo $prodLink;
+                    echo '</td>';
+                    echo '<td>';
+                    echo $lastUpdated;
+                    echo '</td>';
+                    echo '</tr>';
+//                    !d($oldLink, $replaceLink, $prodCode);
+                }
+            }
+        }
+    });
+    echo '<table>';
 });
 
 Route::get('/shortcode', function () {
