@@ -22,6 +22,8 @@ use App\Services\CloneService;
 use App\Services\DatabaseService;
 use App\Services\LogParserService;
 use App\Services\UrlService;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -116,7 +118,7 @@ Route::get('/func', function () {
             $auth_version = '20220426';
 
             foreach ($this->versions as $version) {
-                if ( false === $auth_version || intval( $auth_version ) < $version ){
+                if (false === $auth_version || intval($auth_version) < $version) {
                     if (method_exists($this, 'update_' . $version)) {
                         $auth_version = call_user_func_array([$this, 'update_' . $version], [$auth_version, $version]);
                         $needs_updating = true;
@@ -125,7 +127,7 @@ Route::get('/func', function () {
             }
         }
 
-        protected function update_20221101( $auth_version, $version )
+        protected function update_20221101($auth_version, $version)
         {
             echo 'Hi! ' . $auth_version . '<br>';
             echo 'Yo! ' . $version . '<br>';
@@ -139,6 +141,69 @@ Route::get('/func', function () {
 
 Route::get('/dev', function () {
     // Do what thou wilt
+});
+
+Route::get('/gen_redirects', function () {
+    // Get CSV from John's spreadsheet
+    $redirects = Storage::path('redirects.csv');
+    if (file_exists($redirects)) {
+        if (($open = fopen($redirects, "r")) !== FALSE) {
+            // Iterate over lines
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                // The $data array contains two fields: $id and $urk
+                $id = $data[0];
+                $url = $data[1];
+
+                // Build the rule from the pattern used in the original
+                $rule = '
+                <rule name="faculty/facultybio.cfm?id=' . $id .'" stopProcessing="true">
+                    <match url="faculty/facultybio.cfm"/>
+                    <conditions>
+                        <add input="{QUERY_STRING}" pattern="^([^&amp;]*&amp;)?id=' . $id .'(&amp;[^&amp;]*)?$"/>
+                    </conditions>
+                    <action type="Redirect" url="https://' . trim($url) .'"/>
+                </rule>' . PHP_EOL;
+
+                // echo the rule so that it can be copied from the page source.
+                echo $rule;
+            }
+            fclose($open);
+        }
+    }
+    // Do what thou wilt
+});
+
+Route::get('/repaired', function () {
+    $subset = collect();
+    $testLinks = (new WordpressTestLink())
+        ->where('found', 0)
+        ->where('link_url', 'NOT LIKE', '%blogs.dir%');
+    $testLinks->each(function ($link) use (&$subset) {
+        $linkUrl = $link->link_url;
+        $parts = pathinfo($linkUrl);
+        $path = str_replace(['https:', 'wp-content/uploads/sites/'], '', $parts['dirname']) . '/';
+        if ($subset->contains($path)) {
+            return;
+        }
+        $subset->push($path);
+        $subset->put($path, $link->blog_id);
+    });
+    $commands = collect();
+    $command = null;
+    $subset->each(function ($path) use (&$commands, &$command) {
+        if (!$command) {
+            $escaped = str_replace('/', '\/', $path);
+            $command = 'wp search-replace "' . $escaped . '" "' . $path . '"';
+        } else {
+            $command .= ' wp_' . $path . '_posts --network';
+            $commands->push($command);
+            $command = null;
+        }
+    });
+    $commands->each(function ($command) {
+        echo $command . '<br>';
+    });
+
 });
 
 Route::get('/broken', function () {
@@ -197,7 +262,7 @@ Route::get('/broken', function () {
 Route::get('/shortcode', function () {
     $shortCode = $_REQUEST['shortcode'] ?? null;
 
-    if (! $shortCode) {
+    if (!$shortCode) {
         echo 'No shortcode specified. Syntax: ' . URL::to('/shortcode') . '?shortcode=';
         return;
     }
@@ -276,7 +341,7 @@ Route::get('/where_active', function () {
     DatabaseService::setDb($currentSite . '_clarku');
 
     $rootPath = Storage::path('plugins_json');
-    $file =  $rootPath . "/{$currentSite}_plugins.json";
+    $file = $rootPath . "/{$currentSite}_plugins.json";
 
     if (file_exists($file)) {
         $json = file_get_contents($file);
@@ -298,7 +363,7 @@ Route::get('/themes', function () {
     DatabaseService::setDb($currentSite . '_clarku');
 
     $rootPath = Storage::path('themes_json');
-    $file =  $rootPath . "/{$currentSite}_themes.json";
+    $file = $rootPath . "/{$currentSite}_themes.json";
     if (file_exists($file)) {
         $json = file_get_contents($file);
         collect(json_decode($json, true))->each(function ($row) use ($notFoundOnly) {
@@ -350,12 +415,12 @@ Route::get('/distill', function () {
         $site = str_replace('_plugins', '', $info['filename']);
 
         $json = file_get_contents($file);
-        collect(json_decode($json, true))->each(function ($row) use ($site, &$distilled){
+        collect(json_decode($json, true))->each(function ($row) use ($site, &$distilled) {
             if ($row['status'] !== 'active' && $row['status'] !== 'active-network') {
                 return;
             }
             $plugin = $row['name'];
-            if (! $distilled->contains($plugin)) {
+            if (!$distilled->contains($plugin)) {
                 $distilled->push($plugin);
                 $sites = collect();
                 $sites->push($site);
