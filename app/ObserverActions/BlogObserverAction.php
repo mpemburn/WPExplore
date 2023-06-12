@@ -3,45 +3,15 @@
 namespace App\ObserverActions;
 
 use App\Interfaces\FindableLink;
-use App\Interfaces\ObserverAction;
+use App\Interfaces\ObserverActionInterface;
 use App\Services\BlogCrawlerService;
 use DOMDocument;
 use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class BlogObserverAction implements ObserverAction
+class BlogObserverAction extends ObserverAction implements ObserverActionInterface
 {
-    protected FindableLink $linkFinder;
-    protected int $blogId;
-    protected string $blogRoot;
-    protected bool $echo;
-
-    public function __construct(FindableLink $linkFinder, bool $echo = false)
-    {
-        $this->linkFinder = $linkFinder;
-        $this->echo = $echo;
-    }
-
-    public function setBlogId(int $blogId): self
-    {
-        $this->blogId = $blogId;
-
-        return $this;
-    }
-
-    public function setBlogRoot(string $blogRoot): self
-    {
-        $this->blogRoot = $blogRoot;
-
-        return $this;
-    }
-
-    public function verbose(): bool
-    {
-        return $this->echo;
-    }
-
     public function act(
         UriInterface      $url,
         ResponseInterface $response,
@@ -80,11 +50,6 @@ class BlogObserverAction implements ObserverAction
         }
     }
 
-    public function getLinkFinder(): FindableLink
-    {
-        return $this->linkFinder;
-    }
-
     protected function addLink(string $regexp, string $content, string $url): void
     {
         if (preg_match_all("/$regexp/", $content, $matches, PREG_SET_ORDER) && $matches) {
@@ -102,12 +67,15 @@ class BlogObserverAction implements ObserverAction
                 $found = (new BlogCrawlerService($this))->urlExists($link);
 
                 $finder = new $this->linkFinder();
-                $finder->create([
-                    'blog_id' => $this->blogId,
-                    'page_url' => $url,
-                    'link_url' => $link,
-                    'found' => $found,
-                ]);
+
+                if ($this->persist) {
+                    $finder->create([
+                        'blog_id' => $this->blogId,
+                        'page_url' => $url,
+                        'link_url' => $link,
+                        'found' => $found,
+                    ]);
+                }
 
                 if ($this->echo) {
                     echo '.';

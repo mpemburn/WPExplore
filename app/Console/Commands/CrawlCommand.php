@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Factories\LinkFactory;
 use App\Interfaces\FindableLink;
-use App\Interfaces\ObserverAction;
+use App\Interfaces\ObserverActionInterface;
 use App\Models\BlogList;
 use App\ObserverActions\BlogObserverAction;
 use App\Services\BlogCrawlerService;
@@ -20,9 +20,9 @@ abstract class CrawlCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top} {--fatal}';
+    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top} {--fatal} {--nopersist}}';
 
-    protected ObserverAction $observerAction;
+    protected ObserverActionInterface $observerAction;
     protected ?FindableLink $linkFinder;
     protected bool $echo = false;
 
@@ -37,6 +37,7 @@ abstract class CrawlCommand extends Command
         $fatalOnly = (bool)$this->option('fatal');
         $flushData = (bool)$this->option('flush');
         $resumeAt = (int)$this->option('resume_at');
+        $noPersist = (int)$this->option('nopersist');
 
         if ($topOnly) {
             $this->testTopLevelOnly($this->linkFinder);
@@ -46,6 +47,10 @@ abstract class CrawlCommand extends Command
         if ($fatalOnly) {
             $this->testFatalError($this->linkFinder);
             return Command::SUCCESS;
+        }
+
+        if ($noPersist) {
+            $this->observerAction->persist(false);
         }
 
         if ($flushData) {

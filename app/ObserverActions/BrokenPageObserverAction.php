@@ -3,45 +3,13 @@
 namespace App\ObserverActions;
 
 use App\Interfaces\FindableLink;
-use App\Interfaces\ObserverAction;
+use App\Interfaces\ObserverActionInterface;
 use App\Services\BlogCrawlerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class BrokenPageObserverAction implements ObserverAction
+class BrokenPageObserverAction extends ObserverAction implements ObserverActionInterface
 {
-    protected FindableLink $linkFinder;
-    protected int $blogId;
-    protected string $blogRoot;
-    protected bool $echo;
-    protected bool $persist;
-
-    public function __construct(FindableLink $linkFinder, bool $echo = false, bool $persist = true)
-    {
-        $this->linkFinder = $linkFinder;
-        $this->echo = $echo;
-        $this->persist = $persist;
-    }
-
-    public function setBlogId(int $blogId): self
-    {
-        $this->blogId = $blogId;
-
-        return $this;
-    }
-
-    public function setBlogRoot(string $blogRoot): self
-    {
-        $this->blogRoot = $blogRoot;
-
-        return $this;
-    }
-
-    public function verbose(): bool
-    {
-        return $this->echo;
-    }
-
     public function act(
         UriInterface      $url,
         ResponseInterface $response,
@@ -61,16 +29,14 @@ class BrokenPageObserverAction implements ObserverAction
         $result = (new BlogCrawlerService($this))->testUrl($url);
 
         $linkFinder = new $this->linkFinder();
-        $linkFinder->create([
-            'blog_id' => $this->blogId,
-            'page_url' => $url,
-            'error' => $result === 200 ? 'success' : $result . ' Error',
-        ]);
-    }
 
-    public function getLinkFinder(): FindableLink
-    {
-        return $this->linkFinder;
+        if ($this->persist) {
+            $linkFinder->create([
+                'blog_id' => $this->blogId,
+                'page_url' => $url,
+                'error' => $result === 200 ? 'success' : $result . ' Error',
+            ]);
+        }
     }
 
     public function recordFailure(string $url, string $message): void

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Interfaces\ObserverAction;
+use App\Interfaces\ObserverActionInterface;
 use Spatie\Crawler\CrawlObservers\CrawlObserver;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -14,7 +14,7 @@ class BlogObserver extends CrawlObserver
     protected ?string $blogRoot = null;
     protected int $blogId;
 
-    public function __construct(int $blogId, protected ObserverAction $observerAction)
+    public function __construct(int $blogId, protected ObserverActionInterface $observerAction)
     {
         $this->content = collect();
         $this->blogId = $blogId;

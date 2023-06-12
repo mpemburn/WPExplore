@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\FindableLink;
-use App\Interfaces\ObserverAction;
+use App\Interfaces\ObserverActionInterface;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\Option;
@@ -17,11 +17,11 @@ class BlogCrawlerService
 {
     protected Collection $processes;
     protected FindableLink $linkFinder;
-    protected ObserverAction $observerAction;
+    protected ObserverActionInterface $observerAction;
     protected bool $resume = false;
     protected int $resumeAt = 0;
 
-    public function __construct(ObserverAction $observerAction, bool $flushData = false, int $resumeAt = 0)
+    public function __construct(ObserverActionInterface $observerAction, bool $flushData = false, int $resumeAt = 0)
     {
         $this->linkFinder = $observerAction->getLinkFinder();
 
