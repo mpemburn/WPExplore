@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class BlogObserverAction extends ObserverAction implements ObserverActionInterface
+class BlogObserverAction extends ObserverAction
 {
     public function act(
         UriInterface      $url,

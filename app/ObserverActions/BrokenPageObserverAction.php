@@ -8,7 +8,7 @@ use App\Services\BlogCrawlerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class BrokenPageObserverAction extends ObserverAction implements ObserverActionInterface
+class BrokenPageObserverAction extends ObserverAction
 {
     public function act(
         UriInterface      $url,
