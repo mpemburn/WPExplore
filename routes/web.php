@@ -1,10 +1,12 @@
 <?php
 
 use App\Generators\BlogsCsvGenerator;
+use App\Generators\LegacyAppsCsvGenerator;
 use App\Generators\PluginsCsvGenerator;
 use App\Http\Controllers\BlogCrawlerController;
 use App\Models\Blog;
 use App\Models\BlogList;
+use App\Models\CfLegacyApp;
 use App\Models\DevBrokenPage;
 use App\Models\LogParserCompleted;
 use App\Models\Option;
@@ -24,6 +26,7 @@ use App\Services\LogParserService;
 use App\Services\UrlService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\RedirectMiddleware;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -143,6 +146,27 @@ Route::get('/dev', function () {
     // Do what thou wilt
 });
 
+Route::get('/csv/cfapps', function () {
+    $titles = [
+        'URL',
+        'Title',
+        'Redirect',
+        'Error'
+    ];
+    echo implode(',', $titles) . '<br>';
+
+    CfLegacyApp::where('server', 'Wilbur')->each(function ($app) {
+        $row = [
+            $app->index_url,
+            $app->page_title,
+            $app->redirect_url,
+            $app->error_code,
+        ];
+
+        echo implode(',', $row) . '<br>';
+    });
+});
+
 Route::get('/gen_redirects', function () {
     // Get CSV from John's spreadsheet
     $redirects = Storage::path('redirects.csv');
@@ -170,7 +194,6 @@ Route::get('/gen_redirects', function () {
             fclose($open);
         }
     }
-    // Do what thou wilt
 });
 
 Route::get('/repaired', function () {
