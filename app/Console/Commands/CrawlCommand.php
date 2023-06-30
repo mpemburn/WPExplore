@@ -37,7 +37,7 @@ abstract class CrawlCommand extends Command
         $fatalOnly = (bool)$this->option('fatal');
         $flushData = (bool)$this->option('flush');
         $resumeAt = (int)$this->option('resume_at');
-        $noPersist = (int)$this->option('nopersist');
+//        $noPersist = (int)$this->option('nopersist');
 
         if ($topOnly) {
             $this->testTopLevelOnly($this->linkFinder);

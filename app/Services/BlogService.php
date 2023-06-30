@@ -146,6 +146,44 @@ class BlogService
         return $data;
     }
 
+    public function findTextInPosts(string $searchText): Collection
+    {
+        $postsFound = collect();
+        $blogs = Blog::where('archived', 0);
+
+        $searchRegex = '/' . $searchText . '/';
+
+        $blogs->each(function ($blog) use ($searchRegex, &$postsFound) {
+            $blogId = $blog->blog_id;
+            $blogUrl = 'https://' . $blog->domain . $blog->path;
+
+            if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
+                return;
+            }
+
+            $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
+                ->where('post_status', 'publish')
+                ->orderBy('ID');
+
+            $posts->each(function (Post $post) use ($searchRegex, $blogUrl, &$postsFound) {
+                $foundContent = preg_match($searchRegex, $post->post_content, $matches);
+                $foundTitle = preg_match($searchRegex, $post->post_title, $matches);
+                if ($foundContent || $foundTitle) {
+                    $postsFound->push([
+                        'blog_url' => $blogUrl,
+                        'post_name' => $post->post_name,
+                        'title' => $post->post_title,
+                        'date' => $post->post_date,
+                        'content' => trim($post->post_content),
+                    ]);
+                }
+            });
+
+        });
+
+        return $postsFound;
+
+    }
     public function findShortCodeInPosts(string $shortCode): Collection
     {
         $postsFound = collect();

@@ -55,6 +55,9 @@ use Smalot\PdfParser\Parser;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/dev', function () {
+    echo '<iframe src="https://sites.test.clarku.edu/business-docs/business-office-forms/"/>';
+});
 
 Route::get('/', fn() => view('welcome'));
 
@@ -142,8 +145,49 @@ Route::get('/func', function () {
     new Update();
 });
 
-Route::get('/dev', function () {
-    // Do what thou wilt
+Route::get('/in_post', function () {
+    $database = $_REQUEST['db'] ?? null;
+    $searchText = $_REQUEST['text'] ?? null;
+
+    if ($database) {
+        DatabaseService::setDb($database);
+    }
+
+    if (!$searchText) {
+        echo 'No text specified. Syntax: ' . URL::to('/in_post') . '?text=';
+        return;
+    }
+    $blogList = (new BlogService())->findTextInPosts($searchText);
+
+    echo '<div style="font-family: sans-serif">';
+    echo '<table>';
+    echo '   <tr style="background-color: #e2e8f0;">';
+    echo '      <td>';
+    echo 'Page';
+    echo '      </td>';
+    echo '      <td>';
+    echo 'Title';
+    echo '      </td>';
+    echo '      <td>';
+    echo 'Created';
+    echo '      </td>';
+    echo '   </tr>';
+    $blogList->each(function ($page) {
+        $url = $page['blog_url'] . $page['post_name'];
+        echo '   <tr>';
+        echo '      <td>';
+        echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
+        echo '      </td>';
+        echo '      <td>';
+        echo $page['title'];
+        echo '      </td>';
+        echo '      <td>';
+        echo Carbon::parse($page['date'])->format('F j, Y');
+        echo '      </td>';
+        echo '   </tr>';
+    });
+    echo '<div>';
+    echo '<table>';
 });
 
 Route::get('/csv/cfapps', function () {
