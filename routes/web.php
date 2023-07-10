@@ -56,7 +56,7 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
-    echo '<iframe src="https://sites.test.clarku.edu/business-docs/business-office-forms/"/>';
+    // Do what thou wilt
 });
 
 Route::get('/', fn() => view('welcome'));
