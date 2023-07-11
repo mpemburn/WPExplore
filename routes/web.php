@@ -56,6 +56,11 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
+//    $contents = Storage::disk('s3')->get('/dom29121/wp-content/sites/104/nggallery/coral-fungi/coral.jpg');
+    $contents = Storage::disk('s3')->allFiles('/dom29121/wp-content/uploads/sites/184/nggallery');
+
+    !d($contents);
+
     // Do what thou wilt
 });
 
