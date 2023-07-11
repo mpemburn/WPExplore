@@ -7,6 +7,9 @@ use App\Generators\BlogsInDateRangeCsvGenerator;
 use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
+use App\Services\Searchers\OptionsSearcher;
+use App\Services\Searchers\PostsSearcher;
+use App\Services\Searchers\ShortCodeSearcher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
@@ -19,6 +22,15 @@ class BlogService
         'current_theme',
         'template'
     ];
+
+    public function setDatabase(?string $database): self
+    {
+        if ($database) {
+            DatabaseService::setDb($database);
+        }
+
+        return $this;
+    }
 
     public function createActiveBlogsCsv(string $filename = 'active_blogs.csv')
     {
@@ -146,80 +158,19 @@ class BlogService
         return $data;
     }
 
-    public function findTextInPosts(string $searchText): Collection
+    public function findTextInOptions(string $searchText): void
     {
-        $postsFound = collect();
-        $blogs = Blog::where('archived', 0);
-
-        $searchRegex = '/' . $searchText . '/';
-
-        $blogs->each(function ($blog) use ($searchRegex, &$postsFound) {
-            $blogId = $blog->blog_id;
-            $blogUrl = 'https://' . $blog->domain . $blog->path;
-
-            if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
-                return;
-            }
-
-            $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
-                ->where('post_status', 'publish')
-                ->orderBy('ID');
-
-            $posts->each(function (Post $post) use ($searchRegex, $blogUrl, &$postsFound) {
-                $foundContent = preg_match($searchRegex, $post->post_content, $matches);
-                $foundTitle = preg_match($searchRegex, $post->post_title, $matches);
-                if ($foundContent || $foundTitle) {
-                    $postsFound->push([
-                        'blog_url' => $blogUrl,
-                        'post_name' => $post->post_name,
-                        'title' => $post->post_title,
-                        'date' => $post->post_date,
-                        'content' => trim($post->post_content),
-                    ]);
-                }
-            });
-
-        });
-
-        return $postsFound;
-
+        (new OptionsSearcher())->run($searchText)->display();
     }
-    public function findShortCodeInPosts(string $shortCode): Collection
+
+    public function findTextInPosts(string $searchText): void
     {
-        $postsFound = collect();
-        $blogs = Blog::where('archived', 0);
+        (new PostsSearcher())->run($searchText)->display();
+    }
 
-        $shortCodeRegex = '/\[' . str_replace(['[', ']'], '', $shortCode) . '/';
-
-        $blogs->each(function ($blog) use ($shortCodeRegex, &$postsFound) {
-            $blogId = $blog->blog_id;
-            $blogUrl = 'https://' . $blog->domain . $blog->path;
-
-            if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
-                return;
-            }
-
-            $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
-                ->where('post_status', 'publish')
-                ->orderBy('ID');
-
-            $posts->each(function (Post $post) use ($shortCodeRegex, $blogUrl, &$postsFound) {
-                $found = preg_match($shortCodeRegex, $post->post_content, $matches);
-                if ($found) {
-                    $postsFound->push([
-                        'blog_url' => $blogUrl,
-                        'post_name' => $post->post_name,
-                        'title' => $post->post_title,
-                        'date' => $post->post_date,
-                        'content' => trim($post->post_content),
-                    ]);
-                }
-            });
-
-        });
-
-        return $postsFound;
-
+    public function findShortCodeInPosts(string $searchText): void
+    {
+        (new ShortCodeSearcher())->run($searchText)->display();
     }
 
     public function getStaleBlogs(): Collection

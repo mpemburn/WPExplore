@@ -150,49 +150,25 @@ Route::get('/func', function () {
     new Update();
 });
 
+Route::get('/shortcode', function () {
+    $database = $_REQUEST['db'] ?? null;
+    $searchText = $_REQUEST['text'] ?? null;
+
+    (new BlogService())->setDatabase($database)->findShortCodeInPosts($searchText);
+});
+
+Route::get('/in_options', function () {
+    $database = $_REQUEST['db'] ?? null;
+    $searchText = $_REQUEST['text'] ?? null;
+
+    (new BlogService())->setDatabase($database)->findTextInOptions($searchText);
+});
+
 Route::get('/in_post', function () {
     $database = $_REQUEST['db'] ?? null;
     $searchText = $_REQUEST['text'] ?? null;
 
-    if ($database) {
-        DatabaseService::setDb($database);
-    }
-
-    if (!$searchText) {
-        echo 'No text specified. Syntax: ' . URL::to('/in_post') . '?text=';
-        return;
-    }
-    $blogList = (new BlogService())->findTextInPosts($searchText);
-
-    echo '<div style="font-family: sans-serif">';
-    echo '<table>';
-    echo '   <tr style="background-color: #e2e8f0;">';
-    echo '      <td>';
-    echo 'Page';
-    echo '      </td>';
-    echo '      <td>';
-    echo 'Title';
-    echo '      </td>';
-    echo '      <td>';
-    echo 'Created';
-    echo '      </td>';
-    echo '   </tr>';
-    $blogList->each(function ($page) {
-        $url = $page['blog_url'] . $page['post_name'];
-        echo '   <tr>';
-        echo '      <td>';
-        echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
-        echo '      </td>';
-        echo '      <td>';
-        echo $page['title'];
-        echo '      </td>';
-        echo '      <td>';
-        echo Carbon::parse($page['date'])->format('F j, Y');
-        echo '      </td>';
-        echo '   </tr>';
-    });
-    echo '<div>';
-    echo '<table>';
+    (new BlogService())->setDatabase($database)->findTextInPosts($searchText);
 });
 
 Route::get('/csv/cfapps', function () {
@@ -329,47 +305,6 @@ Route::get('/broken', function () {
         }
     });
     echo '<table>';
-});
-
-Route::get('/shortcode', function () {
-    $shortCode = $_REQUEST['shortcode'] ?? null;
-
-    if (!$shortCode) {
-        echo 'No shortcode specified. Syntax: ' . URL::to('/shortcode') . '?shortcode=';
-        return;
-    }
-    $blogList = (new BlogService())->findShortCodeInPosts($shortCode);
-
-    echo '<div style="font-family: sans-serif">';
-    echo '<table>';
-    echo '   <tr style="background-color: #e2e8f0;">';
-    echo '      <td>';
-    echo 'Page';
-    echo '      </td>';
-    echo '      <td>';
-    echo 'Title';
-    echo '      </td>';
-    echo '      <td>';
-    echo 'Created';
-    echo '      </td>';
-    echo '   </tr>';
-    $blogList->each(function ($page) {
-        $url = $page['blog_url'] . $page['post_name'];
-        echo '   <tr>';
-        echo '      <td>';
-        echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
-        echo '      </td>';
-        echo '      <td>';
-        echo $page['title'];
-        echo '      </td>';
-        echo '      <td>';
-        echo Carbon::parse($page['date'])->format('F j, Y');
-        echo '      </td>';
-        echo '   </tr>';
-    });
-    echo '<div>';
-    echo '<table>';
-
 });
 
 Route::get('/parse_log', function () {
