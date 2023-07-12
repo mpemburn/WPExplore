@@ -19,11 +19,12 @@ class OptionsSearcher extends BlogSearcher
         $options = (new Option())->setTable('wp_' . $blogId . '_options')
             ->orderBy('option_id');
 
-        $options->each(function (Option $option) use ($blogUrl) {
+        $options->each(function (Option $option) use ($blogId, $blogUrl) {
             $foundContent = preg_match($this->searchRegex, $option->option_value, $matches);
 
             if ($foundContent) {
                 $this->found->push([
+                    'blog_id' => $blogId,
                     'blog_url' => $blogUrl,
                     'option_name' => $option->option_name,
                     'option_value' => $option->option_value,
@@ -34,9 +35,13 @@ class OptionsSearcher extends BlogSearcher
 
     function display(): void
     {
+        $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
         echo '   <tr style="background-color: #e2e8f0;">';
+        echo '      <td>';
+        echo 'Blog ID';
+        echo '      </td>';
         echo '      <td>';
         echo 'Blog URL';
         echo '      </td>';
@@ -47,9 +52,12 @@ class OptionsSearcher extends BlogSearcher
         echo 'Value';
         echo '      </td>';
         echo '   </tr>';
-        $this->found->each(function ($item) {
+        $this->found->each(function ($item) use (&$count) {
             $url = $item['blog_url'];
             echo '   <tr>';
+            echo '      <td>';
+            echo $item['blog_id'];
+            echo '      </td>';
             echo '      <td>';
             echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
             echo '      </td>';
@@ -60,9 +68,12 @@ class OptionsSearcher extends BlogSearcher
             echo $this->truncateContent($item['option_value']);
             echo '      </td>';
             echo '   </tr>';
+
+            $count++;
         });
-        echo '<div>';
         echo '<table>';
+        echo 'Total Count: ' . $count;
+        echo '<div>';
     }
 
     function error(): void
