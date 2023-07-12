@@ -43,4 +43,17 @@ abstract class BlogSearcher
 
         return $this;
     }
+
+    protected function truncateContent(string $content)
+    {
+        $highlight = str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $content);
+        $position = stripos($highlight, $this->searchText);
+
+        $start = ($position - 20) > 0 ? $position - 20 : 0;
+        $prellipsis = $start > 0 ? '&hellip;' : '';
+        $postellipsis = strlen($highlight) > 50 ? '&hellip;' : '';
+
+        return $prellipsis . substr($highlight, $start, 50) . $postellipsis;
+    }
+
 }

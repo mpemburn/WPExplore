@@ -65,7 +65,7 @@ class PostsSearcher extends BlogSearcher
             echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $page['title']);
             echo '      </td>';
             echo '      <td>';
-            echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $page['content']);
+            echo $this->truncateContent($page['content']);
             echo '      </td>';
             echo '      <td>';
             echo Carbon::parse($page['date'])->format('F j, Y');

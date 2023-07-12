@@ -57,7 +57,7 @@ class OptionsSearcher extends BlogSearcher
             echo $item['option_name'];
             echo '      </td>';
             echo '      <td>';
-            echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $item['option_value']);
+            echo $this->truncateContent($item['option_value']);
             echo '      </td>';
             echo '   </tr>';
         });
