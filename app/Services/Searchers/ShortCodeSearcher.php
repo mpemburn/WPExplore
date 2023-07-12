@@ -37,6 +37,7 @@ class ShortCodeSearcher extends BlogSearcher
 
     function display(): void
     {
+        $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
         echo '   <tr style="background-color: #e2e8f0;">';
@@ -53,9 +54,10 @@ class ShortCodeSearcher extends BlogSearcher
         echo 'Created';
         echo '      </td>';
         echo '   </tr>';
-        $this->found->each(function ($page) {
+        $this->found->each(function ($page) use (&$count) {
             $url = $page['blog_url'] . $page['post_name'];
-            echo '   <tr>';
+            $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
+            echo '   <tr style="background-color: ' . $bgColor . ';">';
             echo '      <td>';
             echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
             echo '      </td>';
@@ -69,9 +71,12 @@ class ShortCodeSearcher extends BlogSearcher
             echo Carbon::parse($page['date'])->format('F j, Y');
             echo '      </td>';
             echo '   </tr>';
+
+            $count++;
         });
-        echo '<div>';
         echo '<table>';
+        echo '<br><strong>Total Found: ' . $count . '</strong>';
+        echo '<div>';
     }
 
     function error(): void

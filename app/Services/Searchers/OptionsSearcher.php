@@ -54,7 +54,8 @@ class OptionsSearcher extends BlogSearcher
         echo '   </tr>';
         $this->found->each(function ($item) use (&$count) {
             $url = $item['blog_url'];
-            echo '   <tr>';
+            $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
+            echo '   <tr style="background-color: ' . $bgColor . ';">';
             echo '      <td>';
             echo $item['blog_id'];
             echo '      </td>';
@@ -72,7 +73,7 @@ class OptionsSearcher extends BlogSearcher
             $count++;
         });
         echo '<table>';
-        echo 'Total Count: ' . $count;
+        echo '<br><strong>Total Found: ' . $count . '</strong>';
         echo '<div>';
     }
 
