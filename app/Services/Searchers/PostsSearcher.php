@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\URL;
 
 class PostsSearcher extends BlogSearcher
 {
+    protected array $headers = [
+        'Page',
+        'Title',
+        'Content',
+        'Created',
+    ];
+
     function process(string $blogId, string $blogUrl): void
     {
         if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
@@ -42,20 +49,7 @@ class PostsSearcher extends BlogSearcher
         $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
-        echo '   <tr style="background-color: #e2e8f0;">';
-        echo '      <td>';
-        echo 'Page';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Title';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Content';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Created';
-        echo '      </td>';
-        echo '   </tr>';
+        echo $this->buildHeader();
         $this->found->each(function ($page) use (&$count) {
             $url = $page['blog_url'] . $page['post_name'];
             $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';

@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\URL;
 
 class OptionsSearcher extends BlogSearcher
 {
+    protected array $headers = [
+        'Blog ID',
+        'Blog URL',
+        'Option',
+        'Value'
+    ];
+
     function process(string $blogId, string $blogUrl): void
     {
-        if (! Schema::hasTable('wp_' . $blogId. '_options')) {
+        if (!Schema::hasTable('wp_' . $blogId . '_options')) {
             return;
         }
 
@@ -38,20 +45,7 @@ class OptionsSearcher extends BlogSearcher
         $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
-        echo '   <tr style="background-color: #e2e8f0;">';
-        echo '      <td>';
-        echo 'Blog ID';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Blog URL';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Option';
-        echo '      </td>';
-        echo '      <td>';
-        echo 'Value';
-        echo '      </td>';
-        echo '   </tr>';
+        echo $this->buildHeader();
         $this->found->each(function ($item) use (&$count) {
             $url = $item['blog_url'];
             $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';

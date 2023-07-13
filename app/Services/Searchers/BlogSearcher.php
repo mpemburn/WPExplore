@@ -13,6 +13,7 @@ abstract class BlogSearcher
     protected Collection $found;
     protected string $searchText;
     protected string $searchRegex;
+    protected array $headers = [];
 
     abstract function process(string $blogId, string $blogUrl): void;
     abstract function display(): void;
@@ -44,7 +45,20 @@ abstract class BlogSearcher
         return $this;
     }
 
-    protected function truncateContent(string $content)
+    protected function buildHeader(): string
+    {
+        $html = '   <tr style="background-color: #e2e8f0;">';
+        foreach ($this->headers as $header) {
+            $html .= '      <td>';
+            $html .= $header;
+            $html .= '      </td>';
+        }
+        $html .= '   </tr>';
+
+        return $html;
+    }
+
+    protected function truncateContent(string $content): string
     {
         $highlight = str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $content);
         $position = stripos($highlight, $this->searchText);
