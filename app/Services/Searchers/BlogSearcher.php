@@ -13,6 +13,7 @@ abstract class BlogSearcher
     protected Collection $found;
     protected string $searchText;
     protected string $searchRegex;
+    protected bool $verbose;
     protected array $headers = [];
 
     abstract function process(string $blogId, string $blogUrl): void;
@@ -24,13 +25,15 @@ abstract class BlogSearcher
         $this->found = collect();
     }
 
-    public function run(?string $searchText): self
+    public function run(?string $searchText, bool $verbose = false): self
     {
         if (! $searchText) {
             $this->error();
 
             return $this;
         }
+
+        $this->verbose = $verbose;
 
         $blogs = Blog::where('archived', 0);
 
@@ -60,14 +63,16 @@ abstract class BlogSearcher
 
     protected function truncateContent(string $content): string
     {
+        $length = $this->verbose ? null : 50;
+
         $highlight = str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $content);
         $position = stripos($highlight, $this->searchText);
 
         $start = ($position - 20) > 0 ? $position - 20 : 0;
         $prellipsis = $start > 0 ? '&hellip;' : '';
-        $postellipsis = strlen($highlight) > 50 ? '&hellip;' : '';
+        $postellipsis = ! $this->verbose && strlen($highlight) > $length ? '&hellip;' : '';
 
-        return $prellipsis . substr($highlight, $start, 50) . $postellipsis;
+        return $prellipsis . substr($highlight, $start, $length) . $postellipsis;
     }
 
 }

@@ -9,7 +9,8 @@ class CfLegacyApp extends Model
 {
     use HasFactory;
 
-    const ERROR_CODES = [
+    public const ERROR_CODES = [
+        0 => 'n/a',
         301 => '301 Moved',
         302 => '302 Gone ',
         401 => '401 Unauthorized',
@@ -30,7 +31,7 @@ class CfLegacyApp extends Model
 
     public function getErrorCodeAttribute($code)
     {
-        return self::ERROR_CODES[$code] ?? 'n/a';
+        return self::ERROR_CODES[$code] ?? 'okay';
     }
 
     public function getRedirectUrlAttribute($url)

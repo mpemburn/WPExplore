@@ -11,7 +11,7 @@ class BlogCrawlCommand extends CrawlCommand
      *
      * @var string
      */
-    protected $signature = 'blog:crawl {--env=} {--flush} {--top} {--fatal} {--resume_at}';
+    protected $signature = 'blog:crawl {--env=} {--flush} {--top} {--fatal} {--resume_at} {--nopersist}';
 
     /**
      * The console command description.

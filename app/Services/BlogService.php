@@ -95,11 +95,12 @@ class BlogService
     public function getActiveBlogs(array $filter = [], ?string $startDate = null, ?string $endDate = null): Collection
     {
         $rows = collect();
-        if ($startDate && $endDate) {
-            $blogs = Blog::whereBetween('last_updated', [date($startDate), date($endDate)])->get();
-        } else {
-            $blogs = Blog::all();
-        }
+//        if ($startDate && $endDate) {
+//            $blogs = Blog::whereBetween('last_updated', [date($startDate), date($endDate)])->get();
+            $blogs = Blog::where('archived', 0)->get();
+//        } else {
+//            $blogs = Blog::all();
+//        }
 
         $blogs->each(function ($blog) use ($rows, $filter) {
 
@@ -158,9 +159,9 @@ class BlogService
         return $data;
     }
 
-    public function findTextInOptions(string $searchText): void
+    public function findTextInOptions(string $searchText, bool $verbose): void
     {
-        (new OptionsSearcher())->run($searchText)->display();
+        (new OptionsSearcher())->run($searchText, $verbose)->display();
     }
 
     public function findTextInPosts(string $searchText): void

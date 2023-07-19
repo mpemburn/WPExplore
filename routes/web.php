@@ -56,11 +56,6 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
-//    $contents = Storage::disk('s3')->get('/dom29121/wp-content/sites/104/nggallery/coral-fungi/coral.jpg');
-    $contents = Storage::disk('s3')->allFiles('/dom29121/wp-content/uploads/sites/184/nggallery');
-
-    !d($contents);
-
     // Do what thou wilt
 });
 
@@ -160,8 +155,12 @@ Route::get('/shortcode', function () {
 Route::get('/in_options', function () {
     $database = $_REQUEST['db'] ?? null;
     $searchText = $_REQUEST['text'] ?? null;
+    $verbose = isset($_REQUEST['verbose']) ? true : false;
 
-    (new BlogService())->setDatabase($database)->findTextInOptions($searchText);
+    !d($verbose);
+
+    (new BlogService())->setDatabase($database)
+        ->findTextInOptions($searchText, $verbose);
 });
 
 Route::get('/in_post', function () {
@@ -205,12 +204,12 @@ Route::get('/gen_redirects', function () {
 
                 // Build the rule from the pattern used in the original
                 $rule = '
-                <rule name="faculty/facultybio.cfm?id=' . $id .'" stopProcessing="true">
+                <rule name="faculty/facultybio.cfm?id=' . $id . '" stopProcessing="true">
                     <match url="faculty/facultybio.cfm"/>
                     <conditions>
-                        <add input="{QUERY_STRING}" pattern="^([^&amp;]*&amp;)?id=' . $id .'(&amp;[^&amp;]*)?$"/>
+                        <add input="{QUERY_STRING}" pattern="^([^&amp;]*&amp;)?id=' . $id . '(&amp;[^&amp;]*)?$"/>
                     </conditions>
-                    <action type="Redirect" url="https://' . trim($url) .'"/>
+                    <action type="Redirect" url="https://' . trim($url) . '"/>
                 </rule>' . PHP_EOL;
 
                 // echo the rule so that it can be copied from the page source.
