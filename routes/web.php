@@ -21,7 +21,9 @@ use App\Services\BlogCrawlerService;
 use App\Services\BlogService;
 use App\Services\BugScanService;
 use App\Services\CloneService;
+use App\Services\ColdFusionLegacyAppService;
 use App\Services\DatabaseService;
+use App\Services\FileService;
 use App\Services\LogParserService;
 use App\Services\UrlService;
 use GuzzleHttp\Client;
@@ -56,6 +58,13 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
+    $fix = CfLegacyApp::where('web_root', 'like', '%.cfm');
+    $fix->each(function (CfLegacyApp $app) {
+        $app->update([
+            'web_root' => '/intranet_transfer/' . $app->web_root
+        ]);
+        !d($app->web_root);
+    });
     // Do what thou wilt
 });
 
