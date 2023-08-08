@@ -16,21 +16,22 @@ class ShortCodeSearcher extends BlogSearcher
         'Created',
     ];
 
-    function process(string $blogId, string $blogUrl): void
+    public function process(string $blogId, string $blogUrl): bool
     {
         if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
-            return;
+            return false;
         }
-
+        $foundSomething = false;
         $this->searchRegex ='/\[' . str_replace(['[', ']'], '', $this->searchText) . '/';
 
         $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
             ->where('post_status', 'publish')
             ->orderBy('ID');
 
-        $posts->each(function (Post $post) use ($blogUrl) {
+        $posts->each(function (Post $post) use ($blogUrl, &$foundSomething) {
             $found = preg_match($this->searchRegex, $post->post_content, $matches);
             if ($found) {
+                $foundSomething = true;
                 $this->found->push([
                     'blog_url' => $blogUrl,
                     'post_name' => $post->post_name,
@@ -40,9 +41,11 @@ class ShortCodeSearcher extends BlogSearcher
                 ]);
             }
         });
+
+        return $foundSomething;
     }
 
-    function display(): void
+    public function display(): void
     {
         $count = 0;
         echo '<div style="font-family: sans-serif">';
@@ -73,7 +76,7 @@ class ShortCodeSearcher extends BlogSearcher
         echo '<div>';
     }
 
-    function error(): void
+    protected function error(): void
     {
         echo 'No shortcode specified. Syntax: ' . URL::to('/shortcode') . '?text=';
     }

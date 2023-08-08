@@ -11,18 +11,22 @@ abstract class BlogSearcher
 {
 
     protected Collection $found;
+    protected Collection $notFound;
     protected string $searchText;
     protected string $searchRegex;
     protected bool $verbose;
     protected array $headers = [];
+    protected array $unique = [];
+    protected bool $shouldSearchField = false;
 
-    abstract function process(string $blogId, string $blogUrl): void;
-    abstract function display(): void;
-    abstract function error(): void;
+    abstract public function process(string $blogId, string $blogUrl): bool;
+    abstract public function display(): void;
+    abstract protected function error(): void;
 
     public function __construct()
     {
         $this->found = collect();
+        $this->notFound = collect();
     }
 
     public function run(?string $searchText, bool $verbose = false): self
@@ -35,15 +39,24 @@ abstract class BlogSearcher
 
         $this->verbose = $verbose;
 
-        $blogs = Blog::where('archived', 0);
+        $blogs = Blog::where('archived', 0)
+            ->where('deleted', 0)
+            ->where('public', 1);
 
         $this->searchText = $searchText;
 
         $blogs->each(function ($blog) use ($searchText) {
             $blogId = $blog->blog_id;
             $blogUrl = 'https://' . $blog->domain . $blog->path;
-            $this->process($blogId, $blogUrl);
+            $found = $this->process($blogId, $blogUrl);
         });
+
+        return $this;
+    }
+
+    public function searchFieldName(bool $shouldSearch): self
+    {
+        $this->shouldSearchField = $shouldSearch;
 
         return $this;
     }
@@ -63,7 +76,7 @@ abstract class BlogSearcher
 
     protected function truncateContent(string $content): string
     {
-        $length = $this->verbose ? null : 50;
+        $length = $this->verbose ? null : 100;
 
         $highlight = str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $content);
         $position = stripos($highlight, $this->searchText);

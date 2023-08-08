@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\URL;
 
 class OptionsSearcher extends BlogSearcher
 {
+    protected array $already = [];
     protected array $headers = [
         'Blog ID',
         'Blog URL',
@@ -15,21 +16,26 @@ class OptionsSearcher extends BlogSearcher
         'Value'
     ];
 
-    function process(string $blogId, string $blogUrl): void
+    public function process(string $blogId, string $blogUrl): bool
     {
         if (!Schema::hasTable('wp_' . $blogId . '_options')) {
-            return;
+            return false;
         }
-
+        $foundSomething = false;
         $this->searchRegex = '/' . $this->searchText . '/';
 
         $options = (new Option())->setTable('wp_' . $blogId . '_options')
             ->orderBy('option_id');
 
-        $options->each(function (Option $option) use ($blogId, $blogUrl) {
-            $foundContent = preg_match($this->searchRegex, $option->option_value, $matches);
+        $options->each(function (Option $option) use ($blogId, $blogUrl, &$foundSomething) {
+            if ($this->shouldSearchField) {
+                $foundContent = preg_match($this->searchRegex, $option->option_name, $matches);
+            } else {
+                $foundContent = preg_match($this->searchRegex, $option->option_value, $matches);
+            }
 
             if ($foundContent) {
+                $foundSomething = true;
                 $this->found->push([
                     'blog_id' => $blogId,
                     'blog_url' => $blogUrl,
@@ -38,15 +44,21 @@ class OptionsSearcher extends BlogSearcher
                 ]);
             }
         });
+
+        return $foundSomething;
     }
 
-    function display(): void
+    public function display(bool $showNotFound = false): void
     {
+        $found = $showNotFound ? $this->notFound : $this->found;
         $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
         echo $this->buildHeader();
-        $this->found->each(function ($item) use (&$count) {
+        $found->each(function ($item) use (&$count) {
+            if (in_array($item['blog_id'], $this->unique)) {
+                return;
+            }
             $url = $item['blog_url'];
             $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
             echo '   <tr style="background-color: ' . $bgColor . ';">';
@@ -65,13 +77,14 @@ class OptionsSearcher extends BlogSearcher
             echo '   </tr>';
 
             $count++;
+            $this->unique[] = $item['blog_id'];
         });
         echo '<table>';
         echo '<br><strong>Total Found: ' . $count . '</strong>';
         echo '<div>';
     }
 
-    function error(): void
+    protected function error(): void
     {
         echo 'No text specified. Syntax: ' . URL::to('/in_post') . '?text=';
     }

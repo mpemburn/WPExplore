@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
 use App\Services\Searchers\OptionsSearcher;
+use App\Services\Searchers\PostMetaSearcher;
 use App\Services\Searchers\PostsSearcher;
 use App\Services\Searchers\ShortCodeSearcher;
 use Illuminate\Support\Carbon;
@@ -34,6 +35,7 @@ class BlogService
 
     public function createActiveBlogsCsv(string $filename = 'active_blogs.csv')
     {
+        DatabaseService::setDb('wordpress_clarku');
         return (new BlogsCsvGenerator($filename))
             ->setData($this->getActiveBlogs())
             ->unsetColumns(self::UNSET_COLUMNS)
@@ -97,7 +99,10 @@ class BlogService
         $rows = collect();
 //        if ($startDate && $endDate) {
 //            $blogs = Blog::whereBetween('last_updated', [date($startDate), date($endDate)])->get();
-            $blogs = Blog::where('archived', 0)->get();
+            $blogs = Blog::where('archived', 0)
+                ->where('deleted', 0)
+                ->where('public', 1)
+                ->get();
 //        } else {
 //            $blogs = Blog::all();
 //        }
@@ -159,14 +164,27 @@ class BlogService
         return $data;
     }
 
-    public function findTextInOptions(string $searchText, bool $verbose): void
+    public function findTextInOptions(string $searchText, bool $searchInField = false, bool $verbose = false): void
     {
-        (new OptionsSearcher())->run($searchText, $verbose)->display();
+        (new OptionsSearcher())->searchFieldName($searchInField)
+            ->run($searchText, $verbose)
+            ->display();
     }
 
-    public function findTextInPosts(string $searchText): void
+    public function findTextInPosts(string $searchText, bool $verbose, bool $parse): void
     {
-        (new PostsSearcher())->run($searchText)->display();
+        $searcher = (new PostsSearcher())->run($searchText, $verbose);
+
+        if ($parse) {
+            $searcher->parse();
+        } else {
+            $searcher->display();
+        }
+    }
+
+    public function findTextInPostMeta(string $searchText, ?string $metaKey = null): void
+    {
+        (new PostMetaSearcher())->setMetaKey($metaKey)->run($searchText)->display();
     }
 
     public function findShortCodeInPosts(string $searchText): void

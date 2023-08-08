@@ -2,23 +2,22 @@
 
 namespace App\Services\Searchers;
 
-use App\Models\Option;
 use App\Models\Post;
-use Illuminate\Support\Carbon;
+use App\Models\PostMeta;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 
-class PostsSearcher extends BlogSearcher
+class PostMetaSearcher extends BlogSearcher
 {
     protected array $headers = [
         'Post ID',
         'Page',
-        'Title',
-        'Content',
-        'Created',
+        'Meta Key',
+        'Meta Value',
     ];
+    protected ?string $metaKey;
 
-    function process(string $blogId, string $blogUrl): bool
+    public function process(string $blogId, string $blogUrl): bool
     {
         if (! Schema::hasTable('wp_' . $blogId. '_posts')) {
             return false;
@@ -27,22 +26,26 @@ class PostsSearcher extends BlogSearcher
         $foundSomething = false;
         $this->searchRegex = '/' . $this->searchText . '/';
 
-        $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
-            ->where('post_status', 'publish')
-            ->orderBy('ID');
+        $postMetas = (new PostMeta())->setTable('wp_' . $blogId . '_postmeta')
+            ->orderBy('meta_id');
 
-        $posts->each(function (Post $post) use ($blogUrl, &$foundSomething) {
-            $foundContent = preg_match($this->searchRegex, $post->post_content, $matches);
-            $foundTitle = preg_match($this->searchRegex, $post->post_title, $matches);
-            if ($foundContent || $foundTitle) {
+        if ($this->metaKey) {
+            $postMetas->where('meta_key', $this->metaKey);
+        }
+
+        $postMetas->each(function (PostMeta $postMeta) use ($blogId, $blogUrl, &$foundSomething) {
+            if ($this->isNotPublished($blogId, $postMeta->post_id)) {
+                return;
+            }
+            $foundValue = preg_match($this->searchRegex, $postMeta->meta_value, $matches);
+            if ($foundValue) {
                 $foundSomething = true;
                 $this->found->push([
                     'blog_url' => $blogUrl,
-                    'post_id' => $post->ID,
-                    'post_name' => $post->post_name,
-                    'title' => $post->post_title,
-                    'date' => $post->post_date,
-                    'content' => trim($post->post_content),
+                    'post_id' => $postMeta->post_id,
+                    'post_name' => $this->getPageName($blogId, $postMeta->post_id),
+                    'meta_key' => $postMeta->meta_key,
+                    'meta_value' => $postMeta->meta_value,
                 ]);
             }
         });
@@ -50,30 +53,53 @@ class PostsSearcher extends BlogSearcher
         return $foundSomething;
     }
 
-    function display(): void
+    public function setMetaKey(?string $metaKey = null): self
+    {
+        $this->metaKey = $metaKey;
+
+        return $this;
+    }
+
+    protected function isNotPublished($blogId, $postId): bool
+    {
+        $post = (new Post())->setTable('wp_' . $blogId . '_posts')
+            ->where('ID', $postId)
+            ->where('post_status', 'publish')
+            ->first();
+
+        return (bool)$post;
+    }
+
+    protected function getPageName($blogId, $postId): string
+    {
+        $post = (new Post())->setTable('wp_' . $blogId . '_posts')
+            ->where('ID', $postId)
+            ->first();
+
+        return $post->post_name;
+    }
+
+    public function display(): void
     {
         $count = 0;
         echo '<div style="font-family: sans-serif">';
         echo '<table>';
         echo $this->buildHeader();
-        $this->found->each(function ($page) use (&$count) {
-            $url = $page['blog_url'] . $page['post_name'];
+        $this->found->each(function ($postMeta) use (&$count) {
+            $url = $postMeta['blog_url'] . $postMeta['post_name'];
             $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
             echo '   <tr style="background-color: ' . $bgColor . ';">';
             echo '      <td>';
-            echo $page['post_id'];
+            echo $postMeta['post_id'];
             echo '      </td>';
             echo '      <td>';
             echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
             echo '      </td>';
             echo '      <td>';
-            echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $page['title']);
+            echo $postMeta['meta_key'];
             echo '      </td>';
             echo '      <td>';
-            echo $this->truncateContent($page['content']);
-            echo '      </td>';
-            echo '      <td>';
-            echo Carbon::parse($page['date'])->format('F j, Y');
+            echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $postMeta['meta_value']);
             echo '      </td>';
             echo '   </tr>';
 
@@ -84,7 +110,7 @@ class PostsSearcher extends BlogSearcher
         echo '<div>';
     }
 
-    function error(): void
+    protected function error(): void
     {
         echo 'No search text specified. Syntax: ' . URL::to('/in_post') . '?text=';
     }

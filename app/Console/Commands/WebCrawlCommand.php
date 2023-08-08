@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 class WebCrawlCommand extends Command
 {
     protected $signature = 'web:crawl {--url=} {--find=} {--resume=}';
-    public function handle()
+    public function handle(): int
     {
         $url = $this->option('url');
         $find = $this->option('find');

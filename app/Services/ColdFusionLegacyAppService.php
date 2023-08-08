@@ -23,7 +23,7 @@ class ColdFusionLegacyAppService
         });
     }
 
-    protected function testUrl(string $url): string
+    public function testUrl(string $url): string
     {
         try {
 

@@ -58,13 +58,18 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
-    $fix = CfLegacyApp::where('web_root', 'like', '%.cfm');
-    $fix->each(function (CfLegacyApp $app) {
-        $app->update([
-            'web_root' => '/intranet_transfer/' . $app->web_root
-        ]);
-        !d($app->web_root);
-    });
+    $file = Storage::path('blogs.csv');
+    $csv = FileService::toMap($file, ['blog_id', 'url']);
+//    $csv = ->map(function ($row) {
+//        return ['blog_id' => $row[0], 'url' => $row[1]];
+//    });
+
+    !d($csv);
+//    DatabaseService::setDb('wordpress_clarku');
+//
+//    (new BlogService())->getActiveBlogs()->each(function ($blog) {
+//        echo $blog['blog_id'] . ',' . $blog['siteurl'] . '<br>';
+//    });
     // Do what thou wilt
 });
 
@@ -103,57 +108,6 @@ Route::get('/load_blogs', function () {
 
 });
 
-Route::get('/func', function () {
-    class Update
-    {
-        protected $versions = [
-            '20140709',
-            '20160831',
-            '20170510',
-            '20170511',
-            '20170711',
-            '20171023',
-            '20171215',
-            '20171219',
-            '20190227',
-            '20200331',
-            '20201217',
-            '20210624',
-            '20210924',
-            '20220222',
-            '20220426',
-            '20220506',
-            '20220818',
-            '20221101',
-        ];
-
-        public function __construct()
-        {
-            $needs_updating = false;
-            $auth_version = '20220426';
-
-            foreach ($this->versions as $version) {
-                if (false === $auth_version || intval($auth_version) < $version) {
-                    if (method_exists($this, 'update_' . $version)) {
-                        $auth_version = call_user_func_array([$this, 'update_' . $version], [$auth_version, $version]);
-                        $needs_updating = true;
-                    }
-                }
-            }
-        }
-
-        protected function update_20221101($auth_version, $version)
-        {
-            echo 'Hi! ' . $auth_version . '<br>';
-            echo 'Yo! ' . $version . '<br>';
-
-            return $version;
-        }
-    }
-
-    new Update();
-});
-
 Route::get('/shortcode', function () {
     $database = $_REQUEST['db'] ?? null;
     $searchText = $_REQUEST['text'] ?? null;
@@ -164,19 +118,29 @@ Route::get('/shortcode', function () {
 Route::get('/in_options', function () {
     $database = $_REQUEST['db'] ?? null;
     $searchText = $_REQUEST['text'] ?? null;
+    $searchInField = isset($_REQUEST['field']) ? true : false;
     $verbose = isset($_REQUEST['verbose']) ? true : false;
 
-    !d($verbose);
-
     (new BlogService())->setDatabase($database)
-        ->findTextInOptions($searchText, $verbose);
+        ->findTextInOptions($searchText, $searchInField, $verbose);
 });
 
 Route::get('/in_post', function () {
     $database = $_REQUEST['db'] ?? null;
     $searchText = $_REQUEST['text'] ?? null;
+    $verbose = isset($_REQUEST['verbose']) ? true : false;
+    $parse = isset($_REQUEST['parse']) ? true : false;
 
-    (new BlogService())->setDatabase($database)->findTextInPosts($searchText);
+    (new BlogService())->setDatabase($database)->findTextInPosts($searchText, $verbose, $parse);
+});
+
+Route::get('/in_postmeta', function () {
+    $database = $_REQUEST['db'] ?? null;
+    $searchText = $_REQUEST['text'] ?? null;
+    $metaKey = $_REQUEST['key'] ?? null;
+
+    (new BlogService())->setDatabase($database)
+        ->findTextInPostMeta($searchText, $metaKey);
 });
 
 Route::get('/csv/cfapps', function () {
