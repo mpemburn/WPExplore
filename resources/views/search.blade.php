@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
-    <script
-        src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-        crossorigin="anonymous"></script>
-    @vite('resources/js/app.js')
-</head>
-<body class="antialiased bg-gray-100">
-<div class="m-4">
-
+@extends('layouts.app')
+@section('content')
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
             <h2>WP Explorer</h2>
@@ -56,15 +29,15 @@
                             </select>
                         </label>
                         <input type="text" name="text" placeholder="Enter search term">
-                        <button id="search_btn" class="btn btn-primary btn-sm" style="position: relative; top: -2px;" disabled>Search</button>
-                        <img id="loading" class="d-none" src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="" width="24" height="24">                </div>
+                        <button id="search_btn" class="btn btn-primary btn-sm" disabled>Search</button>
+                        <img id="loading" class="d-none"
+                             src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="" width="24"
+                             height="24">
                     </form>
-                <div id="found"></div>
-                <div id="results"></div>
+                    <div id="found"></div>
+                    <div id="results"></div>
+                </div>
             </div>
         </div>
-
     </div>
-</div>
-</body>
-</html>
+@endsection
