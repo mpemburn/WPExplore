@@ -6,11 +6,11 @@ use App\Models\Option;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 
-class OptionsSearcher extends BlogSearcher
+class OptionNameSearcher extends BlogSearcher
 {
     protected array $already = [];
     protected array $headers = [
-        'Blog ID',
+        'Blog&nbsp;ID',
         'Blog URL',
         'Option',
         'Value'
@@ -27,7 +27,7 @@ class OptionsSearcher extends BlogSearcher
             ->orderBy('option_id');
 
         $options->each(function (Option $option) use ($blogId, $blogUrl, &$foundSomething) {
-            $foundContent = preg_match($this->searchRegex, $option->option_value, $matches);
+            $foundContent = preg_match($this->searchRegex, $option->option_name, $matches);
 
             if ($foundContent) {
                 $foundSomething = true;
@@ -69,7 +69,7 @@ class OptionsSearcher extends BlogSearcher
             $html .= $item['option_name'];
             $html .= '      </td>';
             $html .= '      <td>';
-            $html .= $this->truncateContent($item['option_value']);
+            $html .= strip_tags($item['option_value']);
             $html .= '      </td>';
             $html .= '   </tr>';
 

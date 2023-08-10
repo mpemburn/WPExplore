@@ -45,35 +45,38 @@ class ShortCodeSearcher extends BlogSearcher
         return $foundSomething;
     }
 
-    public function display(): void
+    public function render(): string
     {
-        $count = 0;
-        echo '<div style="font-family: sans-serif">';
-        echo '<table>';
-        echo $this->buildHeader();
-        $this->found->each(function ($page) use (&$count) {
-            $url = $page['blog_url'] . $page['post_name'];
-            $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
-            echo '   <tr style="background-color: ' . $bgColor . ';">';
-            echo '      <td>';
-            echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
-            echo '      </td>';
-            echo '      <td>';
-            echo $page['title'];
-            echo '      </td>';
-            echo '      <td>';
-            echo $this->truncateContent($page['content']);
-            echo '      </td>';
-            echo '      <td>';
-            echo Carbon::parse($page['date'])->format('F j, Y');
-            echo '      </td>';
-            echo '   </tr>';
+        $html = '';
 
-            $count++;
+        $this->foundCount = 0;
+        $html .= '<div style="font-family: sans-serif">';
+        $html .= '<table>';
+        $html .= $this->buildHeader();
+        $this->found->each(function ($page) use (&$html) {
+            $url = $page['blog_url'] . $page['post_name'];
+            $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
+            $html .= '   <tr style="background-color: ' . $bgColor . ';">';
+            $html .= '      <td>';
+            $html .= '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= $page['title'];
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= $this->truncateContent(strip_tags($page['content']));
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= Carbon::parse($page['date'])->format('F j, Y');
+            $html .= '      </td>';
+            $html .= '   </tr>';
+
+            $this->foundCount++;
         });
-        echo '<table>';
-        echo '<br><strong>Total Found: ' . $count . '</strong>';
-        echo '<div>';
+        $html .= '<table>';
+        $html .= '<div>';
+
+        return $html;
     }
 
     protected function error(): void

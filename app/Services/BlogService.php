@@ -164,34 +164,6 @@ class BlogService
         return $data;
     }
 
-    public function findTextInOptions(string $searchText, bool $searchInField = false, bool $verbose = false): void
-    {
-        (new OptionsSearcher())->searchFieldName($searchInField)
-            ->run($searchText, $verbose)
-            ->display();
-    }
-
-    public function findTextInPosts(string $searchText, bool $verbose, bool $parse): void
-    {
-        $searcher = (new PostsSearcher())->run($searchText, $verbose);
-
-        if ($parse) {
-            $searcher->parse();
-        } else {
-            $searcher->display();
-        }
-    }
-
-    public function findTextInPostMeta(string $searchText, ?string $metaKey = null): void
-    {
-        (new PostMetaSearcher())->setMetaKey($metaKey)->run($searchText)->display();
-    }
-
-    public function findShortCodeInPosts(string $searchText): void
-    {
-        (new ShortCodeSearcher())->run($searchText)->display();
-    }
-
     public function getStaleBlogs(): Collection
     {
         $rows = collect();

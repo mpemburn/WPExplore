@@ -24,7 +24,6 @@ class PostMetaSearcher extends BlogSearcher
         }
 
         $foundSomething = false;
-        $this->searchRegex = '/' . $this->searchText . '/';
 
         $postMetas = (new PostMeta())->setTable('wp_' . $blogId . '_postmeta')
             ->orderBy('meta_id');
@@ -79,35 +78,38 @@ class PostMetaSearcher extends BlogSearcher
         return $post->post_name;
     }
 
-    public function display(): void
+    public function render(): string
     {
-        $count = 0;
-        echo '<div style="font-family: sans-serif">';
-        echo '<table>';
-        echo $this->buildHeader();
-        $this->found->each(function ($postMeta) use (&$count) {
-            $url = $postMeta['blog_url'] . $postMeta['post_name'];
-            $bgColor = ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
-            echo '   <tr style="background-color: ' . $bgColor . ';">';
-            echo '      <td>';
-            echo $postMeta['post_id'];
-            echo '      </td>';
-            echo '      <td>';
-            echo '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
-            echo '      </td>';
-            echo '      <td>';
-            echo $postMeta['meta_key'];
-            echo '      </td>';
-            echo '      <td>';
-            echo str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $postMeta['meta_value']);
-            echo '      </td>';
-            echo '   </tr>';
+        $html = '';
 
-            $count++;
+        $this->foundCount = 0;
+        $html .= '<div style="font-family: sans-serif">';
+        $html .= '<table>';
+        $html .= $this->buildHeader();
+        $this->found->each(function ($postMeta) use (&$html) {
+            $url = $postMeta['blog_url'] . $postMeta['post_name'];
+            $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
+            $html .= '   <tr style="background-color: ' . $bgColor . ';">';
+            $html .= '      <td>';
+            $html .= $postMeta['post_id'];
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= $postMeta['meta_key'];
+            $html .= '      </td>';
+            $html .= '      <td>';
+            $html .= str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $postMeta['meta_value']);
+            $html .= '      </td>';
+            $html .= '   </tr>';
+
+            $this->foundCount++;
         });
-        echo '<table>';
-        echo '<br><strong>Total Found: ' . $count . '</strong>';
-        echo '<div>';
+        $html .= '<table>';
+        $html .= '<div>';
+
+        return $html;
     }
 
     protected function error(): void

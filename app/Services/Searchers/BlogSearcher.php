@@ -2,25 +2,26 @@
 
 namespace App\Services\Searchers;
 
+use App\Interfaces\SearcherInterface;
 use App\Models\Blog;
 use App\Models\Option;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 
-abstract class BlogSearcher
+abstract class BlogSearcher implements SearcherInterface
 {
 
     protected Collection $found;
     protected Collection $notFound;
+    protected int $foundCount = 0;
     protected string $searchText;
     protected string $searchRegex;
     protected bool $verbose;
     protected array $headers = [];
     protected array $unique = [];
-    protected bool $shouldSearchField = false;
 
     abstract public function process(string $blogId, string $blogUrl): bool;
-    abstract public function display(): void;
+    abstract public function render(): string;
     abstract protected function error(): void;
 
     public function __construct()
@@ -44,19 +45,13 @@ abstract class BlogSearcher
             ->where('public', 1);
 
         $this->searchText = $searchText;
+        $this->searchRegex = '/' . str_replace('/', '\/', $this->searchText) . '/';
 
         $blogs->each(function ($blog) use ($searchText) {
             $blogId = $blog->blog_id;
             $blogUrl = 'https://' . $blog->domain . $blog->path;
             $found = $this->process($blogId, $blogUrl);
         });
-
-        return $this;
-    }
-
-    public function searchFieldName(bool $shouldSearch): self
-    {
-        $this->shouldSearchField = $shouldSearch;
 
         return $this;
     }
@@ -88,4 +83,8 @@ abstract class BlogSearcher
         return $prellipsis . substr($highlight, $start, $length) . $postellipsis;
     }
 
+    public function getCount(): int
+    {
+        return $this->foundCount;
+    }
 }

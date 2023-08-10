@@ -58,22 +58,13 @@ use Smalot\PdfParser\Parser;
 |
 */
 Route::get('/dev', function () {
-    $file = Storage::path('blogs.csv');
-    $csv = FileService::toMap($file, ['blog_id', 'url']);
-//    $csv = ->map(function ($row) {
-//        return ['blog_id' => $row[0], 'url' => $row[1]];
-//    });
-
-    !d($csv);
-//    DatabaseService::setDb('wordpress_clarku');
-//
-//    (new BlogService())->getActiveBlogs()->each(function ($blog) {
-//        echo $blog['blog_id'] . ',' . $blog['siteurl'] . '<br>';
-//    });
     // Do what thou wilt
 });
 
 Route::get('/', fn() => view('welcome'));
+
+Route::get('/search', 'App\Http\Controllers\SearchController@search');
+Route::post('/do_search', 'App\Http\Controllers\SearchController@index');
 
 Route::get('/csv/active', fn() => (new BlogService())->createActiveBlogsCsv());
 
@@ -106,41 +97,6 @@ Route::get('/load_blogs', function () {
     });
 
 
-});
-
-Route::get('/shortcode', function () {
-    $database = $_REQUEST['db'] ?? null;
-    $searchText = $_REQUEST['text'] ?? null;
-
-    (new BlogService())->setDatabase($database)->findShortCodeInPosts($searchText);
-});
-
-Route::get('/in_options', function () {
-    $database = $_REQUEST['db'] ?? null;
-    $searchText = $_REQUEST['text'] ?? null;
-    $searchInField = isset($_REQUEST['field']) ? true : false;
-    $verbose = isset($_REQUEST['verbose']) ? true : false;
-
-    (new BlogService())->setDatabase($database)
-        ->findTextInOptions($searchText, $searchInField, $verbose);
-});
-
-Route::get('/in_post', function () {
-    $database = $_REQUEST['db'] ?? null;
-    $searchText = $_REQUEST['text'] ?? null;
-    $verbose = isset($_REQUEST['verbose']) ? true : false;
-    $parse = isset($_REQUEST['parse']) ? true : false;
-
-    (new BlogService())->setDatabase($database)->findTextInPosts($searchText, $verbose, $parse);
-});
-
-Route::get('/in_postmeta', function () {
-    $database = $_REQUEST['db'] ?? null;
-    $searchText = $_REQUEST['text'] ?? null;
-    $metaKey = $_REQUEST['key'] ?? null;
-
-    (new BlogService())->setDatabase($database)
-        ->findTextInPostMeta($searchText, $metaKey);
 });
 
 Route::get('/csv/cfapps', function () {
