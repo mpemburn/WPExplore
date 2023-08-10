@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Laravel</title>
+    <title>WP Explore</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="m-4">
+    <nav class="fixed-top mb-4 pt-4 pb-2 ps-3 bg-white shadow">
+        <h4>WP Explore</h4>
+        <a href="{{route('dashboard')}}">Dashboard</a>
+        <a href="{{route('search')}}">Searches</a>
+    </nav>
+    <div class="content position-relative">
         @yield('content')
     </div>
 </body>

@@ -69,9 +69,9 @@ Route::get('/dev', function () {
     // Do what thou wilt
 });
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn() => view('dashboard'))->name('dashboard');
 
-Route::get('/search', 'App\Http\Controllers\SearchController@search');
+Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search');
 Route::post('/do_search', 'App\Http\Controllers\SearchController@index');
 
 Route::get('/csv/active', fn() => (new BlogService())->createActiveBlogsCsv());

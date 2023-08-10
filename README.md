@@ -24,7 +24,7 @@ Change to the `WPExplore` directory and run:
 
 ...to install modules needed to compile the JavaScript and CSS assets.
 
-`npm run dev`
+`npm run build`
 
 ...to do the asset compiling.
 
