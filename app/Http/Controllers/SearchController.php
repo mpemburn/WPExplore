@@ -10,7 +10,18 @@ class SearchController extends Controller
 {
     public function search()
     {
-        return view('search', ['databases' => config('wpexplore.databases')]);
+        if (! env('INSTALLED_DATABASES')) {
+            return;
+        }
+
+        $databases = [];
+        collect(explode(',', env('INSTALLED_DATABASES')))
+            ->each(function ($db) use (&$databases) {
+                $parts = explode(':', $db);
+                $databases[$parts[0]] = $parts[1];
+            });
+
+        return view('search', ['databases' => $databases]);
     }
 
     public function index(Request $request)

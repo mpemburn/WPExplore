@@ -12,13 +12,13 @@
                         <h4>Searches:</h4>
                     </div>
                     <form id="search_form">
-                        <label for="type">Search type:
+                        <label for="type">Search in:
                             <select name="type">
-                                <option value="posts">In Posts</option>
-                                <option value="postmeta">In Postmeta</option>
-                                <option value="options">In Options</option>
-                                <option value="option_name">Option Name</option>
-                                <option value="shortcodes">Shortcodes</option>
+                                <option value="posts">Posts</option>
+                                <option value="postmeta">Postmeta</option>
+                                <option value="options">Option Values</option>
+                                <option value="option_name">Option Names</option>
+                                <option value="shortcodes">Shortcodes in Posts</option>
                             </select>
                         </label>
                         <label for="database">Database:
