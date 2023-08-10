@@ -45,7 +45,7 @@ This will launch a server on `http://127.0.0.1:8000`
 * Postmeta
 * Option Values
 * Option Names
-* Shorcodes in Posts
+* Shortcodes in Posts
 
 In order to use this feature, you must have at least one WordPress database installed locally.
 The database(s) need to be defined in your `.env` file as follows:

@@ -36,7 +36,9 @@ $(document).ready(function ($) {
                     success: function (data) {
                         self.loading.addClass('d-none');
                         self.found.html('<strong>Total Found: ' + data.found + '</strong>');
-                        self.results.html(data.html);
+                        if (data.found > 0) {
+                            self.results.html(data.html);
+                        }
                         console.log(data);
                     },
                     error: function (msg) {
