@@ -28,6 +28,8 @@ Change to the `WPExplore` directory and run:
 
 ...to do the asset compiling.
 
+Copy `.env.example` to `.env` and make all necessary changes.
+
 You will need to run a web server to run **WP Explore** in a browser.
 I recommend [**Laravel Valet**](https://laravel.com/docs/10.x/valet), but you can do it simply by going to the project
 directory and running:
