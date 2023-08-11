@@ -20,4 +20,20 @@ class DatabaseService
             'database' => $dbName,
         ]);
     }
+
+    public static function getDatabaseList(): array
+    {
+        if (! env('INSTALLED_DATABASES')) {
+            return [];
+        }
+
+        $databases = [];
+        collect(explode(',', env('INSTALLED_DATABASES')))
+            ->each(function ($db) use (&$databases) {
+                $parts = explode(':', $db);
+                $databases[$parts[0]] = $parts[1];
+            });
+
+        return $databases;
+    }
 }

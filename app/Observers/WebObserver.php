@@ -82,7 +82,7 @@ class WebObserver extends CrawlObserver
         ?UriInterface    $foundOnUrl = null
     ): void
     {
-        //echo 'crawlFailed: ' . $url . PHP_EOL;
+        echo 'crawlFailed: ' . $url . PHP_EOL;
     }
 
     /**

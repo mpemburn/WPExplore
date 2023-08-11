@@ -22,11 +22,7 @@ $(document).ready(function ($) {
                 self.found.html('');
                 self.results.html('');
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+                self.ajaxSetup()
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
@@ -53,6 +49,14 @@ $(document).ready(function ($) {
                 self.searchButton.prop('disabled', ! hasText);
             });
         }
+        ajaxSetup() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        }
+
     }
 
     new Searcher();

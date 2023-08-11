@@ -83,6 +83,21 @@ class BlogCrawlerService
      * Crawl the website content.
      * @return true
      */
+    public function fetchContent(int $blogId, string $url, bool $echo = false) {
+        $options = [RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30];
+        // Get HTTP Basic Auth username and password if available
+        $options = $this->linkFinder->getAuth($options);
+
+        //# initiate crawler
+        Crawler::create($options)
+            ->acceptNofollowLinks()
+            ->ignoreRobots()
+            ->setCrawlObserver(new BlogObserver($blogId, $this->observerAction))
+            ->setMaximumResponseSize(1024 * 1024 * 2) // 2 MB maximum
+            ->setDelayBetweenRequests(500)
+            ->startCrawling($url);
+        return true;
+    }
 
     public function run()
     {

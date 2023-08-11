@@ -18,12 +18,6 @@ use Illuminate\Support\Facades\Schema;
 
 class BlogService
 {
-    protected const UNSET_COLUMNS = [
-        'active_plugins',
-        'current_theme',
-        'template'
-    ];
-
     public function setDatabase(?string $database): self
     {
         if ($database) {
@@ -33,66 +27,6 @@ class BlogService
         return $this;
     }
 
-    public function createActiveBlogsCsv(string $filename = 'active_blogs.csv')
-    {
-        DatabaseService::setDb('wordpress_clarku');
-        return (new BlogsCsvGenerator($filename))
-            ->setData($this->getActiveBlogs())
-            ->unsetColumns(self::UNSET_COLUMNS)
-            ->run();
-    }
-
-    public function createStaleBlogsCsv(string $filename = 'stale_blogs.csv')
-    {
-        return (new BlogsCsvGenerator($filename))
-            ->setData($this->getStaleBlogs())
-            ->unsetColumns(self::UNSET_COLUMNS)
-            ->run();
-    }
-
-    public function createMatBlogsCsv(string $filename = 'mat_blogs.csv')
-    {
-        return (new BlogsCsvGenerator($filename))
-            ->setData($this->getActiveBlogs(['/mat']))
-            ->unsetColumns(self::UNSET_COLUMNS)
-            ->run();
-    }
-
-    public function createBlogsInDateRangeCsv(
-        string $startDate = null,
-        string $endDate = null
-    )
-    {
-        if (! $startDate && ! $endDate) {
-            return null;
-        }
-
-        $filename = "active_blogs_from_{$startDate}_to_{$endDate}.csv";
-
-        $blogs = $this->getFormattedBlogs($startDate, $endDate);
-
-        return (new BlogsInDateRangeCsvGenerator($filename))
-            ->setData($blogs->sortBy('last_updated'))
-            ->run();
-    }
-
-    public function createMatBlogsInDateRangeCsv(
-        string $startDate = null,
-        string $endDate = null
-    )
-    {
-        if (! $startDate && ! $endDate) {
-            return null;
-        }
-
-        $filename = "mat_blogs_from_{$startDate}_to_{$endDate}.csv";
-
-        $blogs = $this->getFormattedBlogs($startDate, $endDate);
-
-        return (new BlogsInDateRangeCsvGenerator($filename))
-            ->setData($blogs->sortBy('last_updated'))
-            ->run();
-    }
 
     public function getActiveBlogs(array $filter = [], ?string $startDate = null, ?string $endDate = null): Collection
     {

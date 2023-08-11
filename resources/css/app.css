@@ -1,6 +1,10 @@
-#search_btn {
+#search_btn, #download_btn {
     position: relative;
     top: -1px;
+}
+
+#date_range {
+    display: none;
 }
 
 div.content {

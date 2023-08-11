@@ -10,16 +10,7 @@ class SearchController extends Controller
 {
     public function search()
     {
-        if (! env('INSTALLED_DATABASES')) {
-            return;
-        }
-
-        $databases = [];
-        collect(explode(',', env('INSTALLED_DATABASES')))
-            ->each(function ($db) use (&$databases) {
-                $parts = explode(':', $db);
-                $databases[$parts[0]] = $parts[1];
-            });
+        $databases = DatabaseService::getDatabaseList();
 
         return view('search', ['databases' => $databases]);
     }
