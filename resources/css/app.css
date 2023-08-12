@@ -7,6 +7,11 @@
     display: none;
 }
 
+#error {
+    font-size: 10pt;
+    color: red;
+}
+
 div.content {
     top: 4.5rem;
     margin: 2rem;

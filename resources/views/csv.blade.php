@@ -29,14 +29,13 @@
                             <input type="date" name="start_date">
 
                             <label for="end_date">Ending:</label>
-                            <input type="date" name="end_date" value="08/10/2023">
+                            <input type="date" name="end_date">
 
                         </span>
                         <input type="hidden" name="today_date" value="{{ $todayDate }}">
                         <button id="download_btn" class="btn btn-primary btn-sm">Download</button>
                     </form>
-                    <div id="found"></div>
-                    <div id="results"></div>
+                    <div id="error"></div>
                 </div>
             </div>
         </div>

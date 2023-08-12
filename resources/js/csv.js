@@ -7,7 +7,9 @@ $(document).ready(function ($) {
             this.dateRange = $('#date_range');
             this.startDate = $('input[name="start_date"]')
             this.endDate = $('input[name="end_date"]')
-            this.useDateRange = false;
+            this.error = $('#error');
+            this.errorMessage = '';
+            this.emptyFields = [];
 
             this.setEndDate();
             this.addListeners();
@@ -82,27 +84,30 @@ $(document).ready(function ($) {
                     }
                 });
             });
-
-            this.download.on('keyup', function (evt) {
-                let hasText = $(this).val() !== '';
-                self.downloadButton.prop('disabled', ! hasText);
-            });
         }
 
         isValidInput() {
-            let inputs = [
-                'csv_type',
-                'database',
-                'start_date',
-                'end_date'
-            ];
+            let self = this;
 
-            inputs.forEach(selector => {
-                let label = $('label[for="' + selector + '"]');
-                console.log(label.html());
+            this.emptyFields = [];
+            $('input, select').each(function () {
+                let isVisible = $(this).is(":visible");
+                let name = $(this).attr('name');
+                let value = $(this).val();
+                let label = $('label[for="' + name + '"]').html();
+                if (isVisible && value === '') {
+                    self.emptyFields.push(label.replace(':', ''));
+                }
             });
 
-            return false;
+            if (this.emptyFields.length > 0 ) {
+                this.errorMessage = 'These fields cannot be empty: ' + this.emptyFields.join(', ');
+                this.error.html(this.errorMessage);
+
+                return false;
+            }
+
+            return true;
         }
 
         setHeaders() {
