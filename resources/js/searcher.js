@@ -56,7 +56,6 @@ $(document).ready(function ($) {
                 }
             });
         }
-
     }
 
     new Searcher();

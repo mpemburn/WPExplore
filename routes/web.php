@@ -37,7 +37,8 @@ Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('sea
 Route::post('/do_search', 'App\Http\Controllers\SearchController@index');
 
 Route::get('/csv', 'App\Http\Controllers\CsvController@index')->name('csv');
-Route::get('/min_date', 'App\Http\Controllers\CsvController@getMinDate')->name('min_date');
+Route::get('/min_date', 'App\Http\Controllers\CsvController@getMinDate')->name('csv_min_date');
+Route::post('/do_download', 'App\Http\Controllers\CsvController@download')->name('csv_download');
 
 Route::get('/load_blogs', function () {
     $currentSite = request('site');

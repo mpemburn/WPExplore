@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Generators\BlogsCsvGenerator;
 use App\Generators\BlogsInDateRangeCsvGenerator;
+use Illuminate\Http\Request;
 
 class CsvService
 {
     public const AVAILABLE_CSV_TYPES = [
-        'All Active Blogs' => 'createActiveBlogsCsv',
-        'All Stale Blogs' => 'createStaleBlogsCsv',
-        'All Active Blogs in Date Range' => 'createBlogsInDateRangeCsv',
+        'All Active Blogs' => 'active_blogs',
+        'All Stale Blogs' => 'stale_blogs',
+        'All Active Blogs in Date Range' => 'active_blogs_in_date_range',
     ];
 
     protected const UNSET_COLUMNS = [
@@ -24,6 +25,19 @@ class CsvService
     public function __construct(BlogService $blogService)
     {
         $this->blogService = $blogService;
+    }
+
+    public function callCsvMethod(string $type, Request $request): string
+    {
+        switch ($type) {
+            case 'active_blogs':
+                break;
+            case 'stale_blogs':
+                break;
+            case 'active_blogs_in_date_range':
+                break;
+
+        }
     }
 
     public function createActiveBlogsCsv(string $filename = 'active_blogs.csv')
@@ -68,5 +82,8 @@ class CsvService
             ->run();
     }
 
+    protected function makeFilenameFromDates()
+    {
 
+    }
 }

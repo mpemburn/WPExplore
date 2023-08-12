@@ -36,7 +36,11 @@ class CsvController extends Controller
             $minDate = Carbon::parse($last)->format('Y-m-d');
         }
 
-
         return response()->json(['minDate' => $minDate]);
+    }
+
+    public function download()
+    {
+        return response()->json(['success' => true]);
     }
 }

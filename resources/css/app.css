@@ -1,3 +1,8 @@
+a.nav-item {
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
 #search_btn, #download_btn {
     position: relative;
     top: -1px;
