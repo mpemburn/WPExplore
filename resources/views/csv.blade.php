@@ -33,9 +33,10 @@
 
                         </span>
                         <label for="filename">Filename:</label>
-                        <input type="text" name="filename">
+                        <input type="text" name="filename" placeholder="Leave blank for default">
 
                         <input type="hidden" name="today_date" value="{{ $todayDate }}">
+                        <input type="hidden" name="filename_default" value="">
                         <button id="download_btn" class="btn btn-primary btn-sm">Download</button>
                     </form>
                     <div id="error"></div>

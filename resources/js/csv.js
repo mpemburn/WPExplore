@@ -9,6 +9,7 @@ $(document).ready(function ($) {
             this.startDate = $('input[name="start_date"]')
             this.endDate = $('input[name="end_date"]')
             this.filename = $('input[name="filename"]')
+            this.filenameDefault = $('input[name="filename_default"]')
             this.error = $('#error');
             this.errorMessage = '';
             this.emptyFields = [];
@@ -30,6 +31,7 @@ $(document).ready(function ($) {
                     if (data.minDate) {
                         self.startDate.val(data.minDate);
                         self.isValidInput();
+                        self.setFileName();
                     }
                     console.log(data);
                 },
@@ -42,6 +44,25 @@ $(document).ready(function ($) {
         setEndDate() {
             let todayDate = $('input[name="today_date"]').val();
             this.endDate.val(todayDate);
+        }
+
+        setFileName() {
+            let filename = '';
+            let useDateRange = this.dateRange.is(':visible');
+            let dbName =  $('#database option:selected').text();
+            let typeName = useDateRange ? 'blogs_from_' : this.csvType.val();
+            let startDate = this.startDate.val();
+            let endDate = this.endDate.val();
+
+            if (dbName !== 'Select' && typeName !== '') {
+                filename = dbName.replace(/\./g, '_') + '_' + typeName;
+            }
+
+            if (useDateRange) {
+                filename += startDate + '_to_' + endDate;
+            }
+
+            this.filenameDefault.val(filename);
         }
 
         addListeners() {
@@ -66,6 +87,15 @@ $(document).ready(function ($) {
                     self.dateRange.show();
                     self.useDateRange = true;
                 }
+                self.setFileName();
+            });
+
+            this.startDate.on('change', function () {
+                self.setFileName();
+            });
+
+            this.endDate.on('change', function () {
+                self.setFileName();
             });
 
             this.downloadButton.on('click', function (evt) {
