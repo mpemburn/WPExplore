@@ -1,5 +1,6 @@
 <?php
 
+use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\CfLegacyApp;
@@ -7,6 +8,7 @@ use App\Observers\BlogObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
 use App\Services\BlogService;
+use App\Services\CsvService;
 use App\Services\DatabaseService;
 use App\Services\LogParserService;
 use GuzzleHttp\Client;
@@ -28,6 +30,18 @@ use Spatie\Crawler\Crawler;
 |
 */
 Route::get('/dev', function () {
+    DatabaseService::setDb( 'www_clarku');
+    $service = new BlogService();
+    $data = (new BlogsCsvGenerator('my_csv'))
+        ->setData($service->getActiveBlogs())
+        ->unsetColumns(CsvService::UNSET_COLUMNS)
+        ->toString();
+    echo $data;
+    // Do what thou wilt
+});
+
+Route::get('/portal', function () {
+    return view('portal');
     // Do what thou wilt
 });
 

@@ -25,7 +25,18 @@ abstract class CsvGenerator
 
     public function getData(): Collection
     {
-        return $this->data ;
+        return $this->data;
+    }
+
+    public function toString(): string
+    {
+        $dataString = implode(',', $this->getColumns()) . PHP_EOL;
+
+        $this->data->each(function ($row) use (&$dataString) {
+            $dataString .= implode(',', $row) . PHP_EOL;
+        });
+
+        return $dataString;
     }
 
     public function unsetColumns(array $columns): self

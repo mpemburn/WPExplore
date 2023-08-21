@@ -14,7 +14,7 @@ class CsvService
         'All Active Blogs in Date Range' => 'active_blogs_in_date_range',
     ];
 
-    protected const UNSET_COLUMNS = [
+    public const UNSET_COLUMNS = [
         'active_plugins',
         'current_theme',
         'template'
@@ -27,15 +27,16 @@ class CsvService
         $this->blogService = $blogService;
     }
 
-    public function callCsvMethod(string $type, Request $request): string
+    public function callCsvMethod(string $database, string $type, string $filename): string
     {
+        DatabaseService::setDb($database);
         switch ($type) {
             case 'active_blogs':
-                break;
+                return $this->createActiveBlogsCsv($filename);
             case 'stale_blogs':
-                break;
+                return $this->createStaleBlogsCsv($filename);
             case 'active_blogs_in_date_range':
-                break;
+                return $this->createBlogsInDateRangeCsv($filename);
 
         }
     }
@@ -45,7 +46,7 @@ class CsvService
         return (new BlogsCsvGenerator($filename))
             ->setData($this->blogService->getActiveBlogs())
             ->unsetColumns(self::UNSET_COLUMNS)
-            ->run();
+            ->toString();
     }
 
     public function createStaleBlogsCsv(string $filename = 'stale_blogs.csv')
@@ -53,7 +54,7 @@ class CsvService
         return (new BlogsCsvGenerator($filename))
             ->setData($this->blogService->getStaleBlogs())
             ->unsetColumns(self::UNSET_COLUMNS)
-            ->run();
+            ->toString();
     }
 
     public function createBlogsInDateRangeCsv(
@@ -71,7 +72,7 @@ class CsvService
 
         return (new BlogsInDateRangeCsvGenerator($filename))
             ->setData($blogs->sortBy('last_updated'))
-            ->run();
+            ->toString();
     }
 
     public function createMatBlogsCsv(string $filename = 'mat_blogs.csv')

@@ -10,6 +10,7 @@ $(document).ready(function ($) {
             this.endDate = $('input[name="end_date"]')
             this.filename = $('input[name="filename"]')
             this.filenameDefault = $('input[name="filename_default"]')
+            this.displayFilename = $('#display_filename')
             this.error = $('#error');
             this.errorMessage = '';
             this.emptyFields = [];
@@ -49,10 +50,11 @@ $(document).ready(function ($) {
         setFileName() {
             let filename = '';
             let useDateRange = this.dateRange.is(':visible');
-            let dbName =  $('#database option:selected').text();
+            let dbName = $('#database option:selected').text();
             let typeName = useDateRange ? 'blogs_from_' : this.csvType.val();
             let startDate = this.startDate.val();
             let endDate = this.endDate.val();
+            this.displayFilename.html('');
 
             if (dbName !== 'Select' && typeName !== '') {
                 filename = dbName.replace(/\./g, '_') + '_' + typeName;
@@ -62,7 +64,10 @@ $(document).ready(function ($) {
                 filename += startDate + '_to_' + endDate;
             }
 
-            this.filenameDefault.val(filename);
+            if (dbName !== 'Select' && filename !== '') {
+                this.filenameDefault.val(filename);
+                this.displayFilename.html(filename + '.csv')
+            }
         }
 
         addListeners() {
@@ -100,7 +105,7 @@ $(document).ready(function ($) {
 
             this.downloadButton.on('click', function (evt) {
                 evt.preventDefault();
-                if (! self.isValidInput()) {
+                if (!self.isValidInput()) {
                     return;
                 }
                 let formData = $('#download_form').serialize();
@@ -113,7 +118,9 @@ $(document).ready(function ($) {
                     data: formData,
                     processData: false,
                     success: function (data) {
-                      console.log(data);
+                        if (data.success) {
+                            self.downloadCsv(data);
+                        }
                     },
                     error: function (msg) {
                         console.log(msg);
@@ -122,8 +129,19 @@ $(document).ready(function ($) {
             });
         }
 
+        downloadCsv(data) {
+            let blob = new Blob([data.data], {type: "application/csv"});
+            let fileName = data.filename;
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+        }
+
         isValidInput() {
             let self = this;
+            let startDate = new Date(this.startDate.val());
+            let endDate = new Date(this.endDate.val());
 
             this.error.html('');
             this.emptyFields = [];
@@ -138,7 +156,10 @@ $(document).ready(function ($) {
                 }
             });
 
-            if (this.emptyFields.length > 0 ) {
+            if (startDate > endDate) {
+                this.error.html('Ending date cannot be later than Starting date.');
+            }
+            if (this.emptyFields.length > 0) {
                 this.errorMessage = 'These fields cannot be empty: ' + this.emptyFields.join(', ');
                 this.error.html(this.errorMessage);
 

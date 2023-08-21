@@ -39,8 +39,24 @@ class CsvController extends Controller
         return response()->json(['minDate' => $minDate]);
     }
 
-    public function download()
+    public function download(CsvService $service, Request $request)
     {
-        return response()->json(['success' => true]);
+        $database = request('database');
+        $type = request('csv_type');
+        $filenameDefault = request('filename_default');
+        $filenameOverride = request('filename_override');
+        $filename = $filenameOverride ?: $filenameDefault;
+
+        if (! str_ends_with($filename, '.csv')) {
+            $filename .= '.csv';
+        }
+
+        $data = $service->callCsvMethod($database, $type, $filename);
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+            'filename' => $filename
+        ]);
     }
 }
