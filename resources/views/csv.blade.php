@@ -33,7 +33,7 @@
 
                         </span>
                         <label for="filename">Filename:</label>
-                        <input type="text" name="filename_override" placeholder="Leave blank for default">
+                        <input type="text" name="filename" placeholder="Leave blank for default">
 
                         <input type="hidden" name="today_date" value="{{ $todayDate }}">
                         <input type="hidden" name="filename_default" value="">

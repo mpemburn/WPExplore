@@ -54,6 +54,9 @@ Route::get('/csv', 'App\Http\Controllers\CsvController@index')->name('csv');
 Route::get('/min_date', 'App\Http\Controllers\CsvController@getMinDate')->name('csv_min_date');
 Route::post('/do_download', 'App\Http\Controllers\CsvController@download')->name('csv_download');
 
+Route::get('/migrate', 'App\Http\Controllers\MigrationController@index')->name('migrate');
+Route::get('/subsites', 'App\Http\Controllers\MigrationController@getSubsites')->name('subsites');
+
 Route::get('/load_blogs', function () {
     $currentSite = request('site');
     DatabaseService::setDb($currentSite . '_clarku');

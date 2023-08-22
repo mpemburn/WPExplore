@@ -30,6 +30,7 @@
         <a class="nav-item" href="{{route('dashboard')}}">Dashboard</a>
         <a class="nav-item" href="{{route('search')}}">Searches</a>
         <a class="nav-item" href="{{route('csv')}}">CSV Downloader</a>
+        <a class="nav-item" href="{{route('migrate')}}">Migrator</a>
     </nav>
     <div class="content position-relative">
         @yield('content')

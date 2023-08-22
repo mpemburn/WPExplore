@@ -1,3 +1,4 @@
 import './bootstrap';
-import './searcher';
 import './csv';
+import './migrate';
+import './searcher';
