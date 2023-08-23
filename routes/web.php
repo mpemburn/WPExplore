@@ -56,6 +56,7 @@ Route::post('/do_download', 'App\Http\Controllers\CsvController@download')->name
 
 Route::get('/migrate', 'App\Http\Controllers\MigrationController@index')->name('migrate');
 Route::get('/subsites', 'App\Http\Controllers\MigrationController@getSubsites')->name('subsites');
+Route::post('/do_migration', 'App\Http\Controllers\MigrationController@migration')->name('migration');
 
 Route::get('/load_blogs', function () {
     $currentSite = request('site');

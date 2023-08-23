@@ -26,7 +26,7 @@ $(document).ready(function ($) {
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: "/do_search",
+                    url: "/do_migration",
                     data: formData,
                     processData: false,
                     success: function (data) {

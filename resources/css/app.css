@@ -22,3 +22,8 @@ div.content {
     top: 4.5rem;
     margin: 2rem;
 }
+
+#subsites_to,
+#subsites_from {
+    min-width: 100%;
+}

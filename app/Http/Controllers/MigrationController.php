@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\BlogService;
 use App\Services\DatabaseService;
+use App\Services\MigrateTablesService;
 use Illuminate\Http\Request;
 
 class MigrationController extends Controller
@@ -28,5 +29,14 @@ class MigrationController extends Controller
         $subsites = $service->getActiveBlogs()->toArray();
 
         return response()->json(['subsites' => $subsites]);
+    }
+
+    public function migration(MigrateTablesService $service, Request $request)
+    {
+        $databaseFrom = request('databaseFrom');
+        $databaseTo = request('databaseTo');
+
+        return response()->json(['databaseTo' => $databaseTo]);
+
     }
 }

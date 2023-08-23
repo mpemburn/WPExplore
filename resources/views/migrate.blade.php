@@ -10,29 +10,30 @@
             <section class="col border m-1 p-2">
                 <h4>From</h4>
                 <label for="database_from">Database:</label>
-                <select id="database_from" name="database_from" required>
+                <select id="database_from" name="database_from">
                     <option value="">Select</option>
                     @foreach($databases as $label => $dbName)
                         <option value="{{ $dbName }}">{{ $label }}</option>
                     @endforeach
                 </select>
+                <input type="text" id="filter" placeholder="Filter selection"/>
                 <button id="migrate_btn" class="btn btn-primary btn-sm">Migrate</button>
                 <div class="mt-2">
-                    <select class="d-none" name="subsites_from" id="subsites_from" size="20" multiple>
+                    <select class="border" name="subsites_from" id="subsites_from" size="20" multiple>
                     </select>
                 </div>
             </section>
             <section class="col border m-1 p-2">
                 <h4>To</h4>
                 <label for="database_to">Database:</label>
-                <select id="database_to" name="database_to" required>
+                <select id="database_to" name="database_to" class="mb-1">
                     <option value="">Select</option>
                     @foreach($databases as $label => $dbName)
                         <option value="{{ $dbName }}">{{ $label }}</option>
                     @endforeach
                 </select>
                 <div class="mt-2">
-                    <select class="d-none" name="subsites_to" id="subsites_to" size="20" multiple>
+                    <select class="border" name="subsites_to" id="subsites_to" size="20" multiple disabled>
                     </select>
                 </div>
             </section>
