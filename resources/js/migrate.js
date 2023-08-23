@@ -44,12 +44,15 @@ $(document).ready(function ($) {
                     databaseTo: self.databaseTo.val()
                 });
 
-                console.log(self.subsitesFrom.val());
+                let selectedValues = $("#subsites_from :selected").map(function(i, el) {
+                    return $(el).val();
+                }).get();
+
                 self.ajaxSetup();
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: "/do_migration?" + data,
+                    url: "/do_migration?" + data + '&from=' + selectedValues.join(','),
                     processData: false,
                     success: function (data) {
                         console.log(data);

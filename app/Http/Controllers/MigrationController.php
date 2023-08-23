@@ -6,6 +6,7 @@ use App\Services\BlogService;
 use App\Services\DatabaseService;
 use App\Services\MigrateTablesService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MigrationController extends Controller
 {
@@ -35,8 +36,11 @@ class MigrationController extends Controller
     {
         $databaseFrom = request('databaseFrom');
         $databaseTo = request('databaseTo');
+        $fromValues = request('from');
+        $blogIds = explode(',', $fromValues);
 
-        return response()->json(['databaseTo' => $databaseTo]);
+        $results = $service->migrateMultiple($databaseFrom, $databaseTo, $blogIds);
 
+        return response()->json(['results' => $results]);
     }
 }

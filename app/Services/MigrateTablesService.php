@@ -32,6 +32,18 @@ class MigrateTablesService
         $this->datetimePrefix = Carbon::now()->format('Y_m_d_His');
     }
 
+    public function migrateMultiple(string $sourceDb, string $destDb, array $blogIds): bool
+    {
+        foreach ($blogIds as $blogId) {
+            $this->setBlogToMigrate($blogId)
+                ->setSourceDatabase($sourceDb)
+                ->setDestDatabase($destDb)
+                ->run();
+        }
+
+        return true;
+    }
+
     public function setBlogToMigrate(int $blogId): self
     {
         $this->sourceBlogId = $blogId;
