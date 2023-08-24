@@ -7,9 +7,13 @@ $(document).ready(function ($) {
             this.subsitesTo = $('#subsites_to');
             this.fromData = [];
             this.toData = [];
+            this.maxSelected = null;
+            this.maxError = $('#max_error');
             this.migrateButton = $('#migrate_btn');
             this.filter = $('#filter');
+            this.loading = $('#loading');
 
+            this.maxError.hide();
             this.addListeners();
         }
 
@@ -38,6 +42,14 @@ $(document).ready(function ($) {
                     }
                 });
             });
+            this.subsitesFrom.change(function(event) {
+                if ($(this).val().length > 5) {
+                    $(this).val(self.maxSelected);
+                    self.maxError.show().fadeOut(4000);
+                } else {
+                    self.maxSelected = $(this).val();
+                }
+            });
             this.migrateButton.on('click', function () {
                 let data = $.param({
                     databaseFrom: self.databaseFrom.val(),
@@ -48,6 +60,7 @@ $(document).ready(function ($) {
                     return $(el).val();
                 }).get();
 
+                self.loading.removeClass('d-none');
                 self.ajaxSetup();
                 $.ajax({
                     type: "POST",
@@ -56,12 +69,13 @@ $(document).ready(function ($) {
                     processData: false,
                     success: function (data) {
                         console.log(data);
+                        self.loading.addClass('d-none');
                     },
                     error: function (msg) {
                         console.log(msg);
+                        self.loading.addClass('d-none');
                     }
                 });
-
             });
         }
 
@@ -93,6 +107,8 @@ $(document).ready(function ($) {
         }
 
         fillSelects() {
+            let disableButton = true;
+
             if (this.toData.length > 0 && this.fromData.length > 0) {
                 this.toData.forEach(item => {
                     let siteUrl = new URL(item.siteurl).pathname;
@@ -105,11 +121,13 @@ $(document).ready(function ($) {
                         this.fromData.splice(index, 1);
                     }
                 });
+                disableButton = false;
             }
             this.subsitesSelect = this.subsitesFrom;
             this.populateSubsites(this.fromData);
             this.subsitesSelect = this.subsitesTo;
             this.populateSubsites(this.toData);
+            this.migrateButton.prop('disabled', disableButton);
         }
 
         populateSubsites(subsites) {

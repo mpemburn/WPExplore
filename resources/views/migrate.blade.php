@@ -17,7 +17,11 @@
                     @endforeach
                 </select>
                 <input type="text" id="filter" placeholder="Filter selection"/>
-                <button id="migrate_btn" class="btn btn-primary btn-sm">Migrate</button>
+                <button id="migrate_btn" class="btn btn-primary btn-sm" disabled>Migrate</button>
+                <img id="loading" class="d-none"
+                     src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="" width="24"
+                     height="24">
+                <div id="max_error" class="text-danger">A maximum of five subsites can be processed at one time.</div>
                 <div class="mt-2">
                     <select class="border" name="subsites_from" id="subsites_from" size="20" multiple>
                     </select>
