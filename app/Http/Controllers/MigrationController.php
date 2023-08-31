@@ -37,9 +37,12 @@ class MigrationController extends Controller
         $databaseFrom = request('databaseFrom');
         $databaseTo = request('databaseTo');
         $fromValues = request('from');
-        $blogIds = explode(',', $fromValues);
 
-        $results = $service->migrateMultiple($databaseFrom, $databaseTo, $blogIds);
+        $results = null;
+        if ($databaseFrom && $databaseTo && $fromValues) {
+            $blogIds = explode(',', $fromValues);
+            $results = $service->migrateMultiple($databaseFrom, $databaseTo, $blogIds);
+        }
 
         return response()->json(['results' => $results]);
     }

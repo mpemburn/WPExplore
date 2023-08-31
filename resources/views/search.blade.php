@@ -8,6 +8,13 @@
                         <h4>Searches:</h4>
                     </div>
                     <form id="search_form">
+                        @if (env('INSTALLED_TEST_DATABASES'))
+                            <div>
+                                <input type="radio" name="source" value="prod" checked> Production
+                                <input type="radio" name="source" value="test"> Test
+                            </div>
+                            <hr>
+                        @endif
                         <label for="type">Search in:
                             <select name="type">
                                 <option value="posts">Posts</option>

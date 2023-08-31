@@ -1,6 +1,7 @@
 $(document).ready(function ($) {
     class Searcher {
         constructor() {
+            this.source = $('input:radio[name="source"]');
             this.found = $('#found');
             this.results = $('#results');
             this.loading = $('#loading');
@@ -8,12 +9,27 @@ $(document).ready(function ($) {
             this.search = $('[name="text"]');
             this.search.focus();
 
+            this.setRadio();
             this.addListeners();
+        }
+
+        setRadio() {
+            let self = this;
+            if (this.source.is('*')) {
+                let urlParams = new URLSearchParams(document.location.search);
+                let source = urlParams.get('source');
+                self.source.filter('[value="' + source + '"]').prop('checked', true);
+            }
         }
 
         addListeners() {
             let self = this;
-
+            this.source.on('click', function () {
+                let baseUrl = document.location.href.replace(document.location.search, '');
+                // console.log($(this).val());
+                // console.log(document.location);
+                document.location = baseUrl + '?source=' + $(this).val();
+            });
             this.searchButton.on('click', function (evt) {
                 evt.preventDefault();
                 let formData = $('#search_form').serialize();
@@ -26,7 +42,7 @@ $(document).ready(function ($) {
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: "/do_migration",
+                    url: "/do_search",
                     data: formData,
                     processData: false,
                     success: function (data) {

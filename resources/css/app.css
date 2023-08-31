@@ -31,3 +31,7 @@ div.content {
 option {
     color: #000;
 }
+
+input[type=search] {
+    outline-offset: 0;
+}

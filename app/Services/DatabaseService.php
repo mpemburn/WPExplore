@@ -21,19 +21,24 @@ class DatabaseService
         ]);
     }
 
-    public static function getDatabaseList(): array
+    public static function getDatabaseList(string $envKey = 'INSTALLED_DATABASES'): array
     {
-        if (! env('INSTALLED_DATABASES')) {
+        if (! env($envKey)) {
             return [];
         }
 
         $databases = [];
-        collect(explode(',', env('INSTALLED_DATABASES')))
+        collect(explode(',', env($envKey)))
             ->each(function ($db) use (&$databases) {
                 $parts = explode(':', $db);
                 $databases[$parts[0]] = $parts[1];
             });
 
         return $databases;
+    }
+
+    public static function getInverseDatabaseList(): array
+    {
+        return array_flip(self::getDatabaseList());
     }
 }

@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Log;
 
 class SearchController extends Controller
 {
-    public function search()
+    public function search(Request $request)
     {
-        $databases = DatabaseService::getDatabaseList();
+        $source = request('source');
+        $useList = $source === 'test' ? 'INSTALLED_TEST_DATABASES' : 'INSTALLED_DATABASES';
+
+        $databases = DatabaseService::getDatabaseList($useList);
 
         return view('search', ['databases' => $databases]);
     }

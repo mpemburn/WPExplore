@@ -4,16 +4,16 @@ $(document).ready(function ($) {
             this.databaseFrom = $('#database_from');
             this.databaseTo = $('#database_to');
             this.subsitesFrom = $('#subsites_from');
+            this.subsitesFromSelected = $("#subsites_from :selected");
             this.subsitesTo = $('#subsites_to');
             this.fromData = [];
             this.toData = [];
             this.maxSelected = null;
-            this.maxError = $('#max_error');
+            this.errorMsg = $('#error_msg');
             this.migrateButton = $('#migrate_btn');
             this.filter = $('#filter');
             this.loading = $('#loading');
 
-            this.maxError.hide();
             this.addListeners();
         }
 
@@ -23,21 +23,32 @@ $(document).ready(function ($) {
                 let dbName = $(this).val();
                 if (dbName) {
                     self.retrieveSubsites(dbName, 'from');
+                } else {
+                    self.fromData = [];
+                    self.subsitesFrom.empty();
                 }
             });
             this.databaseTo.on('change', function () {
                 let dbName = $(this).val();
                 if (dbName) {
                     self.retrieveSubsites(dbName, 'to');
+                } else {
+                    self.toData = [];
+                    self.subsitesTo.empty();
                 }
             });
             this.filter.on('keyup', function (evt) {
                 let value = $(this).val();
-                $("#subsites_from > option").each(function() {
+                $('#subsites_from > option').each(function() {
                     let siteUrl = this.text.replace(/[\d \[\]]+/, '');
                     let pathname = new URL(siteUrl).pathname;
+                    // Remove all selections
+                    self.maxSelected = null;
+                    $('#subsites_from > option').prop("selected", false);
+                    // Show all first
                     $(this).removeClass('d-none');
                     if (pathname.indexOf(value) === -1) {
+                        // Hide any that don't match the pathname
                         $(this).addClass('d-none');
                     }
                 });
@@ -45,12 +56,18 @@ $(document).ready(function ($) {
             this.subsitesFrom.change(function(event) {
                 if ($(this).val().length > 5) {
                     $(this).val(self.maxSelected);
-                    self.maxError.show().fadeOut(4000);
+                    self.errorMsg.html('A maximum of five subsites can be processed at one time.');
+                    self.errorMsg.show().fadeOut(4000);
                 } else {
                     self.maxSelected = $(this).val();
                 }
             });
             this.migrateButton.on('click', function () {
+                if (self.subsitesFrom.val().length === 0) {
+                    self.errorMsg.html('Please choose up to five subsites below.');
+                    self.errorMsg.show().fadeOut(4000);
+                    return;
+                }
                 let data = $.param({
                     databaseFrom: self.databaseFrom.val(),
                     databaseTo: self.databaseTo.val()

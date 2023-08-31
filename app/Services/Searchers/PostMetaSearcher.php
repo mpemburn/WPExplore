@@ -15,7 +15,7 @@ class PostMetaSearcher extends BlogSearcher
         'Meta Key',
         'Meta Value',
     ];
-    protected ?string $metaKey;
+    protected ?string $metaKey = null;
 
     public function process(string $blogId, string $blogUrl): bool
     {

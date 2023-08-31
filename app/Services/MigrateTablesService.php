@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class MigrateTablesService
 {
+    protected array $databases;
     protected int $sourceBlogId;
     protected string $sourceDatabase;
     protected string $destDatabase;
@@ -24,6 +25,7 @@ class MigrateTablesService
 
     public function __construct()
     {
+        $this->databases = DatabaseService::getInverseDatabaseList();
         $this->blogTables = collect();
         $this->createTableStatements = collect();
         $this->dropTableStatements = collect();
@@ -215,16 +217,30 @@ class MigrateTablesService
             if (!$insertStub) {
                 $insertStub = $this->buildInsertStatement($row, $destTableName);
             }
-
             // Save insert data
             $this->inserts->push([
                 'table' => $destTableName,
                 'insert' => $insertStub,
-                'values' => array_values($row)
+                'values' => $this->swapUrlNames(array_values($row))
             ]);
         });
 
         return $this;
+    }
+
+    protected function swapUrlNames(array $values): array
+    {
+        return collect($values)->map(function ($value) {
+            if (stripos($value, $this->databases[$this->sourceDatabase]) !== false) {
+                return str_replace(
+                    $this->databases[$this->sourceDatabase],
+                    $this->databases[$this->destDatabase],
+                    $value
+                );
+            }
+
+            return $value;
+        })->toArray();
     }
 
     protected function insertBlogRecord(): void
