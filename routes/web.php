@@ -30,19 +30,11 @@ use Spatie\Crawler\Crawler;
 |
 */
 Route::get('/dev', function () {
-    DatabaseService::setDb( 'www_clarku');
-    $service = new BlogService();
-    $data = (new BlogsCsvGenerator('my_csv'))
-        ->setData($service->getActiveBlogs())
-        ->unsetColumns(CsvService::UNSET_COLUMNS)
-        ->toString();
-    echo $data;
     // Do what thou wilt
 });
 
 Route::get('/portal', function () {
     return view('portal');
-    // Do what thou wilt
 });
 
 Route::get('/', fn() => view('dashboard'))->name('dashboard');

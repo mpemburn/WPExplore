@@ -268,7 +268,9 @@ class MigrateTablesService
 
     protected function buildInsertStatement($data, string $tableName): string
     {
-        $columns = implode(',', array_keys($data));
+        $columns = collect(array_keys($data))->map(function ($column) {
+            return '`' . $column . '`';
+        })->implode(',');
         $placeholders = implode(',', array_fill(0, count(array_keys($data)), '?'));
 
         $insertStub = "INSERT INTO {$tableName} ({$columns}) VALUES($placeholders);";
