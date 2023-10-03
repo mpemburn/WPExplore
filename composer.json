@@ -19,7 +19,8 @@
         "sentry/sdk": "^3.3",
         "smalot/pdfparser": "^2.3",
         "spatie/async": "^1.5",
-        "spatie/crawler": "^7.1"
+        "spatie/crawler": "^7.1",
+        "stechstudio/laravel-ssh-tunnel": "^3.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

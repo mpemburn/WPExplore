@@ -12,6 +12,7 @@ class PostsSearcher extends BlogSearcher
 {
     protected array $headers = [
         'ID',
+        'Post',
         'Page',
         'Title',
         'Content',
@@ -63,6 +64,9 @@ class PostsSearcher extends BlogSearcher
             $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
             $html .= '   <tr style="background-color: ' . $bgColor . ';">';
             $html .= '      <td class="align-top">';
+            $html .= $page['blog_id'];
+            $html .= '      </td>';
+            $html .= '      <td class="align-top">';
             $html .= $page['post_id'];
             $html .= '      </td>';
             $html .= '      <td class="align-top">';
@@ -73,6 +77,9 @@ class PostsSearcher extends BlogSearcher
             $html .= '      </td>';
             $html .= '      <td class="align-top">';
             $html .= $this->truncateContent(strip_tags($page['content']));
+            $html .= '      <div class="hidden">';
+            $html .= str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', strip_tags($page['content']));
+            $html .= '      <div>';
             $html .= '      </td>';
             $html .= '      <td class="align-top">';
             $html .= Carbon::parse($page['date'])->format('F j, Y');

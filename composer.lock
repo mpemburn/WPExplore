@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b030bdf0c420ae459bd42116440fd01",
+    "content-hash": "e67fd05883852913bfcefa2a8b1e579d",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4814,6 +4814,63 @@
                 }
             ],
             "time": "2023-04-28T07:47:42+00:00"
+        },
+        {
+            "name": "stechstudio/laravel-ssh-tunnel",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stechstudio/laravel-ssh-tunnel.git",
+                "reference": "3f4957ea34086eb1b1f7565091bd777e3b0add4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stechstudio/laravel-ssh-tunnel/zipball/3f4957ea34086eb1b1f7565091bd777e3b0add4c",
+                "reference": "3f4957ea34086eb1b1f7565091bd777e3b0add4c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "STS\\Tunneler\\TunnelerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "STS\\Tunneler\\": "src"
+                },
+                "classmap": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bubba Hines",
+                    "email": "rob@stechstudio.com"
+                }
+            ],
+            "description": "Easy creation & maintenance of an SSH Tunnel for Laravel/Lumen",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "mysql",
+                "ssh",
+                "tunnel"
+            ],
+            "support": {
+                "issues": "https://github.com/stechstudio/laravel-ssh-tunnel/issues",
+                "source": "https://github.com/stechstudio/laravel-ssh-tunnel/tree/3.3.0"
+            },
+            "abandoned": "prodigyphp/laravel-ssh-tunnel",
+            "time": "2023-02-15T14:17:32+00:00"
         },
         {
             "name": "symfony/console",

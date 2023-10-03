@@ -11,6 +11,7 @@ use App\Services\BlogService;
 use App\Services\CsvService;
 use App\Services\DatabaseService;
 use App\Services\LogParserService;
+use App\Services\UrlService;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,10 @@ use Spatie\Crawler\Crawler;
 |
 */
 Route::get('/dev', function () {
+    $start = microtime(true);
+    $code = (new UrlService())->getContents('https://www.clarku.edu');
+    $time_elapsed_secs = microtime(true) - $start;
+    !d($time_elapsed_secs);
     // Do what thou wilt
 });
 
@@ -136,6 +141,8 @@ Route::get('/active', function () {
 
     $blogs = (new BlogService())->getActiveBlogs();
 
-    !d($blogs->toArray());
+    $blogs->each(function ($blog) {
+        echo $blog['blog_id'] . '<br>';
+    });
 });
 

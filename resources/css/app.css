@@ -35,3 +35,7 @@ option {
 input[type=search] {
     outline-offset: 0;
 }
+
+div.hidden {
+    display: none;
+}
