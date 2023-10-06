@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Crawler\Crawler;
+use Symfony\Component\Process\Process;
 
 
 /*
@@ -31,10 +32,6 @@ use Spatie\Crawler\Crawler;
 |
 */
 Route::get('/dev', function () {
-    $start = microtime(true);
-    $code = (new UrlService())->getContents('https://www.clarku.edu');
-    $time_elapsed_secs = microtime(true) - $start;
-    !d($time_elapsed_secs);
     // Do what thou wilt
 });
 

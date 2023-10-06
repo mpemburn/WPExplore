@@ -9,6 +9,8 @@ class UrlService
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_NOBODY, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         if ($username && $password) {
             curl_setopt($ch, CURLOPT_USERPWD, env($username) . ":" . env($password));
         }
@@ -16,7 +18,7 @@ class UrlService
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return (int) $code;
+        return (int)$code;
     }
 
     public function getContents(string $url): string
