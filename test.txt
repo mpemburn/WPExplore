@@ -1,0 +1,1238 @@
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/autoload.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/autoload_52.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/ClassLoader52.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_namespaces.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_real_52.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/ClassLoader.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_psr4.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_classmap.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_static.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/composer/autoload_real.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/xrstf/composer-php52/lib/xrstf/Composer52/AutoloadGenerator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/xrstf/composer-php52/lib/xrstf/Composer52/ClassLoader.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-content-analysis-for-yoast-seo/vendor/xrstf/composer-php52/lib/xrstf/Composer52/Generator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-taxonomy-by-site/acf-taxonomy-by-site.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-taxonomy-by-site/fields/class-acf-field-taxonomy-by-site.php
+110: 		$field = acf_get_field( $options['field_key'] );
+924: 		$field = acf_get_field( $args['field_key'] );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-conditional-taxonomy-rules/acf-conditional-taxonomy-rules.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-conditional-taxonomy-rules/core/ACFCTR_Core.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/icon-font-cheatsheet/icon-font-cheatsheet.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-flexible-content-popup/class-acf-field-flexible-content.php
+119: 		$sub_fields = acf_get_fields( $field );
+462: 						<?php echo acf_get_field_label( $sub_field ); ?>
+1473: 		$field = acf_get_field( $options['field_key'] );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-flexible-content-popup/acf-flexible-content-popup.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-icon-picker/acf-icon-picker.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-icon-picker/fields/class-acf-field-icon-picker-v5.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/functions.php
+20: 	$updatesA = get_field( 'updates', $a->ID );
+21: 	$updatesB = get_field( 'updates', $b->ID );
+61: 	$updates = get_field( 'updates', $latest_initiative->ID );
+76: 		$topic = get_field( 'primary_topic', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/clark-dei.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/components/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/components/initiatives-topics.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/components/status.php
+18: 	$color = get_field( 'status_color', 'dei_status_' . $status->term_id );
+20: 	$tooltip = get_field( 'status_tooltip', 'dei_status_' . $status->term_id );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/components/updates.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/components/carousel.php
+77: 			$updates = get_field( 'updates', $slide->ID );
+120: 			$updates = get_field( 'updates', $slide->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/post-types/initiative.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/acf-fields/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/taxonomies/dei_status.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-dei/taxonomies/topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-advanced-link/acf-advanced-link.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-advanced-link/fields/class-acf-field-advanced-link-v5.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/network-defaults/network-defaults.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/custom-tinymce-dropdown/custom-tinymce-dropdown.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/clark-crime-log.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/components/main.php
+80: 		$crime_date = get_field( 'crime_date', $log->ID );
+81: 		$crime_time = get_field( 'crime_time', $log->ID ) ?? '';
+82: 		$crime_date_end = get_field( 'crime_date_end', $log->ID );
+83: 		$crime_time_end = get_field( 'crime_time_end', $log->ID );
+94: 		$classifications = get_field( 'crime_classification', $log->ID );
+112: 		// $case_number = get_field( 'crime_case_number', $log->ID );
+119: 		$crime_reported_date = get_field( 'crime_report_date', $log->ID );
+120: 		$crime_reported_time = get_field( 'crime_report_time', $log->ID ) ?? '';
+121: 		$crime_reported_date_end = get_field( 'crime_report_date_end', $log->ID );
+122: 		$crime_reported_time_end = get_field( 'crime_report_time_end', $log->ID );
+133: 		$crime_location_type = get_field( 'crime_location_type', $log->ID );
+144: 		$crime_locations = get_field( 'crime_location', $log->ID );
+162: 		$crime_statuses = get_field( 'crime_status', $log->ID );
+180: 		$crime_prevention_advice = get_field( 'crime_prevention_advice', $log->ID );
+181: 		$crime_prevention_advice_post = get_field( 'crime_prevention_advice_post', $log->ID );
+219: 		$crime_date = get_field( 'crime_date', $log->ID );
+220: 		$crime_date_end = get_field( 'crime_date_end', $log->ID );
+273: 		// $saved_case_number = get_field( 'crime_case_number', $log->ID );
+282: 		$crime_report_date = get_field( 'crime_report_date', $log->ID );
+438: 	// $case_number = get_field( 'crime_case_number', $post->ID );
+441: 	$crime_reported_date = get_field( 'crime_report_date', $post->ID );
+442: 	$crime_reported_time = get_field( 'crime_report_time', $post->ID );
+443: 	$crime_reported_date_end = get_field( 'crime_report_date_end', $post->ID );
+444: 	$crime_reported_time_end = get_field( 'crime_report_time_end', $post->ID );
+453: 	$crime_date = get_field( 'crime_date', $post->ID );
+454: 	$crime_time = get_field( 'crime_time', $post->ID ) ?? '';
+455: 	$crime_date_end = get_field( 'crime_date_end', $post->ID );
+456: 	$crime_time_end = get_field( 'crime_time_end', $post->ID );
+465: 	$crime_updated_date = get_field( 'crime_updated_date', $post->ID );
+467: 	$crime_prevention_advice = get_field( 'crime_prevention_advice', $post->ID );
+468: 	$crime_prevention_advice_post = get_field( 'crime_prevention_advice_post', $post->ID );
+535: 	$classification = get_field( 'crime_classification', $post->ID );
+558: 	$crime_location_type = get_field( 'crime_location_type', $post->ID );
+559: 	$crime_location = get_field( 'crime_location', $post->ID );
+573: 			$location_link = get_field( 'crime_location_link', 'crime_log_location_' . $term->term_id );
+594: 	$crime_status = get_field( 'crime_status', $post->ID );
+595: 	$crime_updated_date = get_field( 'crime_updated_date', $post->ID );
+598: 	// 	'open' => get_field( 'crime_status_open_text', $post->ID ),
+599: 	// 	'closed' => get_field( 'crime_status_closed_text', $post->ID ),
+600: 	// 	'summons' => get_field( 'crime_status_summons_text', $post->ID ),
+601: 	// 	'under-investigation' => get_field( 'crime_status_under_investigation_text', $post->ID ),
+602: 	// 	'referred' => get_field( 'crime_status_referred_text', $post->ID ),
+605: 	$extra_text = get_field( 'crime_status_extra_text', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/post-types/crime-prevention-advice.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/post-types/crime-log.php
+109: 		echo get_field('crime_report_date');
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/acf-fields/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/export/main.php
+126: 		$crime_date = get_field( 'crime_date', $log->ID );
+127: 		$crime_time = get_field( 'crime_time', $log->ID ) ?? '';
+128: 		$crime_date_end = get_field( 'crime_date_end', $log->ID );
+129: 		$crime_time_end = get_field( 'crime_time_end', $log->ID );
+159: 		$classifications = get_field( 'crime_classification', $log->ID );
+177: 		// $case_number = get_field( 'crime_case_number', $log->ID );
+184: 		$crime_reported_date = get_field( 'crime_report_date', $log->ID );
+185: 		$crime_reported_time = get_field( 'crime_report_time', $log->ID ) ?? '';
+186: 		$crime_reported_date_end = get_field( 'crime_report_date_end', $log->ID );
+187: 		$crime_reported_time_end = get_field( 'crime_report_time_end', $log->ID );
+198: 		$crime_location_type = get_field( 'crime_location_type', $log->ID );
+209: 		$crime_locations = get_field( 'crime_location', $log->ID );
+227: 		$crime_statuses = get_field( 'crime_status', $log->ID );
+245: 		$crime_prevention_advice = get_field( 'crime_prevention_advice', $log->ID );
+246: 		$crime_prevention_advice_post = get_field( 'crime_prevention_advice_post', $log->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/taxonomies/classification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/taxonomies/status.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-crime-log/taxonomies/location.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-input-counter/acf-input-counter.php
+229: 		$field = get_field_object( $_POST['field_key'] );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-post-object-by-site/acf-post-object-by-site.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-post-object-by-site/fields/class-acf-field-post_object-by-site.php
+98: 		$field = acf_get_field( $options['field_key'] );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/require-alt-text/inc/class-require-alt-text.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/require-alt-text/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/require-alt-text/require-alt-text.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-location-field/acf-location-field.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/acf-location-field/fields/class-acf-field-location-v5.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/plugin.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/faculty/class-faculty-sync.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/faculty/class-faculty.php
+205: 	public function get_field( $field_name ) {
+210: 		if ( function_exists( '\\get_field' ) ) {
+211: 			$value = get_field( $field_name, $this->wp_post_id );
+267: 				$department_link = get_field( 'department_link', 'faculty_department_' . $wp_department->term_id );
+394: 			return $this->get_field( 'faculty_cv' );
+424: 		return $this->get_field( 'faculty_location' );
+431: 		return $this->get_field( 'faculty_phone' );
+438: 		return $this->get_field( 'faculty_links' );
+445: 		return $this->get_field( 'faculty_department_links' );
+452: 		return $this->get_field( 'faculty_teaching_content' );
+459: 		return $this->get_field( 'faculty_service_content' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/icon.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/wp-async-request.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/acf.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/menus.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/wp-background-process.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/profile/class-profile-view.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/templates/single-clark-profile.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/sync.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/post-types/clark-profile.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/post-types/profile-taxonomies.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/api.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clark-faculty-profiles/src/core.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/responsive-embeds/pkm-responsive-embeds.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/responsive-embeds/uninstall.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/custom-tinymce-formats/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/custom-tinymce-formats/custom-tinymce-formats.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/ad-groups-to-roles/ad-groups-to-roles.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/filters/audience.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/filters/department.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/filters/topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/filters/types.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/filters.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/scripts.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/tags.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/api.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/sync/main.php
+451: 			$below_content_area    = get_field( 'below_content_area', $event->ID );
+452: 			$full_width_components = get_field( 'full_width_components', $event->ID );
+529: 			$below_content_area    = get_field( 'below_content_area', $event->ID );
+530: 			$full_width_components = get_field( 'full_width_components', $event->ID );
+587: 			$below_content_area    = get_field( 'below_content_area', $event->ID );
+588: 			$full_width_components = get_field( 'full_width_components', $event->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/sync/organizer.php
+192: 			$below_content_area    = get_field( 'below_content_area', $organizer->ID );
+193: 			$full_width_components = get_field( 'full_width_components', $organizer->ID );
+261: 			$below_content_area    = get_field( 'below_content_area', $organizer->ID );
+262: 			$full_width_components = get_field( 'full_width_components', $organizer->ID );
+313: 			$below_content_area    = get_field( 'below_content_area', $organizer->ID );
+314: 			$full_width_components = get_field( 'full_width_components', $organizer->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/sync/cron.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/sync/venues.php
+180: 			$below_content_area    = get_field( 'below_content_area', $venue->ID );
+181: 			$full_width_components = get_field( 'full_width_components', $venue->ID );
+249: 			$below_content_area    = get_field( 'below_content_area', $venue->ID );
+250: 			$full_width_components = get_field( 'full_width_components', $venue->ID );
+301: 			$below_content_area    = get_field( 'below_content_area', $venue->ID );
+302: 			$full_width_components = get_field( 'full_width_components', $venue->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/sync/image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/master-calendar/taxonomies.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/clarku-master-calendar/clarku-master-calendar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/plyr-embed/inc/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/plyr-embed/inc/class-plyr-embed.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/plyr-embed/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/plugins/plyr-embed/plyr-embed.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/sunrise.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/icon-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/customizer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/custom-header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/color-patterns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/template-tags.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/template-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/inc/back-compat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/footer/footer-widgets.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/footer/site-info.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/page/content-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/page/content-front-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/page/content-front-page-panels.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-gallery.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-none.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-excerpt.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-audio.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/post/content-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/navigation/navigation-top.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/header/site-branding.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/template-parts/header/header-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/front-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyseventeen/searchform.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/inc/customizer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/inc/template-tags.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/inc/back-compat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/sidebar-content-bottom.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/content-single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/biography.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/content-none.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/content-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/template-parts/content-search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentysixteen/searchform.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/icon-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/customizer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/color-patterns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/template-tags.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/template-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/inc/back-compat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/classes/class-twentynineteen-walker-comment.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/classes/class-twentynineteen-svg-icons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/footer/footer-widgets.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/post/author-bio.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/post/discussion-meta.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/content/content-single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/content/content-none.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/content/content-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/content/content-excerpt.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/content/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/header/entry-header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/template-parts/header/site-branding.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentynineteen/image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/functions.php
+47: 	$google_maps = get_field( 'google_map_api_key', 'option' );
+218: 	$google_maps = get_field( 'google_map_api_key', 'option' );
+300: 		$program_type = get_field( 'program_type_page', $program_page->ID );
+322: 		$display_title          = get_field( 'program_display_title', $program->ID );
+325: 		$link_override = get_field( 'program_link', $program->ID );
+353: 		$degree_program_type = get_field( 'degree_program_type', 'program_type_' . $degree->term_id );
+401: 				$program_type = get_field( 'program_type_page', $program_page->ID );
+482: 		$program_page = get_field( 'associated_program', $tuition_page->ID );
+485: 		$tuition_page->content = clarku_render_flexible_content( get_field( 'tuition_page_content', $tuition_page->ID ) );
+493: 		$display_title       = get_field( 'program_display_title', $program_post->ID );
+494: 		$scholarship_display = get_field( 'scholarship_display', $program_post->ID );
+504: 			$program_post->scholarships = get_field( 'program_scholarships', $program_post->ID );
+512: 		$tuition_fields = get_fields( $tuition_page->ID );
+530: 		$degree_program_type = get_field( 'degree_program_type', 'program_type_' . $degree->term_id );
+551: 		$scholarships[ $school->term_id ] = get_field( 'scholarships', 'program_school_' . $school->term_id );
+1072: 	$use_main_network_header = get_field( 'use_main_network_header', 'option' );
+1137: 	return clarku_render_flexible_content( get_field( 'reusable_flexible_content', $post_id ) );
+1370: 		if ( 'category' === $term->taxonomy && get_field( 'hide_category_from_all_stories', $term ) ) {
+1380: 			$array[ $key ]['icon'] = get_field( 'media_type_icon', 'media_type_' . $term->term_id );
+1408: 		$pull_post = get_field( 'pull_story_from_clarknow_field', $post->ID );
+1416: 			$section_label = get_field( 'section_label', $post->ID );
+1423: 			$section_label = get_field( 'section_label', $post->ID );
+1482: 			'section_label' => get_field( 'section_label', $post->ID ),
+1601: 	$content_layouts = get_field( 'full_width_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/sidebar-menu/class-clark-sidebar-walker.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/faculty-listing/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/faculty-listing/profiles.php
+134: 	public function get_field( $field_name ) {
+139: 		if ( function_exists( '\\get_field' ) ) {
+142: 			$value = get_field( $field_name, $this->wp_post_id );
+158: 		return $this->get_field( 'faculty_location' );
+165: 		return $this->get_field( 'faculty_phone' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/compliance.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/customize-tinymce.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/comment-walker.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/directory/class-staff-directory.php
+626: 				$merged_data[ $index ]->link = get_field( 'department_link', 'department_' . $department->term_id );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/directory/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/directory/utilities.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/main-menu/class-walker-main-menu-edit.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/main-menu/class-walker-main-menu.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/main-menu/class-main-navigation-menu.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/theme-support.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/gform.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/post.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/reusable-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/project.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/course.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/tuition.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/program.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/post-types/staff.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/degrees.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/below-content-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/taxonomy__tag-options.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable-components.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/deadlines.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/courses.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/topics.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/header-button.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/program-finder.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/tuition-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/menu-override.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/homepage-alert.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/custom-sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/project.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/tabs/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/latest-stories/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/faculty-listing/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/three-col-image-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/content-and-sidebar/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/comments/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/big-text/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/four-col-link-area/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/money-box/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/cta-area/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/courses-carousel/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/course-surfer/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/flexible-news-and-events/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/events-landing-listing/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/testimonials/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/cta-buttons2/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/clark-at-a-glance/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/staff-listing/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/full-width-columns/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/accordion/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/wysiwyg/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/image-content-slider/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/research-map/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/three-col-link-area/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/portrait-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/full-image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/faculty-profile-listing/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/expanding-schedule/below-fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/expanding-schedule/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/news-feed-by-topic/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/leep-content-image-slider/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/grid-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/handpicked-stories/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/video-list/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/cta-buttons/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/text-grid/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/blockquote/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/full-width-media-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/divider/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/three-col-quote-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/deadlines/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/featured-grid-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/info-box/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/intro-copy/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/reuseable-content/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/icon-content/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/contact-box/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/mixed-media-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/cta-bar/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/story-quote/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/people-carousel/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/snapchat/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/media-alternative/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/image-card-carousel/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/photo-gallery-carousel/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/in-the-news-content/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/logo-showcase/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/grid/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/grid/three-column/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/grid/two-column/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/components/featured-events-carousel/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/emergency-notification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/google-apis.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/full-width-components.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/mobile-cta-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/related_stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/department.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/schools.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/search-dropdown.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/leep-sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/program.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/event-department.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/categories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/hero-homepage.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/cool_timeline.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/emergency-notification-repeater.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/leep-links.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/staff.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/sidebar-content-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable/image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable/adspace/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable/two-thirds/image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/reusable/cta-bar/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/sticky-nav/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/acf-fields/sticky-nav/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/podcasting/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/custom-post-type-capabilities.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/permalinks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/degree.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/program-school.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/media-type.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/displayed-author.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/project-type.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/media-contact.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/status.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/department.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/program-type.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/taxonomies/topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/theme-functions.php
+187: 	$hide_padding = get_field( 'hide_padding' );
+348: 	} elseif ( get_field( 'thumbnail_image', $post_id ) ) {
+350: 		$img_id = get_field( 'thumbnail_image', $post_id );
+358: 		if ( get_field( 'placeholder_image', 'option' ) ) {
+359: 			$img_id = get_field( 'placeholder_image', 'option' );
+397: 	} elseif ( get_field( 'thumbnail_image', $post_id ) ) {
+398: 		$img_id = get_field( 'thumbnail_image', $post_id );
+440: 	$short_title = get_field( 'short_title', $post->ID );
+460: 	$short_excerpt = get_field( 'short_excerpt', $post->ID );
+465: 		return trim_string_to_char_count( get_field( 'excerpt', $post->ID ), 75 );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/role-capabilities.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/inc/image-sizes.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single-initiative.php
+5: $updates = get_field( 'updates' );
+11: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+18: 	$content_layouts = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/sidebar-initiative.php
+6: 	<?php $cta_button = get_field( 'cta_button' ); ?>
+10: 		$button_color = get_field( 'cta_button_color_main' );
+22: 		$cta_buttons = get_field( 'cta_buttons' );
+55: 	$sidebar_content = get_field( 'sidebar_content' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single-aiovg_videos.php
+4: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+11: 	$content_layouts = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/comments.php
+26: 		$responses_text = get_field( 'view_responses_text' );
+65: $post_comment_title_text  = get_field( 'post_comment_title_text' );
+66: $post_comment_button_text = get_field( 'post_comment_button_text' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events-pro/blocks/related-events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events-pro/blocks/related-events/event-thumbnail.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/list.php
+34: 		$optional_component = get_field( 'sub_hero_optional_component' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/components/breadcrumbs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/list/event.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/list/top-bar/datepicker.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/list/event/date.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/list/month-separator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/latest-past/heading.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe/events/v2/day/top-bar/datepicker.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/research-map.php
+64: 		$project->location = get_field( 'project_location', $project->ID );
+70: 		$label = get_field( 'location_label', $project->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs/get-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs/one-column.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs/two-column-special.php
+57: 						$reusable_content = get_field( 'reusable_flexible_content', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs/accordions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs/two-column-even.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/contact-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/tabs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/featured-grid-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/blockquote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/staff-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/three-col-quote-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/image-content-block/text-and-button.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/faculty-profile-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/fancy-bulleted-list.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/latest-stories.php
+55: 				$pull_post = get_field( 'pull_story_from_clarknow_field', $story->ID );
+62: 					$section_label   = get_field( 'section_label', $story->ID );
+72: 					$section_label = get_field( 'section_label', $story->ID );
+142: 					$pull_post = get_field( 'pull_story_from_clarknow_field', $story->ID );
+149: 						$section_label = get_field( 'section_label', $story->ID );
+159: 						$section_label = get_field( 'section_label', $story->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/gallery.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/clark-at-a-glance.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/in-the-news-content.php
+84: 								<div class="subtitle"><?php echo esc_html( get_field( 'publication', $news_item->ID ) ); ?></div>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/news.php
+36: 			$pull_post = get_field( 'pull_story_from_clarknow_field', $news_item->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/adspace.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/headers/news.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/headers/events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events/headers/adspace.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/news-feed-by-topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/link.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/cta-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/photo-gallery-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/deadlines.php
+66: 								if ( get_field( 'hide_degree_from_deadlines', 'degree_' . $degree->term_id ) ) {
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/expanding-schedule.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/breadcrumbs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/sidebox_message.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/form.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero/caption.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/footer-links.php
+18: 	$footer_links = get_field( 'footer_links', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/icon-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/portrait-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/reusable-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/intro-copy.php
+26: 	$hide_story_date = get_field( 'hide_story_date' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/blocks/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/blocks/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/blocks/adspace.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/full_width.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/5050.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/7030.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/6040.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns/4col.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/events-landing-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/leep-content-image-slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/divider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/cta-bar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/video-list.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/media-alternative.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/text-grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/hero-sections.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-media-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/big-text.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/program-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/three-col-image-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/image-content-block-two-thirds.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/carousel/courses.php
+27: 					<p class="subtitle grey"><?php echo esc_html( get_field( 'course_id', $post->ID ) ); ?></p>
+32: 					$courses_link = get_field( 'course_link', $post->ID );
+66: 					<div class="content p__small"><?php echo wp_kses_post( get_field( 'content', $post->ID ) ); ?></div>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/carousel/image_cards.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/carousel/people.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/mixed-media-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/homepage-alert.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sub-hero.php
+98: 	if ( ! is_front_page() || get_field( 'show_sub_hero_title' ) ) :
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/content-and-sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/emergency-notification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/link-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/money-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/mobile-cta-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/story-quote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/hero-video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/cta-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/grid-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/handpicked-stories.php
+45: 						$pull_post = get_field( 'pull_story_from_clarknow_field', $story->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/logo-showcase.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/testimonials.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/story-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/featured-events-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/image-content-slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/course-surfer.php
+110: 	$course['course_code']        = get_Field( 'course_code', $course['course']->ID );
+111: 	$course['course_title']       = get_field( 'course_title', $course['course']->ID );
+112: 	$course['course_description'] = get_field( 'course_description', $course['course']->ID );
+113: 	$course['course_button']      = get_field( 'course_button', $course['course']->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/info-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/leep-sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/initiatives-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sidebar-content.php
+30: 				$reusable_content = get_field( 'reusable_flexible_content', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/initiatives.php
+39: 		$color = get_field( 'status_color', 'dei_status_' . $status->term_id );
+122: 					<?php $tooltip = get_field( 'status_tooltip', 'dei_status_' . $the_status->term_id ); ?>
+152: 					$updates = get_field( 'updates', $initiative->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/emergency-notification-repeater.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/faculty-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/full-width-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/sidebar.php
+13: 	$sidebar_links = get_field( 'sidebar_links' );
+74: 		if ( ! get_field( 'hide_siblings' ) ) {
+80: 			if ( 0 === count( $children->posts ) && ! get_field( 'only_show_siblings' ) ) {
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/snapchat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/flexible-news-and-events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/cta-buttons2.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/grid/two-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/grid/three-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/components/hero-slider.php
+76: 	$hide_class = get_field( 'hide_text_box' ) ? 'no-textbox' : '';
+118: 		<?php if ( ! get_field( 'hide_text_box' ) ) : ?>
+120: 			$hero_slide_box_position = get_field( 'hero_slide_box_position' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/header.php
+24: 		$subhero      = get_field( 'sub_hero_optional_component' );
+39: 			'enabled' => get_field( 'emergency_notification_enabled', 'option' ),
+40: 			'message' => get_field( 'emergency_notification_message', 'option' ),
+41: 			'style'   => get_field( 'emergency_notification_style', 'option' ),
+48: 			'enabled'  => get_field( 'emergency_notification_repeater_enabled', 'option' ),
+49: 			'repeater' => get_field( 'emergency_notification_repeater', 'option' ),
+73: 			if ( get_field( 'mobile_nav_buttons', 'option' ) && get_component( 'link.php' ) ) {
+74: 				foreach ( get_field( 'mobile_nav_buttons', 'option' ) as $link ) {
+195: 					if ( get_component( 'mobile-cta-buttons.php' ) && get_field( 'mobile_nav_buttons', 'option' ) ) {
+196: 						Components\mobile_cta_buttons( get_field( 'mobile_nav_buttons', 'option' ) );
+226: 							$search_terms = get_field( 'popular_searches', 'option' );
+240: 							<p class="title"><?php echo esc_html( get_field( 'take_action_title', 'option' ) ); ?></p>
+244: 							$blocks = get_field( 'take_action_ctas', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/footer.php
+16: 								$ctas = get_field( 'calls_to_action', 'option' );
+67: 								$follow_us = get_field( 'follow_us', 'option' );
+96: 						<?php echo esc_html( get_field( 'phone_number', 'option' ) ); ?>
+102: 							<?php echo wp_kses_post( get_field( 'address', 'option' ) ); ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/office-directory.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/leep-journey.php
+6: 	$optional_component = get_field( 'leep_sub_hero_optional_component' )[0];
+13: 	$content_layouts = get_field( 'below_content_area' );
+47: 	$next_post = get_field( 'next_leep_link' );
+48: 	$prev_post = get_field( 'previous_leep_link' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/staff-directory.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/program-finder.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/tuition-builder.php
+14: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/single/related-stories.php
+17: $related_stories_hidden = get_fields( $post->ID )['related_stories_hidden'] ?? null;
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/single/meta.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/single/media-contacts.php
+16: 				$title = get_field( 'title', "media_contact_$contact->term_id" );
+17: 				$phone = get_field( 'phone_number', "media_contact_$contact->term_id" );
+18: 				$email = sanitize_email( get_field( 'email', "media_contact_$contact->term_id" ) );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/single/categories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/sticky-nav.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+13: 	$content_layouts = get_field( 'below_content_area' );
+18: 	$layouts         = get_field( 'full_width_components' );
+58: 	$below      = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/landing.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/events-landing.php
+5: 	$optional_component = get_field( 'sub_hero_optional_component' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/program-subpage.php
+10: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+17: 	$content_layouts = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/program.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/events/archive-list.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/events/archive-month.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/events/single-event.php
+10: 		$optional_component = get_field( 'sub_hero_optional_component' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/homepage.php
+6: 	$hero_slides    = get_field( 'hero_slides' );
+7: 	$hero_video     = get_field( 'hero_video' );
+8: 	$use_new_hero   = get_field( 'use_new_hero' );
+9: 	$hero_sections  = get_field( 'hero_sections' );
+10: 	$homepage_alert = get_field( 'homepage_alert' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/templates/search-results.php
+29: 		<?php if ( empty( $query ) && ! empty( get_field( 'popular_searches', 'option' ) ) ) : ?>
+37: 					$search_terms = get_field( 'popular_searches', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single-program.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single.php
+11: 			'sub_title' => get_field( 'section_label' ),
+13: 			'content'   => get_field( 'excerpt' ),
+26: 				$hide_story_date = get_field( 'hide_story_date' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/page.php
+4: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+11: 	$content_layouts = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single-tuition.php
+4: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+24: 				$tuition_fields = get_fields( $id );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/below-content-area.php
+3: $content_layouts = get_field( 'below_content_area' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/courses-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/research-map.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/contact-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/tabs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/featured-grid-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/blockquote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/three-col-link-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/latest-stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/people-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/clark-at-a-glance.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/in-the-news-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/news-feed-by-topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/cta-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/photo-gallery-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/deadlines.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/expanding-schedule.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/icon-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/portrait-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/reusable-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/intro-copy.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/events-landing-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/leep-content-image-slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/cta-bar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/video-list.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/media-alternative.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/text-grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/crime-log.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/full-width-media-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/big-text.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/three-col-image-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/mixed-media-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/reusable-image-content-block-two-thirds.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/content-and-sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/initiatives-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/story-quote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/image-card-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/cta-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/grid-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/handpicked-stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/logo-showcase.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/testimonials.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/featured-events-carousel.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/image-content-slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/course-surfer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/info-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/quote-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/four-col-link-area.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/initiatives.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/full-image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/faculty-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/full-width-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/snapchat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/flexible-news-and-events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/section/cta-buttons2.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/tabs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/blockquote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/staff-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/faculty-profile-listing.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/expanding-schedule.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/reusable-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/divider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/crime-log.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/program-buttons.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/image-content-block-two-thirds.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/money-box.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/testimonials.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/two-thirds/initiatives.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/homepage-alert.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/program-finder-components.php
+3: $content_layouts = get_field( 'program_finder_content_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/emergency-notification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/full-width-components.php
+5: $content_layouts = get_field( 'full_width_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/leep-sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/hero/slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/hero/sections.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/hero/video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/modules/emergency-notification-repeater.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/video-thumbnail-image-left.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/category-thumbnail.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/search-form-template-horizontal.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/video-thumbnail.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/player-iframe.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/player-html5.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/player-gdpr.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/search-form-template-vertical.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/all-in-one-video-gallery/public/templates/player.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/pro/related-events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/list/nav.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/list/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/list/single-featured.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/list/loop.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/list/single-event.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/default-template.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/modules/meta/venue.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/modules/meta/details.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/modules/meta/organizer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/modules/meta.php
+79: 		$url  = get_field( 'event_department_link', 'event_department_' . $dep->term_id );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/modules/bar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/tribe-events/single-event.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/sidebar.php
+6: 	<?php $display_menu_last = get_field( 'display_menu_last' ); ?>
+10: 		$sidebar_content = get_field( 'sidebar_content' );
+17: 		<?php $cta_button = get_field( 'cta_button' ); ?>
+21: 			$button_color = get_field( 'cta_button_color_main' );
+33: 			$cta_buttons = get_field( 'cta_buttons' );
+68: 				'hide_sidebar' => get_field( 'hide_sidebar' ),
+77: 				'hide_sidebar' => get_field( 'hide_sidebar' ),
+83: 		<?php $cta_button = get_field( 'cta_button' ); ?>
+87: 			$button_color = get_field( 'cta_button_color_main' );
+99: 			$cta_buttons = get_field( 'cta_buttons' );
+132: 		$sidebar_content = get_field( 'sidebar_content' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/front-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/sidebar-videos.php
+10: 	if ( get_field( 'sidebar_links' ) && ! empty( get_field( 'sidebar_links' ) ) ) {
+12: 		$links = get_field( 'sidebar_links' );
+67: 		if ( ! get_field( 'hide_siblings' ) ) {
+73: 			if ( 0 === count( $children->posts ) && ! get_field( 'only_show_siblings' ) ) {
+115: 	<?php if ( ! empty( $pages ) && ! get_field( 'hide_sidebar' ) ) : ?>
+121: 	<?php $cta_button = get_field( 'cta_button' ); ?>
+125: 		$button_color = get_field( 'cta_button_color_main' );
+137: 		$cta_buttons = get_field( 'cta_buttons' );
+170: 	$sidebar_content = get_field( 'sidebar_content' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku/single-project.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/inc/customizer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/inc/custom-header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/inc/template-tags.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/inc/back-compat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/content-none.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/comments.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/content-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/content-search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/content-link.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/author-bio.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/twentyfifteen/image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/modify-acf-fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/post-types/post.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/post-types/in-the-news.php
+29: 		$media_url = get_field( 'media_url', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/post-types/announcements.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/pull-story-from-clarknow.php
+81: 	if ( 'post' === get_post_type( $post ) && get_field( 'pull_story_from_clarknow', $post->ID ) ) {
+82: 		$pull_post = get_field( 'pull_story_from_clarknow', $post->ID );
+102: 	if ( is_single() && 'post' === get_post_type( $post_id ) && get_field( 'pull_story_from_clarknow' ) ) {
+103: 		$pull_post = get_field( 'pull_story_from_clarknow' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/story-featured-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/media-contact-info.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/main-story-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/announcements-meta.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/in-the-news-details.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/logo-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/acf-fields/event-sidebar-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/taxonomies/displayed-author.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/taxonomies/media-contact.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/taxonomies/topic.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/inc/image-sizes.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/sidebar-events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/header-main.php
+24: 		$subhero = get_field( 'sub_hero_optional_component' );
+40: 			'enabled' => get_field( 'emergency_notification_enabled', 'option' ),
+41: 			'message' => get_field( 'emergency_notification_message', 'option' ),
+42: 			'style'   => get_field( 'emergency_notification_style', 'option' ),
+64: 			if ( get_field( 'mobile_nav_buttons', 'option' ) && get_component( 'link.php' ) ) {
+65: 				foreach ( get_field( 'mobile_nav_buttons', 'option' ) as $link ) {
+186:                   if ( get_component( 'mobile-cta-buttons.php' ) && get_field( 'mobile_nav_buttons', 'option' ) ) {
+187:                     Components\mobile_cta_buttons( get_field( 'mobile_nav_buttons', 'option' ) );
+217:                             $search_terms = get_field( 'popular_searches', 'option' );
+231:                           <p class="title"><?php echo get_field( 'take_action_title', 'option' ); ?></p>
+235:                             $blocks = get_field( 'take_action_ctas', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/components/hero-single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/header.php
+2: $use_main_network_header = get_field( 'use_main_network_header', 'option' );
+20: $menu_override = get_field( 'menu_text_override', 'option' );
+21: $menu_text     = get_field( 'menu_text', 'option' );
+38: 		$subhero = get_field( 'sub_hero_optional_component' );
+54: 			'enabled' => get_field( 'emergency_notification_enabled', 'option' ),
+55: 			'message' => get_field( 'emergency_notification_message', 'option' ),
+56: 			'style'   => get_field( 'emergency_notification_style', 'option' ),
+64:         'enabled' => get_field( 'emergency_notification_repeater_enabled', 'option' ),
+65:         'repeater' => get_field( 'emergency_notification_repeater', 'option' ),
+148: 						<div class="logo-text <?php echo get_field( 'logo_label', 'option' ) ? 'has-label' : ''; ?>">
+151: 									<?php if ( ( is_front_page() && empty( $sub_hero[0] ) ) || ( is_front_page() && ! empty( $sub_hero[0] ) && ! get_field( 'show_sub_hero_title' ) ) ) : ?>
+154: 									<?php if ( get_field( 'logo_label', 'option' ) ) : ?>
+155: 										<div class="subtitle black"><?php echo esc_html( get_field( 'logo_label', 'option' ) ); ?></div>
+157: 									<div class="logo-title h4__title"><?php echo esc_html( get_field( 'logo_title', 'option' ) ); ?></div>
+158: 									<?php if ( ( is_front_page() && empty( $sub_hero[0] ) ) || ( is_front_page() && ! empty( $sub_hero[0] ) && ! get_field( 'show_sub_hero_title' ) ) ) : ?>
+307: 									if ( get_component( 'mobile-cta-buttons.php' ) && get_field( 'mobile_nav_buttons', 'option' ) ) {
+308: 										Components\mobile_cta_buttons( get_field( 'mobile_nav_buttons', 'option' ) );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/archive-announcement.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/footer.php
+9: 								$ctas = get_field( 'calls_to_action', 'option' );
+60: 								$follow_us = get_field( 'follow_us', 'option' );
+89: 						<?php echo esc_html( get_field( 'phone_number', 'option' ) ); ?>
+95: 							<?php echo wp_kses_post( get_field( 'address', 'option' ) ); ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/events.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/single/related-stories.php
+16: if ( ! get_fields($post->ID)['related_stories_hidden'] && ! empty( $related_stories ) ) :
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/single/meta.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/single/media-contacts.php
+16: 				$title = get_field( 'title', "media_contact_$contact->term_id" );
+17: 				$phone = get_field( 'phone_number', "media_contact_$contact->term_id" );
+18: 				$email = sanitize_email( get_field( 'email', "media_contact_$contact->term_id" ) );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/single/categories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/landing.php
+5: 	$hero_slides 		= get_field( 'hero_slides' );
+6: 	$hero_video  		= get_field( 'hero_video' );
+7: 	$use_new_hero   = get_field( 'use_new_hero' );
+8: 	$hero_sections  = get_field( 'hero_sections' );
+12: 		$optional_component = get_field( 'sub_hero_optional_component' )[0];
+15: 			$use_main_network_header = get_field( 'use_main_network_header', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/events/archive-list.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/events/archive-month.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/events/single-event.php
+10: 		$optional_component = get_field( 'sub_hero_optional_component' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/templates/homepage.php
+5: 	$hero_slides 		= get_field( 'hero_slides' );
+6: 	$hero_video  		= get_field( 'hero_video' );
+7: 	$use_new_hero   = get_field( 'use_new_hero' );
+8: 	$hero_sections  = get_field( 'hero_sections' );
+9: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+15: 			$use_main_network_header = get_field( 'use_main_network_header', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/page.php
+4:     $sub_hero_optional_component = get_field( 'sub_hero_optional_component' );
+8: 		$use_main_network_header = get_field( 'use_main_network_header', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/modules/section/latest-stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/modules/section/handpicked-stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/list/nav.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/list/content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/list/single-featured.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/list/loop.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/list/single-event.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/default-template.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/modules/bar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/tribe-events/single-event.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/sidebar-archiveevents.php
+41: 			$cta_buttons = get_field( 'events_sidebar_cta_buttons', 'option' );
+66: 		$sidebar_content = get_field( 'events_sidebar_wysiwyg', 'option' );
+74: 		$sidebar_adspace = get_field( 'events_sidebar_adspace', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/sidebar.php
+6: 	<?php $display_menu_last = get_field( 'display_menu_last' ); ?>
+10: 		$sidebar_content = get_field( 'sidebar_content' );
+17: 		<?php $cta_button = get_field( 'cta_button' ); ?>
+21: 			$button_color = get_field( 'cta_button_color_main' );
+33: 			$cta_buttons = get_field( 'cta_buttons' );
+66: 			'hide_sidebar' => get_field( 'hide_sidebar' ),
+73: 			'hide_sidebar' => get_field( 'hide_sidebar' ),
+78: 		<?php $cta_button = get_field( 'cta_button' ); ?>
+82: 			$button_color = get_field( 'cta_button_color_main' );
+94: 			$cta_buttons = get_field( 'cta_buttons' );
+126: 		$sidebar_content = get_field( 'sidebar_content' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/front-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-subsite/single-announcement.php
+26: 						'From' => get_field( 'from' ),
+27: 						'To' => get_field( 'to' ),
+28: 						'Subject' => get_field( 'subject' )
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/404.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/main-menu/class-walker-main-menu-edit.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/main-menu/class-walker-main-menu.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/main-menu/class-main-navigation-menu.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/theme-support.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/full-width-components.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/footer.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/search-dropdown.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/hero-homepage.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/acf-fields/sidebar.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/theme-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/inc/image-sizes.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/image-content-block/text-and-button.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/gallery.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/expanding-schedule.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/sub-hero/breadcrumbs.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/sub-hero/video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/sub-hero/form.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/sub-hero/caption.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/intro-copy.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/hero-video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/tri-col-image-blocks.php
+35: 		$target_field = empty ( $block['external_link'] ) ? '' : '_blank';
+39: 		echo "<a href='$url' target='$target_field'>"; // WPCS: XSS ok.
+47: 		echo "<a href='$url' class='animate-image' data-parent='.block' target='$target_field'>"; // WPCS: XSS ok.
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/featured-news.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/full-image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/snapchat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/components/hero-slider.php
+58: 	$hide_class = get_field( 'hide_text_box' ) ? 'no-textbox' : '';
+77: 		<?php if ( ! get_field( 'hide_text_box' ) ) : ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/header.php
+172: 													$search_terms = get_field( 'popular_searches', 'option' );
+190: 													$blocks = get_field( 'take_action_ctas', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/footer.php
+8: 								$ctas = get_field( 'calls_to_action', 'option' );
+50: 								$follow_us = get_field( 'follow_us', 'option' );
+79: 						<?php echo esc_html( get_field( 'phone_number', 'option' ) ); ?>
+85: 							<?php echo wp_kses_post( get_field( 'address', 'option' ) ); ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/templates/homepage.php
+6: 	$hero_slides = get_field( 'hero_slides' );
+7: 	$hero_video  = get_field( 'hero_video' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/templates/search-results.php
+36: 					$search_terms = get_field( 'popular_searches', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/page.php
+4: 	$optional_component = get_field( 'sub_hero_optional_component' )[0];
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/expanding-schedule.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/intro-copy.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/tri-col-image-blocks.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/featured-news.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/full-image-content-block.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/section/snapchat.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/full-width-components.php
+3: $content_layouts = get_field( 'full_width_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/hero/slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/modules/hero/video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/sidebar.php
+12: if ( ! get_field( 'hide_siblings' ) ) {
+41: 	<?php if ( get_field( 'cta_button_text' ) && get_field( 'cta_button_url' ) ) : ?>
+43: 			<a href="<?php echo esc_url( get_field( 'cta_button_url' ) ); ?>" class="filled-button">
+45: 					$button_text = get_field( 'cta_button_text' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome-parent/front-page.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/sidebar/main.php
+17: 	$content_layouts = get_field( 'content_components', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/customize-tinymce.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/sidebar/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/footer/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/accordions/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/sub-hero/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/notification/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/wysiwyg/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/content/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/full-image-content-block/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/expanding-schedule/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/controls/main.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/controls/icon-dropdown/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/controls/sidebar-controls/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/tri-col-image-blocks/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/full-width-components.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/table/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/blockquote/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/intro-copy/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/site-settings/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/hero/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/separator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/snapchat/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/featured-news/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/grid/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/grid/three-column/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/acf-fields/grid/two-column/fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/theme-functions.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/inc/image-sizes.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/index.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/search.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/blockquote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/notification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/table.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/separator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/grid/two-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/content/grid/three-columns.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/sub-hero.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/table.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/components/hero-slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/header.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/footer.php
+35: 								$follow_us = get_field( 'follow_us', 'option' );
+64: 						<?php echo esc_html( get_field( 'phone_number', 'option' ) ); ?>
+70: 							<?php echo wp_kses_post( get_field( 'address', 'option' ) ); ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/templates/homepage.php
+6: 	$hero_slides = get_field( 'hero_slides' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/templates/search-results.php
+36: 					$search_terms = get_field( 'popular_searches', 'option' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/page.php
+6: 	$optional_component = get_field( 'sub_hero_optional_component' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/wysiwyg.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/blockquote.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/accordion.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/grid.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/notification.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/table.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/section/separator.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/full-width-components.php
+3: $content_layouts = get_field( 'full_width_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/hero/slider.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/content-components.php
+3: $content_layouts = get_field( 'content_components' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/header/main.php
+6: $site_link = get_field( 'clarku_site_link', 'option' );
+7: $site_header_text = get_field( 'clarku_site_header_title', 'option' );
+12: $login_enabled_field = get_field( 'site_login_enabled', 'option' );
+32: 					<a class="login__link" href="<?php echo esc_url ( clarku_welcome_login_link() ); ?>"><?php $login = get_field( 'site_login_text', 'option' ); echo esc_html( ! empty( $login ) ? $login : 'Login' ); ?></a>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/modules/header/mobile.php
+6: $site_link = get_field( 'clarku_site_link', 'option' );
+7: $site_header_text = get_field( 'clarku_site_header_title', 'option' );
+12: $login_enabled_field = get_field( 'site_login_enabled', 'option' );
+81: 					<a class="login__link" href="<?php echo esc_url ( clarku_welcome_login_link() ); ?>"><?php $login = get_field( 'site_login_text', 'option' ); echo esc_html( ! empty( $login ) ? $login : 'Login' ); ?></a>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-welcome/sidebar.php
+11: 	$acf_content_components = get_field( 'content_components' );
+14: 		$intro_content_display = get_field( 'sidebar_display_intro_content', $post->ID );
+33: 	$acf_content_components = get_field( 'content_components' );
+36: 		$intro_content_display = get_field( 'sidebar_display_intro_content', $post->ID );
+108: 		$intro_content_text = get_field( 'sidebar_intro_content_text', $post->ID );
+128: $sidebar_active    = get_field( 'sidebar_active', $post->ID );
+129: $sidebar_automated = get_field( 'sidebar_automated', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/functions.php
+64: 			'publication' => get_field( 'publication', $post->ID ),
+98: 		if ( get_field( 'hide_from_archive_page', $topic ) ) {
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/modify-acf-fields.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/post-types/issue.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/post-types/in-the-news.php
+30: 		$media_url = get_field( 'media_url', $post->ID );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/story-featured-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/full-width-layouts.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/media-contact-info.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/main-story-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/media-type.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/in-the-news-details.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/site-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/email-signup-form.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/acf-fields/issue-settings.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/inc/image-sizes.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/archive.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/large-video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/story-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/hero-single.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/hero-issue.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/large-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/components/email-signup-form.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/header.php
+14: 	$subhero = get_field( 'sub_hero_optional_component' );
+31: 			'enabled' => get_field( 'emergency_notification_enabled', 'option' ),
+32: 			'message' => get_field( 'emergency_notification_message', 'option' ),
+33: 			'style'   => get_field( 'emergency_notification_style', 'option' ),
+39:         'enabled' => get_field( 'emergency_notification_repeater_enabled', 'option' ),
+40:         'repeater' => get_field( 'emergency_notification_repeater', 'option' ),
+69:           if ( get_field( 'header_button', 'option' ) && get_component( 'link.php' ) ) {
+71:             \Components\link_view( get_field( 'header_button', 'option' ), 'outline-button white cta-button' );
+150:                   if ( get_field( 'header_button', 'option' ) && get_component( 'link.php' ) ) {
+152:                     \Components\link_view( get_field( 'header_button', 'option' ), 'filled-button' );
+160:                   if ( get_component( 'mobile-cta-buttons.php' ) && get_field( 'mobile_nav_buttons', 'option' ) ) {
+161:                     Components\mobile_cta_buttons( get_field( 'mobile_nav_buttons', 'option' ) );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/archive-in_the_news.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/archive-issue.php
+53:                                 <?php if ( get_field( 'download_only' ) ) {
+54:                                     $issue_file = get_field( 'issue_pdf' ); ?>
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/templates/topics.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/templates/homepage.php
+6: $screen_reader_h1_tag = get_field( 'screen_reader_h1_tag' );
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/single-issue.php
+3: if ( get_field( 'download_only' ) && get_field( 'issue_pdf' ) ) {
+4:     wp_redirect( get_field( 'issue_pdf' )['url'] );
+14:             'pdf'       => get_field( 'issue_pdf' ),
+17:             'short_excerpt'   => get_field( 'short_excerpt' ),
+18:             'excerpt'   => get_field( 'excerpt' ),
+19:             'featured_story'   => get_field( 'featured_story' )
+30:                 'section_label'    => get_field( 'issue_featured_section_label' ),
+31:                 'title'            => get_field( 'issue_featured_title' ),
+33:                 'columns'          => get_field( 'issue_featured_columns' ),
+34:                 'stories'          => get_field( 'issue_featured_stories' ),
+43:             'section_label'    => get_field( 'issue_remaining_section_label' ),
+44:             'title'            => get_field( 'issue_remaining_title' ),
+45:             'background_color' => get_field( 'issue_remaining_background_color' ),
+46:             'stories'          => get_field( 'issue_remaining_stories' )
+160:                                     'content' => get_field( 'short_excerpt', $slide->ID ),
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/single.php
+6: 	$form = get_field( 'single_story_form', 'option' );
+11: 			'sub_title' => get_field( 'section_label' ),
+13: 			'content'   => get_field( 'excerpt' ),
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/modules/section/latest-stories.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/modules/section/large-video.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/modules/section/story-content.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/modules/section/large-image.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/modules/section/email-signup-form.php
+Reading: /Users/MPemburn/Dev/clarku-wordpress/wp-content/themes/clarku-now/rss-curated_stories.php
