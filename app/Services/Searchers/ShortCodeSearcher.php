@@ -51,12 +51,11 @@ class ShortCodeSearcher extends BlogSearcher
 
         $this->foundCount = 0;
         $html .= '<div style="font-family: sans-serif">';
-        $html .= '<table>';
+        $html .= '<table style="width: 100%;">';
         $html .= $this->buildHeader();
         $this->found->each(function ($page) use (&$html) {
             $url = $page['blog_url'] . $page['post_name'];
-            $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
-            $html .= '   <tr style="background-color: ' . $bgColor . ';">';
+            $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
             $html .= '      <td class="align-top">';
             $html .= '<a href="' . $url . '" target="_blank">' . $url . '</a><br>';
             $html .= '      </td>';

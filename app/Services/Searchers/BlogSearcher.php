@@ -45,12 +45,12 @@ abstract class BlogSearcher implements SearcherInterface
             ->where('public', 1);
 
         $this->searchText = $searchText;
-        $this->searchRegex = '/' . str_replace('/', '\/', $this->searchText) . '/';
+        $this->searchRegex = '/' . str_replace('/', '\/', $this->searchText) . '/i';
 
         $blogs->each(function ($blog) use ($searchText) {
             $blogId = $blog->blog_id;
             $blogUrl = 'https://' . $blog->domain . $blog->path;
-            $found = $this->process($blogId, $blogUrl);
+            $this->process($blogId, $blogUrl);
         });
 
         return $this;
@@ -59,7 +59,7 @@ abstract class BlogSearcher implements SearcherInterface
     protected function buildHeader(): string
     {
         $html = '   <tr style="background-color: #e2e8f0;">';
-        foreach ($this->headers as $header) {
+        foreach (array_values($this->headers) as $header) {
             $html .= '      <td>';
             $html .= $header;
             $html .= '      </td>';
@@ -69,11 +69,26 @@ abstract class BlogSearcher implements SearcherInterface
         return $html;
     }
 
+    protected function buildColumnGroup(): string
+    {
+        if (array_is_list($this->headers)) {
+            return '';
+        }
+
+        $html = '<colgroup>';
+        foreach (array_keys($this->headers) as $width) {
+            $html .= '<col span="1" style="width: ' . $width . ';">';
+        }
+        $html .= '<colgroup>';
+
+        return $html;
+    }
+
     protected function truncateContent(string $content): string
     {
         $length = $this->verbose ? null : 100;
 
-        $highlight = str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $content);
+        $highlight = $this->highlight($content);
         $position = stripos($highlight, $this->searchText);
 
         $start = ($position - 20) > 0 ? $position - 20 : 0;
@@ -81,6 +96,16 @@ abstract class BlogSearcher implements SearcherInterface
         $postellipsis = ! $this->verbose && strlen($highlight) > $length ? '&hellip;' : '';
 
         return $prellipsis . substr($highlight, $start, $length) . $postellipsis;
+    }
+
+    protected function highlight(string $foundString): string
+    {
+        return str_replace($this->searchText, '<span class="text-danger">' . $this->searchText . '</span>', $foundString);
+    }
+
+    protected function setRowColor(int $count): string
+    {
+        return ($count % 2) === 1 ? '#e2e8f0' : '#fffff';
     }
 
     public function getCount(): int

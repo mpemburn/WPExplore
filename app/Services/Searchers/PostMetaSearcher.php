@@ -84,12 +84,11 @@ class PostMetaSearcher extends BlogSearcher
 
         $this->foundCount = 0;
         $html .= '<div style="font-family: sans-serif">';
-        $html .= '<table>';
+        $html .= '<table style="width: 100%;">';
         $html .= $this->buildHeader();
         $this->found->each(function ($postMeta) use (&$html) {
             $url = $postMeta['blog_url'] . $postMeta['post_name'];
-            $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
-            $html .= '   <tr style="background-color: ' . $bgColor . ';">';
+            $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
             $html .= '      <td class="align-top">';
             $html .= $postMeta['post_id'];
             $html .= '      </td>';
@@ -100,7 +99,7 @@ class PostMetaSearcher extends BlogSearcher
             $html .= $postMeta['meta_key'];
             $html .= '      </td>';
             $html .= '      <td class="align-top">';
-            $html .= str_replace($this->searchText, '<strong>' . $this->searchText . '</strong>', $postMeta['meta_value']);
+            $html .= $this->highlight($postMeta['meta_value']);
             $html .= '      </td>';
             $html .= '   </tr>';
 

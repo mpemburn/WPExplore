@@ -4,6 +4,7 @@ use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\CfLegacyApp;
+use App\Models\Option;
 use App\Observers\BlogObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
@@ -32,6 +33,17 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
+    $headers = [
+        'Blog ID',
+        'Blog URL',
+        'Plugin(s)',
+    ];
+    if (array_is_list($headers)) {
+        return;
+    }
+
+    dd(array_values($headers));
+
     // Do what thou wilt
 });
 

@@ -42,4 +42,23 @@ class FileService
 
         return null;
     }
+    public function getFileContents(string $filepath): ?string
+    {
+        if (file_exists($filepath)) {
+            return file_get_contents($filepath);
+        }
+
+        return null;
+    }
+
+    public function getContentsArray(string $filepath): array
+    {
+        $contents = $this->getFileContents($filepath);
+        if ($contents) {
+            return explode("\n", $contents);
+        }
+
+        return [];
+    }
+
 }

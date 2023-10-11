@@ -50,15 +50,14 @@ class OptionNameSearcher extends BlogSearcher
         $found = $showNotFound ? $this->notFound : $this->found;
         $this->foundCount = 0;
         $html .= '<div style="font-family: sans-serif">';
-        $html .= '<table>';
+        $html .= '<table style="width: 100%;">';
         $html .= $this->buildHeader();
         $found->each(function ($item) use (&$html) {
             if (in_array($item['blog_id'], $this->unique)) {
                 return;
             }
             $url = $item['blog_url'];
-            $bgColor = ($this->foundCount % 2) === 1 ? '#e2e8f0' : '#fffff';
-            $html .= '   <tr style="background-color: ' . $bgColor . ';">';
+            $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
             $html .= '      <td class="align-top">';
             $html .= $item['blog_id'];
             $html .= '      </td>';

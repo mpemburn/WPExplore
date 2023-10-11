@@ -22,6 +22,7 @@
                                 <option value="options">Option Values</option>
                                 <option value="option_name">Option Names</option>
                                 <option value="shortcodes">Shortcodes in Posts</option>
+                                <option value="plugins">Plugins</option>
                             </select>
                         </label>
                         <label for="database">Database:
