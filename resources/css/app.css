@@ -39,3 +39,12 @@ input[type=search] {
 div.hidden {
     display: none;
 }
+
+div.form-parts {
+    float: left;
+    margin-left: 3px;
+}
+
+#found {
+    clear: left;
+}

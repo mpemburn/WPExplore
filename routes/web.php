@@ -33,16 +33,12 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
-    $headers = [
-        'Blog ID',
-        'Blog URL',
-        'Plugin(s)',
-    ];
-    if (array_is_list($headers)) {
-        return;
-    }
+    $testText = 'Gravity-Forms-ACF-Field-master, gravityforms, gravityformsemma';
+    $searchText = '+Grav';
 
-    dd(array_values($headers));
+    $result = str_contains($testText, substr($searchText, 1));
+
+    echo $result;
 
     // Do what thou wilt
 });
@@ -53,8 +49,8 @@ Route::get('/portal', function () {
 
 Route::get('/', fn() => view('dashboard'))->name('dashboard');
 
-Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search');
-Route::post('/do_search', 'App\Http\Controllers\SearchController@index');
+Route::get('/search', 'App\Http\Controllers\SearchController@index');
+Route::post('/do_search', 'App\Http\Controllers\SearchController@search')->name('search');
 
 Route::get('/csv', 'App\Http\Controllers\CsvController@index')->name('csv');
 Route::get('/min_date', 'App\Http\Controllers\CsvController@getMinDate')->name('csv_min_date');

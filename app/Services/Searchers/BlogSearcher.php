@@ -6,6 +6,7 @@ use App\Interfaces\SearcherInterface;
 use App\Models\Blog;
 use App\Models\Option;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 abstract class BlogSearcher implements SearcherInterface
@@ -16,6 +17,7 @@ abstract class BlogSearcher implements SearcherInterface
     protected int $foundCount = 0;
     protected string $searchText;
     protected string $searchRegex;
+    protected bool $exact = false;
     protected bool $verbose;
     protected array $headers = [];
     protected array $unique = [];
@@ -30,7 +32,7 @@ abstract class BlogSearcher implements SearcherInterface
         $this->notFound = collect();
     }
 
-    public function run(?string $searchText, bool $verbose = false): self
+    public function run(?string $searchText, bool $exact = false, bool $verbose = false): self
     {
         if (! $searchText) {
             $this->error();
@@ -39,21 +41,37 @@ abstract class BlogSearcher implements SearcherInterface
         }
 
         $this->verbose = $verbose;
+        $this->exact = $exact;
 
         $blogs = Blog::where('archived', 0)
             ->where('deleted', 0)
             ->where('public', 1);
 
         $this->searchText = $searchText;
-        $this->searchRegex = '/' . str_replace('/', '\/', $this->searchText) . '/i';
+        $this->searchRegex = $this->buildRegex($searchText);
 
-        $blogs->each(function ($blog) use ($searchText) {
+        $blogs->each(function ($blog) {
             $blogId = $blog->blog_id;
             $blogUrl = 'https://' . $blog->domain . $blog->path;
             $this->process($blogId, $blogUrl);
         });
 
         return $this;
+    }
+
+    protected function isFound(string $testText): bool
+    {
+        if ($this->exact) {
+            // Only return exact matches
+            return $testText === $this->searchText;
+        }
+
+        return preg_match($this->searchRegex, $testText, $matches);
+    }
+
+    protected function buildRegex(string $searchText): string
+    {
+        return '/' . preg_quote($searchText) . '/i';
     }
 
     protected function buildHeader(): string
@@ -88,19 +106,22 @@ abstract class BlogSearcher implements SearcherInterface
     {
         $length = $this->verbose ? null : 100;
 
-        $highlight = $this->highlight($content);
-        $position = stripos($highlight, $this->searchText);
+        $position = stripos($content, $this->searchText);
 
-        $start = ($position - 20) > 0 ? $position - 20 : 0;
+        $start = ! $this->verbose ? $position - 20 : 0;
         $prellipsis = $start > 0 ? '&hellip;' : '';
-        $postellipsis = ! $this->verbose && strlen($highlight) > $length ? '&hellip;' : '';
+        $postellipsis = ! $this->verbose && $position > $length ? '&hellip;' : '';
 
-        return $prellipsis . substr($highlight, $start, $length) . $postellipsis;
+        $truncated = $prellipsis . substr($content, $start, $length) . $postellipsis;
+
+        return $this->highlight($truncated);
     }
 
     protected function highlight(string $foundString): string
     {
-        return str_replace($this->searchText, '<span class="text-danger">' . $this->searchText . '</span>', $foundString);
+        $replace = '<span class="text-danger">$1</span>';
+
+        return preg_replace('/('. preg_quote($this->searchText) . ')/i', $replace, $foundString);
     }
 
     protected function setRowColor(int $count): string

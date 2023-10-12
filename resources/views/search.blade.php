@@ -15,28 +15,36 @@
                             </div>
                             <hr>
                         @endif
-                        <label for="type">Search in:
-                            <select name="type">
-                                <option value="posts">Posts</option>
-                                <option value="postmeta">Postmeta</option>
-                                <option value="options">Option Values</option>
-                                <option value="option_name">Option Names</option>
-                                <option value="shortcodes">Shortcodes in Posts</option>
-                                <option value="plugins">Plugins</option>
-                            </select>
-                        </label>
-                        <label for="database">Database:
-                            <select name="database">
-                                @foreach($databases as $label => $dbName)
-                                    <option value="{{ $dbName }}">{{ $label }}</option>
-                                @endforeach
-                            </select>
-                        </label>
-                        <input type="text" name="text" placeholder="Enter search term">
-                        <button id="search_btn" class="btn btn-primary btn-sm" disabled>Search</button>
-                        <img id="loading" class="d-none"
-                             src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="" width="24"
-                             height="24">
+                        <div class="form-parts">
+                            <label for="type">Search in:
+                                <select name="type">
+                                    <option value="posts">Posts</option>
+                                    <option value="postmeta">Postmeta</option>
+                                    <option value="options">Option Values</option>
+                                    <option value="option_name">Option Names</option>
+                                    <option value="shortcodes">Shortcodes in Posts</option>
+                                    <option value="plugins">Plugins</option>
+                                </select>
+                            </label>
+                            <label for="database">Database:
+                                <select name="database">
+                                    @foreach($databases as $label => $dbName)
+                                        <option value="{{ $dbName }}">{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-parts">
+                            <input type="text" name="text" placeholder="Enter search term"><br>
+                            <input type="checkbox" name="exact"> Exact match
+                        </div>
+                        <div class="form-parts">
+                            <button id="search_btn" class="btn btn-primary btn-sm" disabled>Search</button>
+                            <img id="loading" class="d-none"
+                                 src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt=""
+                                 width="24"
+                                 height="24">
+                        </div>
                     </form>
                     <div id="found"></div>
                     <div id="results"></div>
