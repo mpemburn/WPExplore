@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-parts">
                             <input type="text" name="text" placeholder="Enter search term"><br>
-                            <input type="checkbox" name="exact"> Exact match
+                            <input type="checkbox" name="exact"> Exact word match
                         </div>
                         <div class="form-parts">
                             <button id="search_btn" class="btn btn-primary btn-sm" disabled>Search</button>

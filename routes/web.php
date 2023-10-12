@@ -33,13 +33,12 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
-    $testText = 'Gravity-Forms-ACF-Field-master, gravityforms, gravityformsemma';
-    $searchText = '+Grav';
-
-    $result = str_contains($testText, substr($searchText, 1));
-
-    echo $result;
-
+    $search = 'redirected';
+    if (preg_match('/\b' . $search . '\b/i', "carbon emissions be redirected to finding alternatives to fossil fuels. In the Dec. 20, 2013, pie")) {
+        echo "A match was found.";
+    } else {
+        echo "A match was not found.";
+    }
     // Do what thou wilt
 });
 

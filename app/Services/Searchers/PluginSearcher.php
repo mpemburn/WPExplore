@@ -29,7 +29,7 @@ class PluginSearcher extends BlogSearcher
         $foundPlugins = collect();
         collect($plugins)->each(function ($plugin) use ($blogId, $blogUrl, &$foundSomething, &$foundPlugins){
             $directory = current(explode('/', $plugin));
-            $foundPlugin = $this->isFound($directory);
+            $foundPlugin = $this->wasFound($directory);
             if ($foundPlugin) {
                 $foundSomething = true;
                 $foundPlugins->push($directory);

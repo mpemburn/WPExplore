@@ -36,7 +36,7 @@ class PostMetaSearcher extends BlogSearcher
             if ($this->isNotPublished($blogId, $postMeta->post_id)) {
                 return;
             }
-            $foundValue = preg_match($this->searchRegex, $postMeta->meta_value, $matches);
+            $foundValue = $this->wasFound($postMeta->meta_value);
             if ($foundValue) {
                 $foundSomething = true;
                 $this->found->push([

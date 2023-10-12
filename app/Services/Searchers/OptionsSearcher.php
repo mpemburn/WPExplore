@@ -27,8 +27,7 @@ class OptionsSearcher extends BlogSearcher
             ->orderBy('option_id');
 
         $options->each(function (Option $option) use ($blogId, $blogUrl, &$foundSomething) {
-            $foundContent = preg_match($this->searchRegex, $option->option_value, $matches);
-
+            $foundContent = $this->wasFound($option->option_value);
             if ($foundContent) {
                 $foundSomething = true;
                 $this->found->push([

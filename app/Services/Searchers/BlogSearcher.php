@@ -59,11 +59,11 @@ abstract class BlogSearcher implements SearcherInterface
         return $this;
     }
 
-    protected function isFound(string $testText): bool
+    protected function wasFound(string $testText): bool
     {
         if ($this->exact) {
-            // Only return exact matches
-            return $testText === $this->searchText;
+            // Only return exact word matches
+            return preg_match('/\b' . $this->searchText . '\b/i', $testText);
         }
 
         return preg_match($this->searchRegex, $testText, $matches);

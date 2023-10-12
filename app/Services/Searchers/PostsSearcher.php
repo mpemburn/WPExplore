@@ -32,8 +32,8 @@ class PostsSearcher extends BlogSearcher
             ->orderBy('ID');
 
         $posts->each(function (Post $post) use ($blogUrl, $blogId, &$foundSomething) {
-            $foundContent = preg_match($this->searchRegex, $post->post_content, $matches);
-            $foundTitle = preg_match($this->searchRegex, $post->post_title, $matches);
+            $foundTitle = $this->wasFound($post->post_title);
+            $foundContent = $this->wasFound($post->post_content);
             if ($foundContent || $foundTitle) {
                 $foundSomething = true;
                 $this->found->push([
