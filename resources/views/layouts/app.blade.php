@@ -28,7 +28,7 @@
     <nav class="fixed-top mb-4 pt-4 pb-2 ps-3 bg-white shadow">
         <h4>WP Explore</h4>
         <a class="nav-item" href="{{route('dashboard')}}">Dashboard</a>
-        <a class="nav-item" href="{{route('search')}}">Searches</a>
+        <a class="nav-item" href="{{route('index')}}">Searches</a>
         <a class="nav-item" href="{{route('csv')}}">CSV Downloader</a>
         <a class="nav-item" href="{{route('migrate')}}">Migrator</a>
     </nav>

@@ -33,12 +33,6 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
-    $search = 'redirected';
-    if (preg_match('/\b' . $search . '\b/i', "carbon emissions be redirected to finding alternatives to fossil fuels. In the Dec. 20, 2013, pie")) {
-        echo "A match was found.";
-    } else {
-        echo "A match was not found.";
-    }
     // Do what thou wilt
 });
 
@@ -48,7 +42,7 @@ Route::get('/portal', function () {
 
 Route::get('/', fn() => view('dashboard'))->name('dashboard');
 
-Route::get('/search', 'App\Http\Controllers\SearchController@index');
+Route::get('/search', 'App\Http\Controllers\SearchController@index')->name('index');
 Route::post('/do_search', 'App\Http\Controllers\SearchController@search')->name('search');
 
 Route::get('/csv', 'App\Http\Controllers\CsvController@index')->name('csv');
