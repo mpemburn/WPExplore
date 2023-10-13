@@ -5,6 +5,7 @@ use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\CfLegacyApp;
 use App\Models\Option;
+use App\Models\Post;
 use App\Observers\BlogObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
@@ -33,6 +34,15 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
+    DatabaseService::setDb('www_clarku');
+    $blogId = '102';
+    $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
+        ->whereIn('post_status', ['publish', 'inherit'])
+        ->where(function ($post) {
+            return $post->where('post_date', $post->max('post_date'));
+        })->first();
+
+    !d($posts->post_date);
     // Do what thou wilt
 });
 

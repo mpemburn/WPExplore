@@ -17,13 +17,14 @@
                         @endif
                         <div class="form-parts">
                             <label for="type">Search in:
-                                <select name="type">
+                                <select id="type" name="type">
                                     <option value="posts">Posts</option>
                                     <option value="postmeta">Postmeta</option>
                                     <option value="options">Option Values</option>
                                     <option value="option_name">Option Names</option>
                                     <option value="shortcodes">Shortcodes in Posts</option>
                                     <option value="plugins">Plugins</option>
+                                    <option value="updated">Most recent update</option>
                                 </select>
                             </label>
                             <label for="database">Database:
@@ -34,8 +35,8 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="form-parts">
-                            <input type="text" name="text" placeholder="Enter search term"><br>
+                        <div id="search_section" class="form-parts">
+                            <input id="search" type="search" name="text" placeholder="Enter search term"><br>
                             <input type="checkbox" name="exact"> Exact word match
                         </div>
                         <div class="form-parts">

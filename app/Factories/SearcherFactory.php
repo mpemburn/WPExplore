@@ -3,6 +3,7 @@
 namespace App\Factories;
 
 use App\Interfaces\SearcherInterface;
+use App\Services\Searchers\MostRecentUpdateSearcher;
 use App\Services\Searchers\OptionNameSearcher;
 use App\Services\Searchers\OptionsSearcher;
 use App\Services\Searchers\PluginSearcher;
@@ -21,6 +22,7 @@ class SearcherFactory
             'option_name' => new OptionNameSearcher(),
             'shortcodes' => new ShortCodeSearcher(),
             'plugins' => new PluginSearcher(),
+            'updated' => new MostRecentUpdateSearcher(),
             default => null
         };
     }
