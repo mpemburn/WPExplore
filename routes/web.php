@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Crawler\Crawler;
 use Symfony\Component\Process\Process;
+use Spatie\Async\Pool;
 
 
 /*
@@ -34,15 +35,20 @@ use Symfony\Component\Process\Process;
 |
 */
 Route::get('/dev', function () {
-    DatabaseService::setDb('www_clarku');
-    $blogId = '102';
-    $posts = (new Post())->setTable('wp_' . $blogId . '_posts')
-        ->whereIn('post_status', ['publish', 'inherit'])
-        ->where(function ($post) {
-            return $post->where('post_date', $post->max('post_date'));
-        })->first();
+    pcntl_errno();
+    $pool = Pool::create();
 
-    !d($posts->post_date);
+    foreach (range(1, 5) as $i) {
+        $pool[] = async(function () use ($i) {
+            echo 'bluh';
+        })->then(function (int $output) {
+            echo 'duh';
+        })->catch(function (Exception $exception) {
+            echo $exception->getMessage() . '<br>';
+        });
+    }
+
+    await($pool);
     // Do what thou wilt
 });
 

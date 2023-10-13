@@ -7,8 +7,9 @@ use App\Services\Searchers\MostRecentUpdateSearcher;
 use App\Services\Searchers\OptionNameSearcher;
 use App\Services\Searchers\OptionsSearcher;
 use App\Services\Searchers\PluginSearcher;
+use App\Services\Searchers\PostMetaKeysSearcher;
 use App\Services\Searchers\PostsSearcher;
-use App\Services\Searchers\PostMetaSearcher;
+use App\Services\Searchers\PostMetaValuesSearcher;
 use App\Services\Searchers\ShortCodeSearcher;
 
 class SearcherFactory
@@ -17,7 +18,8 @@ class SearcherFactory
     {
         return match ($type) {
             'posts' => new PostsSearcher(),
-            'postmeta' => new PostMetaSearcher(),
+            'postmeta_values' => new PostMetaValuesSearcher(),
+            'postmeta_keys' => new PostMetaKeysSearcher(),
             'options' => new OptionsSearcher(),
             'option_name' => new OptionNameSearcher(),
             'shortcodes' => new ShortCodeSearcher(),

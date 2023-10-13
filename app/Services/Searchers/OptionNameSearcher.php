@@ -49,7 +49,7 @@ class OptionNameSearcher extends BlogSearcher
         $found = $showNotFound ? $this->notFound : $this->found;
         $this->foundCount = 0;
         $html .= '<div style="font-family: sans-serif">';
-        $html .= '<table style="width: 100%;">';
+        $html .= self::TABLE_TAG;
         $html .= $this->buildHeader();
         $found->each(function ($item) use (&$html) {
             if (in_array($item['blog_id'], $this->unique)) {
@@ -57,7 +57,7 @@ class OptionNameSearcher extends BlogSearcher
             }
             $url = $item['blog_url'];
             $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
-            $html .= '      <td class="align-top">';
+            $html .= '      <td class="align-top first-cell">';
             $html .= $item['blog_id'];
             $html .= '      </td>';
             $html .= '      <td class="align-top">';

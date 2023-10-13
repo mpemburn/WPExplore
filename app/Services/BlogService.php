@@ -8,7 +8,7 @@ use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
 use App\Services\Searchers\OptionsSearcher;
-use App\Services\Searchers\PostMetaSearcher;
+use App\Services\Searchers\PostMetaValuesSearcher;
 use App\Services\Searchers\PostsSearcher;
 use App\Services\Searchers\ShortCodeSearcher;
 use Illuminate\Support\Carbon;

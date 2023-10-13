@@ -57,12 +57,12 @@ class PostsSearcher extends BlogSearcher
 
         $this->foundCount = 0;
         $html .= '<div style="font-family: sans-serif">';
-        $html .= '<table style="width: 100%;">';
+        $html .= self::TABLE_TAG;
         $html .= $this->buildHeader();
         $this->found->each(function ($page) use (&$html) {
             $url = $page['blog_url'] . $page['post_name'];
             $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
-            $html .= '      <td class="align-top">';
+            $html .= '      <td class="align-top first-cell">';
             $html .= $page['blog_id'];
             $html .= '      </td>';
             $html .= '      <td class="align-top">';

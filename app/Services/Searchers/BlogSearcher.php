@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Schema;
 abstract class BlogSearcher implements SearcherInterface
 {
 
+    const TABLE_TAG = '<table style="width: 100%;">';
+
     protected Collection $found;
     protected Collection $notFound;
     protected int $foundCount = 0;
@@ -76,11 +78,13 @@ abstract class BlogSearcher implements SearcherInterface
 
     protected function buildHeader(): string
     {
+        $class = ' class="first-cell"';
         $html = '   <tr style="background-color: #e2e8f0;">';
         foreach (array_values($this->headers) as $header) {
-            $html .= '      <td>';
+            $html .= '      <th' . $class . '>';
             $html .= $header;
-            $html .= '      </td>';
+            $html .= '      </th>';
+            $class = '';
         }
         $html .= '   </tr>';
 

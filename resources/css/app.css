@@ -48,3 +48,8 @@ div.form-parts {
 #found {
     clear: left;
 }
+
+.first-cell {
+     padding-left: 5px;
+}
+

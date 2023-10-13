@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-pdo": "*",
@@ -21,7 +21,8 @@
         "spatie/async": "^1.5",
         "spatie/crawler": "^7.1",
         "stechstudio/laravel-ssh-tunnel": "^3.3",
-        "symfony/process": "^6.3"
+        "symfony/process": "^6.3",
+        "ext-pcntl": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
