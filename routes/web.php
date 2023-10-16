@@ -11,11 +11,13 @@ use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
 use App\Services\BlogService;
 use App\Services\CsvService;
+use App\Services\DatabaseImportService;
 use App\Services\DatabaseService;
 use App\Services\LogParserService;
 use App\Services\UrlService;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -35,20 +37,6 @@ use Spatie\Async\Pool;
 |
 */
 Route::get('/dev', function () {
-    pcntl_errno();
-    $pool = Pool::create();
-
-    foreach (range(1, 5) as $i) {
-        $pool[] = async(function () use ($i) {
-            echo 'bluh';
-        })->then(function (int $output) {
-            echo 'duh';
-        })->catch(function (Exception $exception) {
-            echo $exception->getMessage() . '<br>';
-        });
-    }
-
-    await($pool);
     // Do what thou wilt
 });
 

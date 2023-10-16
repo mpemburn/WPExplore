@@ -61,4 +61,8 @@ class FileService
         return [];
     }
 
+    public function getContentsCollection(string $filepath): Collection
+    {
+        return collect($this->getContentsArray($filepath));
+    }
 }
