@@ -25,7 +25,7 @@ class MigrateTablesService
 
     public function __construct()
     {
-        $this->databases = DatabaseService::getInverseDatabaseList();
+        $this->databases = Database::getInverseDatabaseList();
         $this->blogTables = collect();
         $this->createTableStatements = collect();
         $this->dropTableStatements = collect();
@@ -69,7 +69,7 @@ class MigrateTablesService
 
     protected function switchToDatabase(string $databaseName)
     {
-        DatabaseService::setDb($databaseName);
+        Database::setDb($databaseName);
     }
 
     public function run(): void

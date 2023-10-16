@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use App\Services\MigrateTablesService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

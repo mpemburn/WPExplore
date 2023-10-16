@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\BlogService;
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use App\Services\MigrateTablesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +12,7 @@ class MigrationController extends Controller
 {
     public function index()
     {
-        $databases = DatabaseService::getDatabaseList();
+        $databases = Database::getDatabaseList();
 
         return view('migrate', [
             'databases' => $databases,
@@ -25,7 +25,7 @@ class MigrationController extends Controller
         if (! $database) {
             return response()->json(['error' => 'No Database']);
         }
-        DatabaseService::setDb($database);
+        Database::setDb($database);
 
         $subsites = $service->getActiveBlogs()->toArray();
 

@@ -31,7 +31,7 @@ class DatabaseImportService
 
     public function setDatabase(string $dbName): self
     {
-        DatabaseService::setDb($dbName);
+        Database::setDb($dbName);
 
         return $this;
     }

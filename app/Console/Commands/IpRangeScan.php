@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\UrlService;
+use App\Facades\Curl;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Symfony\Component\Process\Process;
@@ -65,7 +65,7 @@ class IpRangeScan extends Command
             echo 'Testing: ' . $url . PHP_EOL;
         }
 
-        $code = (new UrlService())->testUrl($url);
+        $code = Curl::testUrl($url);
         if ($code === 200) {
             echo $url . ' -- Found'. PHP_EOL;
         } else {

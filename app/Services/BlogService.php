@@ -21,7 +21,7 @@ class BlogService
     public function setDatabase(?string $database): self
     {
         if ($database) {
-            DatabaseService::setDb($database);
+            Database::setDb($database);
         }
 
         return $this;

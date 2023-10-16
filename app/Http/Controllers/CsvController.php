@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Services\CsvService;
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +14,7 @@ class CsvController extends Controller
 {
     public function index()
     {
-        $databases = DatabaseService::getDatabaseList();
+        $databases = Database::getDatabaseList();
 
         return view('csv', [
             'csvTypes' => CsvService::AVAILABLE_CSV_TYPES,
@@ -29,7 +29,7 @@ class CsvController extends Controller
         if (! $database) {
             return response()->json(['error' => 'No Database']);
         }
-        DatabaseService::setDb($database);
+        Database::setDb($database);
         $last = Blog::min('last_updated');
         $minDate = '';
         if ($last) {

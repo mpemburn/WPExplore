@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Factories\SearcherFactory;
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class SearchController extends Controller
         $source = request('source');
         $useList = $source === 'test' ? 'INSTALLED_TEST_DATABASES' : 'INSTALLED_DATABASES';
 
-        $databases = DatabaseService::getDatabaseList($useList);
+        $databases = Database::getDatabaseList($useList);
 
         return view('search', ['databases' => $databases]);
     }
@@ -24,7 +24,7 @@ class SearchController extends Controller
         if (! $database) {
             return response()->json(['error' => 'No Database']);;
         }
-        DatabaseService::setDb($database);
+        Database::setDb($database);
         $searchType = request('type');
         $searchText = request('text');
         $exact = (bool)request('exact');

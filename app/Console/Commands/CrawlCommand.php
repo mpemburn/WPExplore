@@ -8,7 +8,7 @@ use App\Interfaces\ObserverActionInterface;
 use App\Models\BlogList;
 use App\ObserverActions\BlogObserverAction;
 use App\Services\BlogCrawlerService;
-use App\Services\UrlService;
+use App\Facades\Curl;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use PDOException;
@@ -112,7 +112,7 @@ abstract class CrawlCommand extends Command
                 echo 'Testing ' . $url . PHP_EOL;
             }
 //            $code = (new BlogCrawlerService($this->observerAction))->testUrl($url, $finder::AUTH_USERNAME, $finder::AUTH_PASSWORD);
-            $code = (new UrlService())->testUrl($url, $finder::AUTH_USERNAME, $finder::AUTH_PASSWORD);
+            $code = Curl::testUrl($url, $finder::AUTH_USERNAME, $finder::AUTH_PASSWORD);
 
             if ($code !== 200) {
                 echo $url. ' failed with ' . $code . ' error.' . PHP_EOL;

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\DatabaseImportService;
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

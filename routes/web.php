@@ -12,9 +12,9 @@ use App\Observers\WebObserver;
 use App\Services\BlogService;
 use App\Services\CsvService;
 use App\Services\DatabaseImportService;
-use App\Services\DatabaseService;
+use App\Facades\Database;
 use App\Services\LogParserService;
-use App\Services\UrlService;
+use App\Facades\Curl;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
@@ -37,6 +37,11 @@ use Spatie\Async\Pool;
 |
 */
 Route::get('/dev', function () {
+    $does = \App\Facades\Curl::testUrl('www.clarku.edu');
+
+    if ($does) {
+        echo 'It does!';
+    }
     // Do what thou wilt
 });
 
@@ -59,11 +64,11 @@ Route::post('/do_migration', 'App\Http\Controllers\MigrationController@migration
 
 Route::get('/load_blogs', function () {
     $currentSite = request('site');
-    DatabaseService::setDb($currentSite . '_clarku');
+    Database::setDb($currentSite . '_clarku');
 
     $blogs = (new BlogService())->getActiveBlogs();
 
-    DatabaseService::setDb('server_tests');
+    Database::setDb('server_tests');
     DB::purge('mysql');
     $blogs->each(function ($blog) use ($currentSite) {
         BlogList::create([
@@ -117,7 +122,7 @@ Route::get('/where_active', function () {
     $currentSite = request('site');
     $notFoundOnly = request('not_found');
 
-    DatabaseService::setDb($currentSite . '_clarku');
+    Database::setDb($currentSite . '_clarku');
 
     $rootPath = Storage::path('plugins_json');
     $file = $rootPath . "/{$currentSite}_plugins.json";
@@ -138,7 +143,7 @@ Route::get('/where_active', function () {
 Route::get('/active', function () {
     $currentSite = request('site');
     if ($currentSite) {
-        DatabaseService::setDb($currentSite . '_clarku');
+        Database::setDb($currentSite . '_clarku');
     }
 
     $blogs = (new BlogService())->getActiveBlogs();

@@ -29,7 +29,7 @@ class CsvService
 
     public function callCsvMethod(string $database, string $type, string $filename): string
     {
-        DatabaseService::setDb($database);
+        Database::setDb($database);
         switch ($type) {
             case 'active_blogs':
                 return $this->createActiveBlogsCsv($filename);

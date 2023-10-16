@@ -123,7 +123,7 @@ class BlogCrawlerService
 
     public function testUrl(string $url, ?string $username = null, ?string $password = null): int
     {
-        return (new UrlService())->testUrl($url, $username, $password);
+        return Curl::testUrl($url, $username, $password);
     }
 
     protected function truncate(FindableLink $linkFinder): void
