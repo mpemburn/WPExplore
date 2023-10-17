@@ -25,6 +25,7 @@
                                     <option value="option_name">Option Names</option>
                                     <option value="shortcodes">Shortcodes in Posts</option>
                                     <option value="plugins">Plugins</option>
+                                    <option value="themes">Themes</option>
                                     <option value="updated">Most recent update</option>
                                 </select>
                             </label>

@@ -37,11 +37,12 @@ use Spatie\Async\Pool;
 |
 */
 Route::get('/dev', function () {
-    $does = \App\Facades\Curl::testUrl('www.clarku.edu');
+    Database::setDb('www_clarku');
+    $theme = (new Option())->setTable('wp_334_options')
+        ->where('option_name', 'stylesheet')
+        ->first();
 
-    if ($does) {
-        echo 'It does!';
-    }
+    !d($theme->option_value);
     // Do what thou wilt
 });
 
