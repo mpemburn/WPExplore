@@ -14,6 +14,7 @@ class ProductionBrokenPage extends Link
     ];
 
     public $table = 'www_broken_pages';
+    public ?string $sourceDb = 'www_clarku';
     protected string $site = 'www';
     protected string $blogBasePath = 'www.clarku.edu';
 }

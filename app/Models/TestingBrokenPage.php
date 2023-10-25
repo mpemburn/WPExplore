@@ -17,6 +17,7 @@ class TestingBrokenPage extends Link
     ];
 
     public $table = 'www_testing_broken_pages';
+    public ?string $sourceDb = 'www_clarku';
     protected string $site = 'www';
     protected string $blogBasePath = 'www.testing.clarku.edu';
 }

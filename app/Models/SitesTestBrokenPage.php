@@ -14,6 +14,7 @@ class SitesTestBrokenPage extends Link
     ];
 
     public $table = 'sites_test_broken_pages';
+    public ?string $sourceDb = 'sites_clarku';
     protected string $site = 'sites';
     protected string $blogBasePath = 'sites.test.clarku.edu';
 }

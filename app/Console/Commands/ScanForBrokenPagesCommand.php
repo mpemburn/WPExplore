@@ -13,6 +13,10 @@ class ScanForBrokenPagesCommand extends CrawlCommand
      */
     protected $description = 'Scans for broken pages';
 
+    /*
+    protected $signature = 'scan:pages {--env=} {--flush} {--resume_at=} {--top} {--fatal} {--nopersist}}';
+    */
+
     public function handle()
     {
         $this->echo = $this->option('verbose') ? true : false;

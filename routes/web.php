@@ -6,6 +6,7 @@ use App\Models\BlogList;
 use App\Models\CfLegacyApp;
 use App\Models\Option;
 use App\Models\Post;
+use App\Models\SitesProductionBrokenPage;
 use App\Observers\BlogObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
@@ -36,13 +37,41 @@ use Spatie\Async\Pool;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/dev', function () {
+Route::get('/blogs', function () {
+//    $blogs = BlogList::where('site', 'www')->where('deprecated', 0);
+//    !d($blogs->get()->toArray());
+//    return;
     Database::setDb('www_clarku');
-    $theme = (new Option())->setTable('wp_334_options')
-        ->where('option_name', 'stylesheet')
-        ->first();
+    $blogList = collect();
+    $active = (new BlogService())->getActiveBlogs();
+    $active->each(function ($blog) use (&$blogList) {
+        $blogList->push([
+            'blog_id' => $blog['blog_id'],
+            'blog_url' => $blog['siteurl'],
+        ]);
+    });
+    !d($blogList);
+});
 
-    !d($theme->option_value);
+Route::get('/dev', function () {
+    $tests = \App\Models\SitesTestBrokenPage::all();
+
+    $count = 0;
+    $errors = 0;
+    $tests->each(function ($test) use (&$count, &$errors) {
+        $url = str_replace('test.', '', $test->page_url);
+        $prod = SitesProductionBrokenPage::where('page_url', $url)->first();
+
+        if ($prod && $prod->error !== $test->error) {
+            !d($prod->error);
+            $errors++;
+        }
+        $count++;
+
+    });
+
+    echo $count . ' lines scanned.<br>';
+    echo $errors . ' errors found.<br>';
     // Do what thou wilt
 });
 

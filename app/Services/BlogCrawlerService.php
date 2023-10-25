@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Facades\Curl;
+use App\Facades\Database;
 use App\Interfaces\FindableLink;
 use App\Interfaces\ObserverActionInterface;
 use App\Models\Blog;
@@ -12,6 +14,7 @@ use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Collection;
 use Spatie\Async\Pool;
 use Spatie\Crawler\Crawler;
+use Throwable;
 
 class BlogCrawlerService
 {
@@ -41,7 +44,7 @@ class BlogCrawlerService
         $finder = new $finderClass();
         $blogs = $this->resume
             ? $this->getRemainingBlogs($finder)
-            : BlogList::where('site', $finder->getSite())->where('deprecated', 0);
+            : $this->getBlogsList($finder);
 
         $blogs->each(function ($blog) use ($finder, $echo) {
             $blogUrl = $finder->replaceBasePath($blog['blog_url']);
@@ -54,6 +57,29 @@ class BlogCrawlerService
         });
 
         return $this;
+    }
+
+    protected function getBlogsList(FindableLink $finder)
+    {
+        if (! $finder->sourceDb) {
+            return BlogList::where('site', $finder->getSite())
+                ->where('deprecated', 0)
+                ->get();
+        }
+
+        Database::setDb($finder->sourceDb);
+        $blogList = collect();
+        (new BlogService())->getActiveBlogs()
+            ->each(function ($blog) use (&$blogList) {
+                $blogList->push([
+                    'blog_id' => $blog['blog_id'],
+                    'blog_url' => $blog['siteurl'],
+                ]);
+            });
+        Database::setDb(env('DB_DATABASE'));
+
+
+        return $blogList;
     }
 
     protected function getRemainingBlogs(FindableLink $finder): Collection

@@ -14,6 +14,7 @@ class NewsProductionBrokenPage extends Link
     ];
 
     public $table = 'news_broken_pages';
+    public ?string $sourceDb = 'news_clarku';
     protected string $site = 'news';
     protected string $blogBasePath = 'news.clarku.edu';
 }

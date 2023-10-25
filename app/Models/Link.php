@@ -12,6 +12,7 @@ abstract class Link extends Model implements FindableLink
     public const AUTH_USERNAME = null;
     public const AUTH_PASSWORD = null;
 
+    public ?string $sourceDb = null;
     protected string $site = '';
     protected string $blogBasePath = '';
     protected array $alternateImagePaths = [];

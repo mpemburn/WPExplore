@@ -14,6 +14,7 @@ class NewsTestBrokenPage extends Link
     ];
 
     public $table = 'news_test_broken_pages';
+    public ?string $sourceDb = 'news_clarku';
     protected string $site = 'news';
     protected string $blogBasePath = 'news.test.clarku.edu';
 }
