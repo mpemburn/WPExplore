@@ -29,19 +29,19 @@ class CfLegacyApp extends Model
     ];
     public $table = 'cold_fusion_legacy_apps';
 
-//    public function getErrorCodeAttribute($code)
-//    {
-//        return self::ERROR_CODES[$code] ?? 'okay';
-//    }
-//
-//    public function getRedirectUrlAttribute($url)
-//    {
-//        return $url ?? 'n/a';
-//    }
-//
-//    public function getPageTitleAttribute($title)
-//    {
-//        return str_replace(',', '-',$title) ?? 'n/a';
-//    }
+    public function getErrorCodeAttribute($code)
+    {
+        return self::ERROR_CODES[$code] ?? 'okay';
+    }
+
+    public function getRedirectUrlAttribute($url)
+    {
+        return $url ?? 'n/a';
+    }
+
+    public function getPageTitleAttribute($title)
+    {
+        return str_replace(',', '-',$title) ?? 'n/a';
+    }
 
 }

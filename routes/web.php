@@ -15,8 +15,10 @@ use App\Services\BlogService;
 use App\Services\CsvService;
 use App\Services\DatabaseImportService;
 use App\Facades\Database;
+use App\Services\FileService;
 use App\Services\LogParserService;
 use App\Facades\Curl;
+use App\Services\WebArchiveService;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
@@ -39,7 +41,31 @@ use Ahc\Jwt\JWT;
 |
 */
 
+Route::get('/sites', function () {
+    $baseUrl = 'http://www2.clarku.edu/';
+
+    (new WebArchiveService())->setServer('charlotte')
+        ->setBaseUrl($baseUrl)
+        ->setFilePath('indices2.txt')
+        ->gather();
+ });
+
 Route::get('/dev', function () {
+    Database::setDb('coldfusion_tests');
+    CfLegacyAppBaseline::all()->each(function ($cf) {
+        $error = $cf->error;
+        $current = CfLegacyApp::where('index_url', $cf->index_url)
+            ->first();
+        if (! $current) {
+            return;
+        }
+        echo $cf->index_url . '<br>';
+
+        if ($current->error !== $error) {
+            echo '~~~~~~~~~~~~~~~~~~~ Changed! ' . $cf->index_url . '<br>';
+        }
+    });
+
     // Do what thou wilt
 });
 
