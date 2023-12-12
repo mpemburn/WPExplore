@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CfLegacyApp extends Model
+class CfLegacyAppBaseline extends Model
 {
     use HasFactory;
 
@@ -27,21 +27,21 @@ class CfLegacyApp extends Model
         'redirect_url',
         'error_code',
     ];
-    public $table = 'cold_fusion_legacy_apps';
+    public $table = 'cold_fusion_legacy_apps_baseline';
 
-//    public function getErrorCodeAttribute($code)
-//    {
-//        return self::ERROR_CODES[$code] ?? 'okay';
-//    }
-//
-//    public function getRedirectUrlAttribute($url)
-//    {
-//        return $url ?? 'n/a';
-//    }
-//
-//    public function getPageTitleAttribute($title)
-//    {
-//        return str_replace(',', '-',$title) ?? 'n/a';
-//    }
+    public function getErrorCodeAttribute($code)
+    {
+        return self::ERROR_CODES[$code] ?? 'okay';
+    }
+
+    public function getRedirectUrlAttribute($url)
+    {
+        return $url ?? 'n/a';
+    }
+
+    public function getPageTitleAttribute($title)
+    {
+        return str_replace(',', '-',$title) ?? 'n/a';
+    }
 
 }

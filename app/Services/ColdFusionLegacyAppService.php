@@ -39,11 +39,16 @@ class ColdFusionLegacyAppService
 
     public function testAndWrite(string $sourceFile, string $baseUrl, string $server, string $path = '')
     {
+        if (! file_exists(Storage::path($sourceFile))) {
+            return;
+        }
+
         $sourceFiles = FileService::toArray(Storage::path($sourceFile));
         $sourcePath = $baseUrl . $path;
 
         collect($sourceFiles)->each(function ($rawPath) use ($sourcePath, $server) {
             echo $rawPath;
+
             if (str_replace(self::EXCLUDE_TEXT, '', $rawPath) != $rawPath) {
                 return;
             }

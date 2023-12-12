@@ -36,7 +36,7 @@ class TestUrlsForRedirects extends Command
     {
         $sourceFile = $this->option('file');
         $baseUrl = $this->option('baseurl');
-        $path = $this->option('path');
+        $path = $this->option('path') ?? '';
         $server = $this->option('server');
 
         (new ColdFusionLegacyAppService())->testAndWrite(

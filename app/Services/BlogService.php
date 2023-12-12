@@ -2,19 +2,12 @@
 
 namespace App\Services;
 
-use App\Generators\BlogsCsvGenerator;
-use App\Generators\BlogsInDateRangeCsvGenerator;
+use App\Facades\Database;
 use App\Models\Blog;
 use App\Models\Option;
 use App\Models\Post;
-use App\Services\Searchers\OptionsSearcher;
-use App\Services\Searchers\PostMetaValuesSearcher;
-use App\Services\Searchers\PostsSearcher;
-use App\Services\Searchers\ShortCodeSearcher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Schema;
 
 class BlogService
 {
@@ -31,15 +24,10 @@ class BlogService
     public function getActiveBlogs(array $filter = [], ?string $startDate = null, ?string $endDate = null): Collection
     {
         $rows = collect();
-//        if ($startDate && $endDate) {
-//            $blogs = Blog::whereBetween('last_updated', [date($startDate), date($endDate)])->get();
             $blogs = Blog::where('archived', 0)
                 ->where('deleted', 0)
                 ->where('public', 1)
                 ->get();
-//        } else {
-//            $blogs = Blog::all();
-//        }
 
         $blogs->each(function ($blog) use ($rows, $filter) {
 
