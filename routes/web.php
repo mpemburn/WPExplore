@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\Sheets\WebArchiveSheet;
+use App\Exports\WebArchiveExport;
 use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
 use App\Models\BlogList;
@@ -43,9 +45,10 @@ use Ahc\Jwt\JWT;
 */
 
 Route::get('/sites', function () {
-    $baseUrl = 'https://www2.clarku.edu/';
+    $baseUrl = 'https://web.clarku.edu/';
 
-    (new WebArchiveService())->setServer('wilbur')
+    (new WebArchiveService())
+        ->setServer('wilbur')
         ->setBaseUrl($baseUrl)
         ->setFilePath('indices4.txt')
         ->gather();
@@ -59,21 +62,7 @@ Route::get('/sites', function () {
  });
 
 Route::get('/dev', function () {
-    Database::setDb('coldfusion_tests');
-    CfLegacyAppBaseline::all()->each(function ($cf) {
-        $error = $cf->error;
-        $current = CfLegacyApp::where('index_url', $cf->index_url)
-            ->first();
-        if (! $current) {
-            return;
-        }
-        //echo $cf->index_url . '<br>';
-
-        if ($current->error !== $error) {
-            echo '~~~~~~~~~~~~~~~~~~~ Changed! ' . $cf->index_url . '<br>';
-        }
-    });
-
+    return (new WebArchiveExport('charlotte'))->download('charlotte.xlsx');
     // Do what thou wilt
 });
 

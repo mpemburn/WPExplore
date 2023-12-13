@@ -6,6 +6,7 @@ use App\Facades\Curl;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RedirectMiddleware;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -84,6 +85,13 @@ class WebArchiveService extends WebTestService
                 Storage::append('public/' . $this->server . '/misc.txt', $url);
             }
         });
+    }
+
+    public function getFileList(string $filePath): Collection
+    {
+        $fullPath = Storage::path($filePath);
+
+        return collect(File::allFiles($fullPath));
     }
 
     public function runTests(): void
