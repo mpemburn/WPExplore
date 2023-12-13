@@ -2,23 +2,19 @@
 
 namespace App\Console\Commands;
 
-use App\Models\CfLegacyApp;
-use App\Services\ColdFusionLegacyAppService;
-use DOMDocument;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\RedirectMiddleware;
+use App\Models\WebArchiveTest;
+use App\Services\WebArchiveService;
+use App\Services\WebTestService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
-class TestUrlsForRedirects extends Command
+class TestWebUrls extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'redirect:test {--server=} {--file=} {--baseurl=} {--path=}';
+    protected $signature = 'test:web {--server=} {--file=} {--baseurl=} {--path=}';
 
     /**
      * The console command description.
@@ -34,18 +30,17 @@ class TestUrlsForRedirects extends Command
      */
     public function handle()
     {
+        $server = $this->option('server');
         $sourceFile = $this->option('file');
         $baseUrl = $this->option('baseurl');
         $path = $this->option('path') ?? '';
-        $server = $this->option('server');
 
-        (new ColdFusionLegacyAppService())
-            ->setSourceFile($sourceFile)
+        (new WebArchiveService())
             ->setBaseUrl($baseUrl)
             ->setServer($server)
             ->setFilePath($path)
-            ->setDataModel(new CfLegacyApp())
-            ->testAndWrite();
+            ->setDataModel(new WebArchiveTest())
+            ->runTests();
 
         return Command::SUCCESS;
     }

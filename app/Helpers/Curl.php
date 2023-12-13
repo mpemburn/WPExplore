@@ -2,6 +2,10 @@
 
 namespace App\Helpers;
 
+use App\Models\CfLegacyApp;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 class Curl
 {
     public function testUrl(string $url): bool
@@ -14,6 +18,20 @@ class Curl
         curl_close($ch);
 
         return ((int) $code) === 200;
+    }
+
+    public static function testRedirect(string $url): string
+    {
+        try {
+
+            $client = new Client(['allow_redirects' => ['track_redirects' => true]]);
+            $response = $client->get($url);
+            !d($response);
+            return 'okay';
+
+        } catch (GuzzleException $e) {
+            return CfLegacyApp::ERROR_CODES[$e->getCode()];
+        }
     }
 
     public function getContents(string $url, bool $noFollow = true): string

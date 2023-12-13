@@ -2,9 +2,14 @@
 
 namespace App\Services;
 
+use App\Facades\Curl;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\RedirectMiddleware;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class WebArchiveService
+class WebArchiveService extends WebTestService
 {
     const CATEGORIES = [
         'admissions',
@@ -80,4 +85,32 @@ class WebArchiveService
             }
         });
     }
+
+    public function runTests(): void
+    {
+        $rootPath = Storage::path('public/' . $this->server);
+        collect(File::allFiles($rootPath))->each(function ($file) use ($rootPath) {
+            $filename = $file->getFilename();
+            $category = $file->getFilenameWithoutExtension();
+            $this->setSourceFile($rootPath . '/' . $filename, false);
+            $this->testAndWrite($category);
+        });
+    }
+
+    public function testAndWrite(?string $category = null): void
+    {
+        if (! file_exists($this->sourceFile)) {
+            return;
+        }
+
+        $sourceFiles = FileService::toArray($this->sourceFile);
+        $sourcePath = $this->baseUrl . $this->filePath;
+
+        collect($sourceFiles)->each(function ($testUrl) use ($category, $sourcePath) {
+            echo $testUrl . PHP_EOL;
+
+            $this->createRecord($testUrl, $sourcePath, $category);
+        });
+    }
+
 }

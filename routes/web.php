@@ -8,6 +8,7 @@ use App\Models\CfLegacyAppBaseline;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\SitesProductionBrokenPage;
+use App\Models\WebArchiveTest;
 use App\Observers\BlogObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
@@ -42,12 +43,19 @@ use Ahc\Jwt\JWT;
 */
 
 Route::get('/sites', function () {
-    $baseUrl = 'http://www2.clarku.edu/';
+    $baseUrl = 'https://www2.clarku.edu/';
 
-    (new WebArchiveService())->setServer('charlotte')
+    (new WebArchiveService())->setServer('wilbur')
         ->setBaseUrl($baseUrl)
-        ->setFilePath('indices2.txt')
+        ->setFilePath('indices4.txt')
         ->gather();
+
+//    (new WebArchiveService())
+//        ->setBaseUrl($baseUrl)
+//        ->setServer('charlotte')
+//        ->setFilePath('')
+//        ->setDataModel(new WebArchiveTest())
+//        ->runTests();
  });
 
 Route::get('/dev', function () {
@@ -59,7 +67,7 @@ Route::get('/dev', function () {
         if (! $current) {
             return;
         }
-        echo $cf->index_url . '<br>';
+        //echo $cf->index_url . '<br>';
 
         if ($current->error !== $error) {
             echo '~~~~~~~~~~~~~~~~~~~ Changed! ' . $cf->index_url . '<br>';
