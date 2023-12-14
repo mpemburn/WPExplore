@@ -23,10 +23,10 @@ class WebArchiveService extends WebTestService
         'faculty',
         'geography',
         'graduate',
-        'gsom',
-        'idce',
-        'its',
-        'leep',
+        'GSOM',
+        'IDCE',
+        'ITS',
+        'LEEP',
         'luminis',
         'offices',
         'policies',
@@ -42,6 +42,7 @@ class WebArchiveService extends WebTestService
     protected string $server;
     protected string $baseUrl;
     protected string $filePath;
+    protected bool $prepend;
 
     public function setServer(string $server): self
     {
@@ -64,8 +65,10 @@ class WebArchiveService extends WebTestService
         return $this;
     }
 
-    public function gather()
+    public function gather(bool $prependBaseUrl = false)
     {
+        $this->prepend = $prependBaseUrl;
+
         $categories = collect(self::CATEGORIES);
 
         FileService::toCollection($this->filePath)->each(function ($file) use ($categories) {
@@ -74,9 +77,10 @@ class WebArchiveService extends WebTestService
             }
             $url = str_replace('./', $this->baseUrl, $file);
             $found = false;
-            $categories->each(function ($cat) use ($file, $url, &$found) {
-                if (stripos($file, '/' . $cat . '/') !== false) {
-                    Storage::append('public/' . $this->server . '/' . $cat . '.txt', $url);
+            $categories->each(function ($category) use ($file, $url, &$found) {
+                if (stripos($file, '/' . $category . '/') !== false) {
+                    $url = $this->prepend ? $this->baseUrl . $url : $url;
+                    Storage::append('public/' . $this->server . '/' . $category . '.txt', $url);
                     $found = true;
                 }
             });

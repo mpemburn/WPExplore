@@ -48,9 +48,9 @@ Route::get('/sites', function () {
     $baseUrl = 'https://web.clarku.edu/';
 
     (new WebArchiveService())
-        ->setServer('wilbur')
+        ->setServer('wilbur_login')
         ->setBaseUrl($baseUrl)
-        ->setFilePath('indices4.txt')
+        ->setFilePath('cf_apps/logincfm_wilbur.txt')
         ->gather();
 
 //    (new WebArchiveService())
@@ -63,6 +63,20 @@ Route::get('/sites', function () {
 
 Route::get('/dev', function () {
     return (new WebArchiveExport('charlotte'))->download('charlotte.xlsx');
+//    $query = WebArchiveTest
+//        ::query()
+//        ->select(['web_root', 'page_title'])
+//        ->where('redirect_url', '0')
+//        ->where('web_root', 'NOT LIKE', '%delete_%')
+//        ->where('server', 'charlotte')
+//        ->where('category', 'departments')
+//        ->get();
+//
+////    !d($query);
+//    $query->each(function ($row) {
+//        !d($row->web_root);
+//    });
+
     // Do what thou wilt
 });
 

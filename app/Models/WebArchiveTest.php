@@ -35,6 +35,11 @@ class WebArchiveTest extends Model
         return self::ERROR_CODES[$code] ?? 'okay';
     }
 
+    public function getWebRootAttribute($web_root)
+    {
+        return '=HYPERLINK("' . $web_root . '", "' . $web_root . '")';
+    }
+
     public function getRedirectUrlAttribute($url)
     {
         return $url ?? 'n/a';
