@@ -2,6 +2,7 @@
 namespace App\Exports;
 
 use App\Exports\Sheets\WebArchiveSheet;
+use App\Models\CfmArchiveTest;
 use App\Models\WebArchiveTest;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
@@ -30,7 +31,6 @@ class WebArchiveExport implements WithMultipleSheets, WithHeadings
     public function sheets(): array
     {
         $sheets = [];
-
         $this->getCategories()
             ->each(function ($result) use (&$sheets) {
                 $query = $this->getSheetData($result->category);
@@ -46,7 +46,7 @@ class WebArchiveExport implements WithMultipleSheets, WithHeadings
 
     protected function getCategories(): Builder
     {
-        return WebArchiveTest::query()
+        return CfmArchiveTest::query()
             ->select(['category'])
             ->where('server', $this->server)
             ->orderBy('category')
@@ -55,11 +55,11 @@ class WebArchiveExport implements WithMultipleSheets, WithHeadings
 
     protected function getSheetData(string $category): ?Builder
     {
-        $query = WebArchiveTest
+        $query = CfmArchiveTest
             ::query()
             ->select(['web_root', 'page_title'])
-            ->where('redirect_url', '0')
-            ->where('web_root', 'NOT LIKE', '%delete_%')
+            ->whereNull('redirect_url')
+//            ->where('web_root', 'NOT LIKE', '%delete_%')
             ->where('server', $this->server)
             ->where('category', $category);
 

@@ -62,7 +62,7 @@ Route::get('/sites', function () {
  });
 
 Route::get('/dev', function () {
-    return (new WebArchiveExport('charlotte'))->download('charlotte.xlsx');
+    return (new WebArchiveExport('charlotte'))->download('charlotte_cfm.xlsx');
 //    $query = WebArchiveTest
 //        ::query()
 //        ->select(['web_root', 'page_title'])

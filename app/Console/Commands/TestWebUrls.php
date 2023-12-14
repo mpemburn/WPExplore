@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CfmArchiveTest;
 use App\Models\WebArchiveTest;
 use App\Services\WebArchiveService;
 use App\Services\WebTestService;
@@ -39,7 +40,7 @@ class TestWebUrls extends Command
             ->setBaseUrl($baseUrl)
             ->setServer($server)
             ->setFilePath($path)
-            ->setDataModel(new WebArchiveTest())
+            ->setDataModel(new CfmArchiveTest())
             ->runTests();
 
         return Command::SUCCESS;

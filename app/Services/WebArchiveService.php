@@ -41,7 +41,7 @@ class WebArchiveService extends WebTestService
 
     protected string $server;
     protected string $baseUrl;
-    protected string $filePath;
+    protected string $filePath = '';
     protected bool $prepend;
 
     public function setServer(string $server): self
@@ -60,7 +60,7 @@ class WebArchiveService extends WebTestService
 
     public function setFilePath(string $filePath): self
     {
-        $this->filePath =Storage::path('public/' . $filePath);
+        $this->filePath = Storage::path('public/' . $filePath);
 
         return $this;
     }
@@ -100,7 +100,10 @@ class WebArchiveService extends WebTestService
 
     public function runTests(): void
     {
-        $rootPath = Storage::path('public/' . $this->server);
+        $rootPath = empty($this->filePath)
+            ? Storage::path('public/' . $this->server)
+            : $this->filePath;
+
         collect(File::allFiles($rootPath))->each(function ($file) use ($rootPath) {
             $filename = $file->getFilename();
             $category = $file->getFilenameWithoutExtension();
