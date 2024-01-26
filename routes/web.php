@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\SitesProductionBrokenPage;
 use App\Models\WebArchiveTest;
 use App\Observers\BlogObserver;
+use App\Observers\UrlObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
 use App\Services\BlogService;
@@ -62,21 +63,6 @@ Route::get('/sites', function () {
  });
 
 Route::get('/dev', function () {
-    return (new WebArchiveExport('charlotte'))->download('charlotte_cfm.xlsx');
-//    $query = WebArchiveTest
-//        ::query()
-//        ->select(['web_root', 'page_title'])
-//        ->where('redirect_url', '0')
-//        ->where('web_root', 'NOT LIKE', '%delete_%')
-//        ->where('server', 'charlotte')
-//        ->where('category', 'departments')
-//        ->get();
-//
-////    !d($query);
-//    $query->each(function ($row) {
-//        !d($row->web_root);
-//    });
-
     // Do what thou wilt
 });
 

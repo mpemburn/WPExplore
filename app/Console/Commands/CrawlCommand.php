@@ -63,6 +63,7 @@ abstract class CrawlCommand extends Command
         }
 
         (new BlogCrawlerService($this->observerAction, $flushData, $resumeAt))
+            ->setIncludeList()
             ->loadCrawlProcesses($this->echo)->run();
 
         return Command::SUCCESS;

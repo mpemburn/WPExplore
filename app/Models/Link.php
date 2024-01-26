@@ -65,6 +65,9 @@ abstract class Link extends Model implements FindableLink
     {
         $parts = parse_url($url);
         $path = $parts['path'] ?? null;
+        if (str_ends_with($path, '_')) {
+            $path = rtrim($path, '_');
+        }
 
         return $parts['scheme'] . '://' . $this->blogBasePath . $path;
     }

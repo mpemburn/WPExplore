@@ -41,6 +41,7 @@ class BlogObserver extends CrawlObserver
         ?UriInterface     $foundOnUrl = null
     ): void
     {
+        echo 'Please crawl: ' . $url. PHP_EOL;
         $this->observerAction->setBlogRoot($this->blogRoot)
             ->act($url, $response, $foundOnUrl);
     }

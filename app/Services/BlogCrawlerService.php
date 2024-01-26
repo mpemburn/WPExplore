@@ -12,6 +12,7 @@ use App\Models\Option;
 use App\Observers\BlogObserver;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Async\Pool;
 use Spatie\Crawler\Crawler;
 use Throwable;
@@ -19,6 +20,7 @@ use Throwable;
 class BlogCrawlerService
 {
     protected Collection $processes;
+    protected Collection $blogs;
     protected FindableLink $linkFinder;
     protected ObserverActionInterface $observerAction;
     protected bool $resume = false;
@@ -36,6 +38,24 @@ class BlogCrawlerService
 
         $this->observerAction = $observerAction;
         $this->resumeAt = $resumeAt;
+    }
+
+    public function setIncludeList(): self
+    {
+        $file = Storage::path('www_sites_with_clarku-subsite.csv');
+        $csv = file_get_contents($file);
+        $this->blogs = collect();
+
+        collect(explode("\n", $csv))->each(function ($line) {
+            $parts = explode(',', $line);
+
+            $this->blogs->push(collect([
+                'blog_id' => $parts[0],
+                'blog_url' => $parts[1],
+            ]));
+        });
+
+        return $this;
     }
 
     public function loadCrawlProcesses(bool $echo = false): self
@@ -61,6 +81,10 @@ class BlogCrawlerService
 
     protected function getBlogsList(FindableLink $finder)
     {
+        if ($this->blogs) {
+            return $this->blogs;
+        }
+
         if (! $finder->sourceDb) {
             return BlogList::where('site', $finder->getSite())
                 ->where('deprecated', 0)
@@ -110,6 +134,8 @@ class BlogCrawlerService
      * @return true
      */
     public function fetchContent(int $blogId, string $url, bool $echo = false) {
+        echo $url . ' Found' . PHP_EOL;
+
         $options = [RequestOptions::ALLOW_REDIRECTS => true, RequestOptions::TIMEOUT => 30];
         // Get HTTP Basic Auth username and password if available
         $options = $this->linkFinder->getAuth($options);

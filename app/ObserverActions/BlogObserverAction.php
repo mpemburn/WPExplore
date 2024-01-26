@@ -23,7 +23,6 @@ class BlogObserverAction extends ObserverAction
             return;
         }
 
-
         $doc = new DOMDocument();
         $body = $response->getBody();
 
@@ -37,6 +36,12 @@ class BlogObserverAction extends ObserverAction
 
         // Fix the URL if necessary
         $url = $this->linkFinder->replaceBasePath($url->__toString());
+        echo 'Saving: ' . $url . PHP_EOL;
+        $this->linkFinder->create([
+            'blog_id' => $this->blogId,
+            'page_url' => $url,
+            'error' => 'success'
+        ]);
 
         // Search for image links
         if (str_contains($content, '<img')) {
