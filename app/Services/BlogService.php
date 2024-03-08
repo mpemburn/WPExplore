@@ -26,7 +26,7 @@ class BlogService
         $rows = collect();
             $blogs = Blog::where('archived', 0)
                 ->where('deleted', 0)
-                ->where('public', 1)
+//                ->where('public', 1)
                 ->get();
 
         $blogs->each(function ($blog) use ($rows, $filter) {

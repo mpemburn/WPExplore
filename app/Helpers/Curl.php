@@ -19,6 +19,28 @@ class Curl
         return ((int) $code) === 200;
     }
 
+    public function getRedirect($url): ?string
+    {
+        try {
+            $headers = get_headers($url, true);
+            if (isset($headers['Location'])) {
+                if (is_array($headers['Location'])) {
+                    foreach ($headers['Location'] as $location) {
+                        if (str_starts_with($location, 'http')) {
+                            return $location;
+                        }
+                    }
+                }
+
+                return $headers['Location'];
+            }
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return null; // No redirect
+    }
+
     public static function testRedirect(string $url): string
     {
         try {

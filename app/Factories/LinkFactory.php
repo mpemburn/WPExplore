@@ -14,6 +14,7 @@ use App\Models\ProductionBrokenPage;
 use App\Models\SitesProductionBrokenPage;
 use App\Models\SitesTestBrokenPage;
 use App\Models\TestingBrokenPage;
+use App\Models\TrainingBrokenPage;
 use App\Models\WordPressProductionBrokenPage;
 use App\Models\WordpressProductionLink;
 use App\Models\WordPressTestBrokenPage;
@@ -32,6 +33,7 @@ class LinkFactory
             'wwwdev' => new DevBrokenPage(),
             'wwwprod' => new ProductionBrokenPage(),
             'wwwtest' => new TestingBrokenPage(),
+            'wwwtraining' => new TrainingBrokenPage(),
             'wordpressprod' => new WordPressProductionBrokenPage(),
             'wordpresstest' => new WordPressTestBrokenPage(),
             'newsprod' => new NewsProductionBrokenPage(),

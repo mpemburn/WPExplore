@@ -8,6 +8,7 @@ use App\Models\Option;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 abstract class BlogSearcher implements SearcherInterface
 {
@@ -23,6 +24,7 @@ abstract class BlogSearcher implements SearcherInterface
     protected bool $verbose;
     protected array $headers = [];
     protected array $unique = [];
+    protected array $savedData = [];
 
     abstract public function process(string $blogId, string $blogUrl): bool;
     abstract public function render(): string;
@@ -136,5 +138,47 @@ abstract class BlogSearcher implements SearcherInterface
     public function getCount(): int
     {
         return $this->foundCount;
+    }
+
+    public function saveData(array $data, array $fields): void
+    {
+        $saved = [];
+        foreach ($fields as $field) {
+            $item = $data[$field];
+            if ($field === 'content') {
+                $item = $this->extractLinks($item);
+            }
+
+            $saved[$field] = '"' . $item  . '"';
+        }
+
+        Log::info( implode(",", $saved), );
+
+    }
+
+    protected function extractLinks(string $html): string
+    {
+        $regex = '~<a(.*?)href="([^"]+)"(.*?)>~';
+        preg_match_all($regex, $html, $matches);
+
+        $result = collect($matches)->map(function ($match) {
+            $extracted = collect($match)->map(function ($item) {
+                if (
+                    str_contains($item, 'http')
+                    && ! str_contains($item, 'href')
+                    && str_contains($item, $this->searchText)
+                ) {
+                    return $item;
+                }
+                return null;
+            })->filter();
+            return count($extracted) > 0 ? $extracted : null;
+        })->filter()->toArray();
+
+        if (! $result || ! is_array($result)) {
+            return '';
+        }
+
+        return  implode(' | ', current($result));
     }
 }

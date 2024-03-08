@@ -2,11 +2,13 @@
 
 use App\Exports\Sheets\WebArchiveSheet;
 use App\Exports\WebArchiveExport;
+use App\Factories\SearcherFactory;
 use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
 use App\Models\BlogList;
 use App\Models\CfLegacyApp;
 use App\Models\CfLegacyAppBaseline;
+use App\Models\CfLinks;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\SitesProductionBrokenPage;
@@ -27,6 +29,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Crawler\Crawler;
@@ -60,10 +63,75 @@ Route::get('/sites', function () {
 //        ->setFilePath('')
 //        ->setDataModel(new WebArchiveTest())
 //        ->runTests();
- });
+});
+
+Route::get('/diff', function () {
+    // https://rapidapi.com/softwarepinguin/api/text-diff
+    $response = Http::withHeaders([
+        'content-type' => 'application/json',
+        'X-RapidAPI-Key' => 'd06ccc6067mshe9e2ecc5d12d900p16efddjsn2912767d8ca9',
+        'X-RapidAPI-Host' => 'text-diff.p.rapidapi.com'
+    ])->post('https://text-diff.p.rapidapi.com/diff', [
+        'text1' => "I was fascinated by your description of the trips on MDMA.  The experience of fear when you realize that you've committed to something that's going to warp your mind for hours and that you have no control over this is a familiar one from my \"psychedelic era\".  I have even felt this when I've had a larger than usual dose of cannabis.  These days, I think I know my mind well enough to realize that I won't lose it when this happens—and it really doesn't happen that often.  I don't know if this would happen with psychedelics these days, and I only have a mild interest in trying them again.  Maybe mushrooms if they are legalized here.",
+        'text2' => "I was fascinated by your description of the trips on MDMA. The experience of fear when you realize that you've committed to something that's going to warp your mind for hours and that you have no control over this is a familiar one from my psychedelic era. I have even felt this when I've had a larger-than-usual dose of cannabis. These days, I think I know my mind well enough to realize that I won't lose it when this happens, and it really doesn't happen that often. I don't know if this would happen with psychedelics these days, and I only have a mild interest in trying them again. Maybe mushrooms if they are legalized here.",
+    ]);
+
+    echo json_decode($response->body())->html;
+});
+
+Route::get('/redirect', function () {
+    function getRedirect($url) {
+        $headers = get_headers($url, 1);
+        if (isset($headers['Location'])) {
+            if (is_array($headers['Location'])) {
+                foreach ($headers['Location'] as $location) {
+                    if (str_starts_with($location, 'http')) {
+                        return $location;
+                    }
+                }
+            }
+
+            return $headers['Location'];
+         }
+
+        return $url; // No redirect
+    }
+
+    echo getRedirect('https://www2.clarku.edu/offices/president/presidents-lecture-series.cfm');
+
+});
 
 Route::get('/dev', function () {
-    // Do what thou wilt
+    $file = '/Users/MPemburn/Desktop/wilbur_links.csv';
+    $lines = file($file, FILE_IGNORE_NEW_LINES);
+
+    $urls = collect();
+    $categories = ['facultybio', 'faculty', 'offices', 'departments', 'research', 'students'];
+
+    foreach ($lines as $key => $value) {
+        $fields = str_getcsv($value);
+        collect(explode(' | ', end($fields)))
+            ->each(function ($url) use (&$urls) {
+                $urls->push($url);
+            });
+    }
+
+    $urls->unique()->each(function ($url) use ($categories) {
+        echo $url. '<br>';
+        $foundCategory = 'misc';
+        foreach ($categories as $category) {
+            if (str_contains($url, $category)) {
+                $foundCategory = $category;
+            }
+        }
+        CfLinks::create([
+            'server' => 'Wilbur',
+            'category' => $foundCategory,
+            'url' => $url,
+            'redirect' => '',
+        ]);
+
+    });
 });
 
 Route::get('/portal', function () {
