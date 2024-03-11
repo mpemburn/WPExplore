@@ -61,7 +61,7 @@ class PostsSearcher extends BlogSearcher
         $html .= self::TABLE_TAG;
         $html .= $this->buildHeader();
         $this->found->each(function ($page) use (&$html) {
-//            $this->saveData($page, ['blog_url', 'post_name', 'content']);
+            //$this->saveData($page, ['blog_url', 'post_name', 'date', 'content']);
             $url = $page['blog_url'] . $page['post_name'];
             $html .= '   <tr style="background-color: ' . $this->setRowColor($this->foundCount) . ';">';
             $html .= '      <td class="align-top first-cell">';

@@ -79,7 +79,7 @@ class CfLinkScan extends Command
     {
         CfLinks::all()->each(function ($cfLink) {
             $redirect = null;
-            if (empty($cfLink)) {
+             if (empty($cfLink)) {
                 return;
             }
             if ($this->flagAsInvalid($cfLink->url)) {

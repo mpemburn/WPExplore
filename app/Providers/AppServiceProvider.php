@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Helpers\Curl;
 use App\Helpers\Database;
+use App\Helpers\Reader;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('reader',function(){
+            return new Reader();
+        });
         $this->app->bind('curl',function() {
             return new Curl();
         });

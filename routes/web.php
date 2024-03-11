@@ -18,6 +18,7 @@ use App\Observers\UrlObserver;
 use App\Observers\WebCrawlObserver;
 use App\Observers\WebObserver;
 use App\Services\BlogService;
+use App\Services\BrowserService;
 use App\Services\CsvService;
 use App\Services\DatabaseImportService;
 use App\Facades\Database;
@@ -66,17 +67,6 @@ Route::get('/sites', function () {
 });
 
 Route::get('/diff', function () {
-    // https://rapidapi.com/softwarepinguin/api/text-diff
-    $response = Http::withHeaders([
-        'content-type' => 'application/json',
-        'X-RapidAPI-Key' => 'd06ccc6067mshe9e2ecc5d12d900p16efddjsn2912767d8ca9',
-        'X-RapidAPI-Host' => 'text-diff.p.rapidapi.com'
-    ])->post('https://text-diff.p.rapidapi.com/diff', [
-        'text1' => "I was fascinated by your description of the trips on MDMA.  The experience of fear when you realize that you've committed to something that's going to warp your mind for hours and that you have no control over this is a familiar one from my \"psychedelic era\".  I have even felt this when I've had a larger than usual dose of cannabis.  These days, I think I know my mind well enough to realize that I won't lose it when this happens—and it really doesn't happen that often.  I don't know if this would happen with psychedelics these days, and I only have a mild interest in trying them again.  Maybe mushrooms if they are legalized here.",
-        'text2' => "I was fascinated by your description of the trips on MDMA. The experience of fear when you realize that you've committed to something that's going to warp your mind for hours and that you have no control over this is a familiar one from my psychedelic era. I have even felt this when I've had a larger-than-usual dose of cannabis. These days, I think I know my mind well enough to realize that I won't lose it when this happens, and it really doesn't happen that often. I don't know if this would happen with psychedelics these days, and I only have a mild interest in trying them again. Maybe mushrooms if they are legalized here.",
-    ]);
-
-    echo json_decode($response->body())->html;
 });
 
 Route::get('/redirect', function () {
@@ -102,36 +92,9 @@ Route::get('/redirect', function () {
 });
 
 Route::get('/dev', function () {
-    $file = '/Users/MPemburn/Desktop/wilbur_links.csv';
-    $lines = file($file, FILE_IGNORE_NEW_LINES);
-
-    $urls = collect();
-    $categories = ['facultybio', 'faculty', 'offices', 'departments', 'research', 'students'];
-
-    foreach ($lines as $key => $value) {
-        $fields = str_getcsv($value);
-        collect(explode(' | ', end($fields)))
-            ->each(function ($url) use (&$urls) {
-                $urls->push($url);
-            });
-    }
-
-    $urls->unique()->each(function ($url) use ($categories) {
-        echo $url. '<br>';
-        $foundCategory = 'misc';
-        foreach ($categories as $category) {
-            if (str_contains($url, $category)) {
-                $foundCategory = $category;
-            }
-        }
-        CfLinks::create([
-            'server' => 'Wilbur',
-            'category' => $foundCategory,
-            'url' => $url,
-            'redirect' => '',
-        ]);
-
-    });
+    $redirects = Storage::path('public/cf_links/wilbur_web_config.xml');
+    (new \App\Services\RedirectService())->read($redirects, 'https://web.clarku.edu')->render();
+    // Do what thou wilt
 });
 
 Route::get('/portal', function () {
