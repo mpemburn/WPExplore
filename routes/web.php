@@ -9,6 +9,7 @@ use App\Models\BlogList;
 use App\Models\CfLegacyApp;
 use App\Models\CfLegacyAppBaseline;
 use App\Models\CfLinks;
+use App\Models\LinksOnCurrentSites;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\SitesProductionBrokenPage;
@@ -92,9 +93,28 @@ Route::get('/redirect', function () {
 });
 
 Route::get('/dev', function () {
-    $redirects = Storage::path('public/cf_links/wilbur_web_config.xml');
-    (new \App\Services\RedirectService())->read($redirects, 'https://web.clarku.edu')->render();
-    // Do what thou wilt
+    $links = LinksOnCurrentSites::query()
+        ->orderBy('post_date', 'DESC')
+        ->get();
+
+    $count = 0;
+    $links->each(function ($link) use (&$count) {
+        $count++;
+        if ($link->link !== 'https://www2.clarku.edu/faculty/facultybio.cfm') {
+            return;
+        }
+        echo $link->url . ' (' . $link->post_date . ')<br>';
+        echo ' -- ' . $link->link . '<br>';
+        $cfLink = CfLinks::query()
+            ->where('url', $link)
+            ->first();
+        if ($cfLink) {
+            echo $link->link . '<br>';
+        }
+    });
+    echo $count . '<br>';
+
+     // Do what thou wilt
 });
 
 Route::get('/portal', function () {
