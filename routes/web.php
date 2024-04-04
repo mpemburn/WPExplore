@@ -1,7 +1,9 @@
 <?php
 
+use App\Console\Commands\CfLinkScan;
 use App\Exports\Sheets\WebArchiveSheet;
 use App\Exports\WebArchiveExport;
+use App\Facades\Reader;
 use App\Factories\SearcherFactory;
 use App\Generators\BlogsCsvGenerator;
 use App\Models\Blog;
@@ -9,6 +11,7 @@ use App\Models\BlogList;
 use App\Models\CfLegacyApp;
 use App\Models\CfLegacyAppBaseline;
 use App\Models\CfLinks;
+use App\Models\DynamicModel;
 use App\Models\LinksOnCurrentSites;
 use App\Models\Option;
 use App\Models\Post;
@@ -71,50 +74,58 @@ Route::get('/diff', function () {
 });
 
 Route::get('/redirect', function () {
-    function getRedirect($url) {
-        $headers = get_headers($url, 1);
-        if (isset($headers['Location'])) {
-            if (is_array($headers['Location'])) {
-                foreach ($headers['Location'] as $location) {
-                    if (str_starts_with($location, 'http')) {
-                        return $location;
-                    }
-                }
+    $file = Storage::path('public/cf_links/clarkyou_links.txt');
+
+    $links = \App\Facades\Reader::getContentsAsArray($file);
+
+    collect($links)->each(function ($link) {
+        echo $link . '<br>';
+        if (empty($link)) {
+            return;
+        }
+        echo 'Redirect: ' . Curl::getRedirect($link) . '<br>';
+    });
+});
+
+Route::get('/img', function () {
+    $uploads = Storage::path('all_uploads.txt');
+
+    $uploadArray = \App\Facades\Reader::getContentsAsArray($uploads);
+    $filteredFilenames = preg_grep('/\d+x\d+/', $uploadArray, PREG_GREP_INVERT);
+
+
+    collect(['.png', '.jpg', '.jpeg', '.gif'])->each(function ($ext) use ($filteredFilenames) {
+        collect($filteredFilenames)->each(function ($line) use ($ext) {
+            if (!str_contains($line, $ext)) {
+                return;
             }
 
-            return $headers['Location'];
-         }
-
-        return $url; // No redirect
-    }
-
-    echo getRedirect('https://www2.clarku.edu/offices/president/presidents-lecture-series.cfm');
-
+            $pattern = '/\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+(\S+)/';
+            $trimmed = preg_replace($pattern, '$1', $line);
+            echo $trimmed . '<br>';
+        });
+    });
 });
 
 Route::get('/dev', function () {
-    $links = LinksOnCurrentSites::query()
-        ->orderBy('post_date', 'DESC')
-        ->get();
+    $images = Reader::getContentsAsArray(Storage::path('found_images.txt'));
+    $previous = null;
 
-    $count = 0;
-    $links->each(function ($link) use (&$count) {
-        $count++;
-        if ($link->link !== 'https://www2.clarku.edu/faculty/facultybio.cfm') {
+    collect($images)->each(function ($image) use (&$previous) {
+        if (str_starts_with($image, 'IMAGE')) {
+            $image = '# ' . $image;
+        }
+        if (str_starts_with($image, 'https://clarknow.clarku.edu')) {
             return;
         }
-        echo $link->url . ' (' . $link->post_date . ')<br>';
-        echo ' -- ' . $link->link . '<br>';
-        $cfLink = CfLinks::query()
-            ->where('url', $link)
-            ->first();
-        if ($cfLink) {
-            echo $link->link . '<br>';
+        if (str_starts_with($image, 'https://www.clarku.edu')) {
+            echo $previous . '<br>';
+            echo $image . '<br>';
         }
-    });
-    echo $count . '<br>';
 
-     // Do what thou wilt
+        $previous = $image;
+    });
+    // Do what thou wilt
 });
 
 Route::get('/portal', function () {
