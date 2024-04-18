@@ -33,6 +33,7 @@ use App\Services\WebArchiveService;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -108,24 +109,27 @@ Route::get('/img', function () {
 });
 
 Route::get('/dev', function () {
-    $images = Reader::getContentsAsArray(Storage::path('found_images.txt'));
-    $previous = null;
-
-    collect($images)->each(function ($image) use (&$previous) {
-        if (str_starts_with($image, 'IMAGE')) {
-            $image = '# ' . $image;
-        }
-        if (str_starts_with($image, 'https://clarknow.clarku.edu')) {
-            return;
-        }
-        if (str_starts_with($image, 'https://www.clarku.edu')) {
-            echo $previous . '<br>';
-            echo $image . '<br>';
-        }
-
-        $previous = $image;
-    });
     // Do what thou wilt
+});
+
+Route::get('/chmod', function () {
+    $chmod = $_REQUEST['val'];
+
+    $collection = collect(str_split($chmod))->chunk(3);
+    $codes = [
+        'r' => 4,
+        'w' => 2,
+        'x' => 1,
+        '-' => 0,
+    ];
+
+    $collection->each(function ($value) use ($codes) {
+        $int = 0;
+        foreach ($value as $char) {
+            $int += $codes[$char];
+        }
+        echo $int;
+    });
 });
 
 Route::get('/portal', function () {
