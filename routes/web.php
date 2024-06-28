@@ -26,10 +26,12 @@ use App\Services\BrowserService;
 use App\Services\CsvService;
 use App\Services\DatabaseImportService;
 use App\Facades\Database;
+use App\Services\ExtractLinkIntoShortcode;
 use App\Services\FileService;
 use App\Services\LogParserService;
 use App\Facades\Curl;
 use App\Services\WebArchiveService;
+use App\Services\WebHealthService;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Carbon;
@@ -38,6 +40,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Psl\Encoding\Base64\Internal\Base64;
 use Spatie\Crawler\Crawler;
 use Symfony\Component\Process\Process;
 use Spatie\Async\Pool;
@@ -108,8 +111,55 @@ Route::get('/img', function () {
     });
 });
 
+Route::get('/health', function () {
+    return (new WebHealthService())->checkHealth();
+});
+
+Route::get('/auth_db', function () {
+    Database::setDb('www_clone');
+    $blogs = (new BlogService())->getActiveBlogs();
+
+    $count = 0;
+    $blogs->each(function ($blog) use (&$count) {
+        if (! is_array($blog)) {
+            return;
+        }
+
+        $options = (new Option())->setTable('wp_' . $blog['blog_id'] . '_options')
+            ->whereIn('option_name', ['siteurl', 'auth_version'])
+            ->orderBy('option_name')->get();
+        $data = [];
+        $data['blog_id'] = $blog['blog_id'];
+        $options->each(function (Option $option) use (&$data) {
+            $data[$option->option_name] = $option->option_value;
+        });
+
+
+        !d($data);
+        $count++;
+    });
+    !d($count);
+});
+
 Route::get('/dev', function () {
-    // Do what thou wilt
+// Simulate some process
+    $response = Curl::getContents('https://clark:clarkadmin@www.testing.clarku.edu');
+    usleep(500000000);
+
+    if ($response) {
+// End time
+        $end = Carbon::now()->micro;
+
+// Calculate the difference in microseconds
+        $microDiff = $end - $start;
+
+        echo "Difference in microseconds: " . $microDiff . "μs\n";
+
+// Convert to seconds for easier reading
+        $secondsDiff = $microDiff / 1000000;
+        echo "Difference in seconds: " . $secondsDiff . "s\n";
+    }
+ // Do what thou wilt
 });
 
 Route::get('/chmod', function () {
